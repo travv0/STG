@@ -74,7 +74,7 @@ namespace STG
 
             //bullet textures
             spriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
-            spriteDict["bullet2"] = new Sprite(Content.Load<Texture2D>("bullet2"));
+            spriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
             spriteDict["bullet3"] = new Sprite(Content.Load<Texture2D>("bullet3"));
             //hitbox texture
             spriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));

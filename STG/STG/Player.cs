@@ -174,13 +174,14 @@ namespace STG
 
                     }
 
+                    //going in and out of focus mode
                     if (keyboard.IsKeyDown(Keys.Enter) && inFocus == false)
                     {
                         speed = 2;
                         inFocus = true;
                         foreach (Option option in options)
                         {
-                            option.relativePosition.X = option.RelativePosition.X / 2;
+                            option.relativePosition.X = option.RelativePosition.X * 3 / 4;
                             option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
                         }
                     }
@@ -190,7 +191,7 @@ namespace STG
                         inFocus = false;
                         foreach (Option option in options)
                         {
-                            option.relativePosition.X = option.RelativePosition.X * 2;
+                            option.relativePosition.X = option.RelativePosition.X * 4 / 3;
                             option.relativePosition.Y = option.RelativePosition.Y + boundingBox.Height / 2;
                         }
                     }
@@ -216,10 +217,10 @@ namespace STG
                     {
                         if (inFocus == false)
                             foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(option.Position.X, option.Position.Y - 20), -20, 90 + option.RelativePosition.X / 4, this, actionList));
+                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), -10, 90 + option.RelativePosition.X / 4, this, actionList, false, true));
                         if (inFocus == true)
                             foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet2"], new Vector2(option.Position.X, option.Position.Y - 20), -20, 90 + option.RelativePosition.X / 4, this, actionList, true));
+                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), -10, 90 + option.RelativePosition.X / 4, this, actionList, true, true));
                         optionCooldown = 10;
                     }
                     if (mainCooldown > 0)
