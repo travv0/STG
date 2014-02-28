@@ -26,8 +26,8 @@ namespace STG
         public static GameObjectManager objectManager = new GameObjectManager();
         public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>(); //use filename as key
 
-        Player player1;
-        Player player2;
+        public static Player player1;
+        public static Player player2;
 
         public Game1()
         {
@@ -66,7 +66,7 @@ namespace STG
 
             //player 2 stuff
             spriteDict["player2"] = new Sprite(Content.Load<Texture2D>("player2"));
-            player2 = new Player(spriteDict["player2"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100), 5, 5);
+            player2 = new Player(spriteDict["player2"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100));
             objectManager.Add(player2);
 
             //bullet texture

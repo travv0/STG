@@ -77,7 +77,8 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.NumPad1) && cooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], pos, new Vector2(0, -20), this, actionList));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], new Vector2(pos.X - 10, pos.Y - 20), -40, 90, this, actionList));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], new Vector2(pos.X + 10, pos.Y - 20), -40, 90, this, actionList));
                         cooldown = 2;
                     }
                     if (cooldown > 0)
@@ -99,7 +100,7 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.G) && cooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], pos, new Vector2(0, 20), this, actionList));
+                        //Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], pos,, this, actionList));
                         cooldown = 2;
                     }
                     if (cooldown > 0)
@@ -114,7 +115,13 @@ namespace STG
                 {
                     Bullet t = (Bullet)o; //make bullet variable t so you can check it's parent
                     if (t.Parent != this)
+                    {
                         Game1.objectManager.Remove(o);
+                        collisionGrid[(int)topLeft.X, (int)topLeft.Y].Remove(o);
+                        collisionGrid[(int)topRight.X, (int)topRight.Y].Remove(o);
+                        collisionGrid[(int)bottomLeft.X, (int)bottomLeft.Y].Remove(o);
+                        collisionGrid[(int)bottomRight.X, (int)bottomRight.Y].Remove(o);
+                    }
                 }
             }
 

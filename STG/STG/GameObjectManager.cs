@@ -50,5 +50,13 @@ namespace STG
             foreach (GameObject o in objectList)
                 o.Draw(spriteBatch);
         }
+
+        public GameObject Find(Type type)
+        {
+            return objectList.Find(delegate(GameObject obj)
+            {
+                return (type == obj.GetType());
+            });
+        }
     }
 }
