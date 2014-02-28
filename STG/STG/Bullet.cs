@@ -24,7 +24,7 @@ namespace STG
         float curveY = 0;
         float curveYmom = 0; //momentum for the curve on the Y axis
 
-        public Bullet(Texture2D sprite, Vector2 pos, Vector2 vel, Player parent, List<Tuple<Action, float, int>> actionList)
+        public Bullet(Sprite sprite, Vector2 pos, Vector2 vel, Player parent, List<Tuple<Action, float, int>> actionList)
         {
             this.sprite = sprite;
             this.pos = pos;
