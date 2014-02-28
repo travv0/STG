@@ -73,7 +73,7 @@ namespace STG
             objectManager.Add(player2);
 
             //bullet textures
-            spriteDict["bullet"] = new Sprite(Content.Load<Texture2D>("bullet"));
+            spriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
             spriteDict["bullet2"] = new Sprite(Content.Load<Texture2D>("bullet2"));
             spriteDict["bullet3"] = new Sprite(Content.Load<Texture2D>("bullet3"));
             //hitbox texture
