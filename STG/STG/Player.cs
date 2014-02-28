@@ -15,13 +15,10 @@ namespace STG
     {
         public enum PlayerNum {One, Two};
         PlayerNum playerNum;
-        bool inFocus = false;
-        int power = 0;
 
         int cooldown = 0; //frames until another bullet can be fired
-        Stack<Option> options = new Stack<Option>();
 
-        float speed = 5; //player's speed
+        const int speed = 5; //player's speed
 
         List<Tuple<Bullet.Action, float, int>> actionList = new List<Tuple<Bullet.Action, float, int>>();
 
@@ -60,14 +57,6 @@ namespace STG
             this.playerNum = playerNum;
         }
 
-        protected override void Initialize()
-        {
-            foreach (Option option in options)
-                Game1.objectManager.Add(option);
-
-            base.Initialize();
-        }
-
         public override void Update()
         {
             KeyboardState keyboard = Keyboard.GetState();                
@@ -75,71 +64,6 @@ namespace STG
             switch (playerNum)
             {
                 case PlayerNum.One:
-                    if (keyboard.IsKeyDown(Keys.Q))
-                        power = 0;
-                    if (keyboard.IsKeyDown(Keys.W))
-                        power = 1;
-                    if (keyboard.IsKeyDown(Keys.E))
-                        power = 2;
-                    if (keyboard.IsKeyDown(Keys.R))
-                        power = 3;
-
-                    //changing options at different powers
-                    if (power == 0 && options.Count != 0)
-                    {
-                        while (options.Count > 0)
-                            options.Pop();
-                    }
-                    if (power == 1 && options.Count != 2)
-                    {
-                        if (options.Count < 2)
-                        {
-                            options.Push(new Option(this, Game1.spriteDict["option"], new Vector2(-20, 0)));
-                            options.Push(new Option(this, Game1.spriteDict["option"], new Vector2(20, 0)));
-                        }
-                        else while (options.Count > 2)
-                            options.Pop();
-                    }
-                    if (power == 2 && options.Count != 4)
-                    {
-                        if (options.Count < 4)
-                        {
-                            options.Push(new Option(this, Game1.spriteDict["option"], new Vector2(-30, 10)));
-                            options.Push(new Option(this, Game1.spriteDict["option"], new Vector2(30, 10)));
-                        }
-                        else while (options.Count > 4)
-                                options.Pop();
-                    }
-                    if (power == 3 && options.Count != 6)
-                    {
-                        options.Push(new Option(this, Game1.spriteDict["option"], new Vector2(-40, 20)));
-                        options.Push(new Option(this, Game1.spriteDict["option"], new Vector2(40, 20)));
-                    }
-
-                    foreach (Option option in options)
-                        Game1.objectManager.Add(option);
-
-                    if (keyboard.IsKeyDown(Keys.Enter) && inFocus == false)
-                    {
-                        speed = 2;
-                        inFocus = true;
-                        foreach (Option option in options)
-                        {
-                            option.relativePosition.X = option.RelativePosition.X / 2;
-                            option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
-                        }
-                    }
-                    else if (keyboard.IsKeyUp(Keys.Enter) && inFocus == true)
-                    {
-                        speed = 5;
-                        inFocus = false;
-                        foreach (Option option in options)
-                        {
-                            option.relativePosition.X = option.RelativePosition.X * 2;
-                            option.relativePosition.Y = option.RelativePosition.Y + boundingBox.Height / 2;
-                        }
-                    }
-
                     //movement
                     if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > 0)
                         pos.X -= speed;
@@ -150,18 +74,11 @@ namespace STG
                     if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > 0)
                         pos.Y -= speed;
 
-
                     //shootin
                     if (keyboard.IsKeyDown(Keys.NumPad1) && cooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], new Vector2(Position.X + 10, Position.Y - 20), -40, 90, this, actionList));
-                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], new Vector2(Position.X - 10, Position.Y - 20), -40, 90, this, actionList));
-                        if (inFocus == false)
-                            foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(option.Position.X, option.Position.Y - 20), -40, 90 + option.RelativePosition.X / 4, this, actionList));
-                        if (inFocus == true)
-                            foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet2"], new Vector2(option.Position.X, option.Position.Y - 20), -40, 90 + option.RelativePosition.X / 4, this, actionList, true));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], new Vector2(pos.X - 10, pos.Y - 20), -40, 90, this, actionList));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], new Vector2(pos.X + 10, pos.Y - 20), -40, 90, this, actionList));
                         cooldown = 2;
                     }
                     if (cooldown > 0)
@@ -211,6 +128,6 @@ namespace STG
             base.Update();
         }
 
-        public float Speed { get { return speed; } }
+        public int Speed { get { return speed; } }
     }
 }
