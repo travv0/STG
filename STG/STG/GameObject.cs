@@ -24,7 +24,7 @@ namespace STG
         protected Vector2 topLeft = new Vector2(), topRight = new Vector2(), 
             bottomLeft = new Vector2(), bottomRight = new Vector2(),
             prevTopLeft = new Vector2(), prevTopRight = new Vector2(),
-            prevBottomLeft = new Vector2(), prevBottomRight = new Vector2(); //all of these are for the collision grid and all x and y values range from 0-9. names should be self-explanitory
+            prevBottomLeft = new Vector2(), prevBottomRight = new Vector2(); //all of these are for the collision grid and all x and y values range from 0-gridWidth or 0-gridHeight. names should be self-explanitory
         
         public GameObject()
         {
@@ -107,7 +107,7 @@ namespace STG
             prevBottomRight.Y = bottomRight.Y;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        virtual public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
@@ -149,6 +149,32 @@ namespace STG
                     collidingObjs.Add(o);
             }
             return collidingObjs;
+        }
+
+        public float AngleToTarget(Vector2 pos1, Vector2 pos2)
+        {
+            double deltaX = (pos2.X - pos1.X);
+            double deltaY = (pos2.Y - pos1.Y);
+            return ((float)Math.Atan2(deltaY, deltaX) / ((float)Math.PI / 180) + 180) % 360;
+        }
+
+        public float AngleToTarget(Vector2 targetPos)
+        {
+            double deltaX = (targetPos.X - pos.X);
+            double deltaY = (targetPos.Y - pos.Y);
+            return ((float)Math.Atan2(deltaY, deltaX) / ((float)Math.PI / 180) + 180) % 360;
+        }
+
+        public float DistanceToTarget(Vector2 pos1, Vector2 pos2)
+        {
+            return (float)Math.Sqrt(Math.Pow((float)pos1.X - pos2.X, 2) + Math.Pow((float)pos1.Y - pos2.Y, 2));
+
+        }
+
+        public float DistanceToTarget(Vector2 targetPos)
+        {
+            return (float)Math.Sqrt(Math.Pow((float)pos.X - targetPos.X, 2) + Math.Pow((float)pos.Y - targetPos.Y, 2));
+
         }
     }
 }
