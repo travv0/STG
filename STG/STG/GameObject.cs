@@ -15,7 +15,7 @@ namespace STG
     {
         protected Vector2 pos; //position
         protected Rectangle boundingBox; //boundingBox of the sprite, likely not the hitbox.  used mainly for drawing
-        protected Texture2D sprite;
+        protected Sprite sprite;
         protected Rectangle hitbox; //used for collision detection
 
         const int gridWidth = 5, gridHeight = 3; //height and width of collision grid
@@ -111,10 +111,10 @@ namespace STG
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(sprite, boundingBox, null, Color.White, 0, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
-            float test = pos.Y / Game1.windowHeight;
+            sprite.Update();
+            sprite.Draw(spriteBatch, boundingBox, Color.White, 0, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
 
-            spriteBatch.Draw(Game1.textureDict["hitbox"], hitbox, Color.White);
+            Game1.spriteDict["hitbox"].Draw(spriteBatch, hitbox, Color.White);
 
             spriteBatch.End();
         }

@@ -24,7 +24,7 @@ namespace STG
 
         //static containers for accessing objects and textures
         public static GameObjectManager objectManager = new GameObjectManager();
-        public static Dictionary<string, Texture2D> textureDict = new Dictionary<string, Texture2D>(); //use filename as key
+        public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>(); //use filename as key
 
         Player player1;
         Player player2;
@@ -60,19 +60,19 @@ namespace STG
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //player 1 stuff
-            textureDict["player1"] = Content.Load<Texture2D>("player1");
-            player1 = new Player(textureDict["player1"], Player.PlayerNum.One, new Vector2(windowWidth / 2, 200), 5, 5);
+            spriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 3, 5);
+            player1 = new Player(spriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(windowWidth / 2, 200), 5, 5);
             objectManager.Add(player1);
 
             //player 2 stuff
-            textureDict["player2"] = Content.Load<Texture2D>("player2");
-            player2 = new Player(textureDict["player2"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100), 5, 5);
+            spriteDict["player2"] = new Sprite(Content.Load<Texture2D>("player2"));
+            player2 = new Player(spriteDict["player2"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100), 5, 5);
             objectManager.Add(player2);
 
             //bullet texture
-            textureDict["bullet"] = Content.Load<Texture2D>("bullet");
+            spriteDict["bullet"] = new Sprite(Content.Load<Texture2D>("bullet"));
             //hitbox texture
-            textureDict["hitbox"] = Content.Load<Texture2D>("hitbox");
+            spriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
             // TODO: use this.Content to load your game content here
         }

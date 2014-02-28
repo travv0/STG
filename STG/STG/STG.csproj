@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sprite.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameObjectManager.cs" />

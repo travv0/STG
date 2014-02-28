@@ -22,7 +22,7 @@ namespace STG
 
         List<Tuple<Bullet.Action, float, int>> actionList = new List<Tuple<Bullet.Action, float, int>>();
 
-        public Player(Texture2D sprite, PlayerNum playerNum, Vector2 pos, int hitboxWidth, int hitboxHeight)
+        public Player(Sprite sprite, PlayerNum playerNum, Vector2 pos, int hitboxWidth, int hitboxHeight)
         {
             this.sprite = sprite;
             this.pos = pos;
@@ -31,7 +31,7 @@ namespace STG
             this.hitbox.Height = hitboxHeight;
             this.playerNum = playerNum;
         }
-        public Player(Texture2D sprite, PlayerNum playerNum, Rectangle boundingBox, int hitboxWidth, int hitboxHeight)
+        public Player(Sprite sprite, PlayerNum playerNum, Rectangle boundingBox, int hitboxWidth, int hitboxHeight)
         {
             this.sprite = sprite;
             this.pos = new Vector2(boundingBox.X, boundingBox.Y);
@@ -40,7 +40,7 @@ namespace STG
             this.hitbox.Height = hitboxHeight;
             this.playerNum = playerNum;
         }
-        public Player(Texture2D sprite, PlayerNum playerNum, Vector2 pos)
+        public Player(Sprite sprite, PlayerNum playerNum, Vector2 pos)
         {
             this.sprite = sprite;
             this.pos = pos;
@@ -48,7 +48,7 @@ namespace STG
             this.hitbox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
         }
-        public Player(Texture2D sprite, PlayerNum playerNum, Rectangle boundingBox)
+        public Player(Sprite sprite, PlayerNum playerNum, Rectangle boundingBox)
         {
             this.sprite = sprite;
             this.pos = new Vector2(boundingBox.X, boundingBox.Y);
@@ -77,7 +77,7 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.NumPad1) && cooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.textureDict["bullet"], pos, new Vector2(0, -20), this, actionList));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], pos, new Vector2(0, -20), this, actionList));
                         cooldown = 2;
                     }
                     if (cooldown > 0)
@@ -99,7 +99,7 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.G) && cooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.textureDict["bullet"], pos, new Vector2(0, 20), this, actionList));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet"], pos, new Vector2(0, 20), this, actionList));
                         cooldown = 2;
                     }
                     if (cooldown > 0)
