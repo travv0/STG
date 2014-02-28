@@ -43,7 +43,7 @@ namespace STG
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            objectList.Sort(delegate(GameObject obj1, GameObject obj2) //sorts actionList by time the action will be performed, that way you only have to check the first item in the list
+            objectList.Sort(delegate(GameObject obj1, GameObject obj2) //sorts objectList by Y value
             {
                 return obj1.Position.Y.CompareTo(obj2.Position.Y);
             });
