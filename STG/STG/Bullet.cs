@@ -14,15 +14,16 @@ namespace STG
     public class Bullet:GameObject
     {
         enum Direction { clockwise, counterclockwise };
-        float vel, angle; //velocity of bullet
+        float vel, angle, drawAngle = 0; //velocity of bullet
         bool homing;
+        bool spinning;
         GameObject parent;
         public enum Action {speed, curve, velocityX, velocityY};
         List<Tuple<Action, float, int>> actionList = new List<Tuple<Action, float, int>>(); //list of actions for bullet to perform during its lifetime. first item in tuple is the action and second is the amount to adjust
                                                                                             //third item is the time into the bullet's life to perform this action
         int timer = 0; //used to see when to change actions
 
-        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, Player parent, List<Tuple<Action, float, int>> actionList, bool homing = false)
+        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, Player parent, List<Tuple<Action, float, int>> actionList, bool homing = false, bool spinning = false)
         {
             this.sprite = sprite;
             this.pos = pos;
@@ -33,6 +34,7 @@ namespace STG
             this.hitbox = new Rectangle((int)(pos.X - Math.Ceiling(sprite.Width / 2.0)), (int)(pos.Y - Math.Ceiling(sprite.Height / 2.0)), sprite.Width, sprite.Height);
             this.actionList.InsertRange(0, actionList);
             this.homing = homing;
+            this.spinning = spinning;
             this.actionList.Sort(delegate(Tuple<Action, float, int> action1, Tuple<Action, float, int> action2) //sorts actionList by time the action will be performed, that way you only have to check the first item in the list
             {
                 return action1.Item3.CompareTo(action2.Item3);
@@ -42,6 +44,10 @@ namespace STG
         public override void Update()
         {
             angle = angle % 360;
+
+            if (spinning == true)
+                drawAngle = (drawAngle + .1f) % 360;
+            
             float a = AngleDifference(Game1.player2);
             if (homing == true)
             {
@@ -91,7 +97,7 @@ namespace STG
             spriteBatch.Begin();
 
             sprite.Update();
-            sprite.Draw(spriteBatch, boundingBox, Color.White, angle * (float)Math.PI / 180, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
+            sprite.Draw(spriteBatch, boundingBox, Color.White, angle * (float)Math.PI / 180 + drawAngle, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
 
             spriteBatch.End();
         }
