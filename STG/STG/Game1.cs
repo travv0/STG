@@ -68,8 +68,8 @@ namespace STG
             objectManager.Add(player1);
 
             //player 2 stuff
-            spriteDict["player2"] = new Sprite(Content.Load<Texture2D>("player2"));
-            player2 = new Player(spriteDict["player2"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100));
+            spriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
+            player2 = new Player(spriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100));
             objectManager.Add(player2);
 
             //bullet textures
