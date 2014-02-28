@@ -59,9 +59,6 @@ namespace STG
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //option texture
-            spriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
-
             //player 1 stuff
             spriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 3, 5);
             player1 = new Player(spriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(windowWidth / 2, 200), 5, 5);
@@ -72,10 +69,8 @@ namespace STG
             player2 = new Player(spriteDict["player2"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100));
             objectManager.Add(player2);
 
-            //bullet textures
+            //bullet texture
             spriteDict["bullet"] = new Sprite(Content.Load<Texture2D>("bullet"));
-            spriteDict["bullet2"] = new Sprite(Content.Load<Texture2D>("bullet2"));
-            spriteDict["bullet3"] = new Sprite(Content.Load<Texture2D>("bullet3"));
             //hitbox texture
             spriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
