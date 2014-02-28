@@ -102,7 +102,7 @@ namespace STG
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X / 2;
+                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
                                 tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
@@ -112,7 +112,7 @@ namespace STG
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X / 2;
+                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
                                 tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
@@ -132,7 +132,7 @@ namespace STG
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X / 2;
+                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
                                 tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
@@ -142,7 +142,7 @@ namespace STG
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X / 2;
+                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
                                 tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
@@ -158,7 +158,7 @@ namespace STG
                         //start them in focus mode if player is in focus
                         if (inFocus == true)
                         {
-                            tempOption.relativePosition.X = tempOption.RelativePosition.X / 2;
+                            tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
                             tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                         }
 
@@ -168,7 +168,7 @@ namespace STG
                         //start them in focus mode if player is in focus
                         if (inFocus == true)
                         {
-                            tempOption.relativePosition.X = tempOption.RelativePosition.X / 2;
+                            tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
                             tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                         }
 
@@ -221,7 +221,7 @@ namespace STG
                         if (inFocus == true)
                             foreach (Option option in options)
                                 Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), -10, 90 + option.RelativePosition.X / 4, this, actionList, true, true));
-                        optionCooldown = 10;
+                        optionCooldown = 50;
                     }
                     if (mainCooldown > 0)
                         mainCooldown--;
