@@ -17,6 +17,7 @@ namespace STG
         protected Rectangle boundingBox; //boundingBox of the sprite, likely not the hitbox.  used mainly for drawing
         protected Sprite sprite;
         protected Rectangle hitbox; //used for collision detection
+        
 
         const int gridWidth = 5, gridHeight = 3; //height and width of collision grid
 
@@ -37,6 +38,13 @@ namespace STG
             collisionGrid[(int)topRight.X, (int)topRight.Y].Add(this);
             collisionGrid[(int)bottomLeft.X, (int)bottomLeft.Y].Add(this);
             collisionGrid[(int)bottomRight.X, (int)bottomRight.Y].Add(this);
+
+            Initialize();
+        }
+
+        virtual protected void Initialize()
+        {
+
         }
 
         virtual public void Update()
