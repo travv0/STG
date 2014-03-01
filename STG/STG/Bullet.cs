@@ -52,9 +52,9 @@ namespace STG
             if (homing == true)
             {
                 if (ClosestDirection(Game1.player2) == Direction.clockwise)
-                    angle += AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * 100;
+                    angle += AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
                 if (ClosestDirection(Game1.player2) == Direction.counterclockwise)
-                    angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * 100;
+                    angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
             }
 
             pos.X += (int)(vel * Math.Cos((double)angle * Math.PI / 180));
