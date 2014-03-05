@@ -24,7 +24,7 @@ namespace STG
 
         float speed = 5; //player's speed
 
-        List<Tuple<Bullet.Action, float, int>> actionList = new List<Tuple<Bullet.Action, float, int>>();
+        List<Tuple<Bullet.Action, float, int, int>> actionList = new List<Tuple<Bullet.Action, float, int, int>>();
 
         public Player(Sprite sprite, PlayerNum playerNum, Vector2 pos, int hitboxWidth, int hitboxHeight)
         {
@@ -66,10 +66,8 @@ namespace STG
             foreach (Option option in options)
                 Game1.objectManager.Add(option);
 
-            actionList.Add(new Tuple<Bullet.Action, float, int>(Bullet.Action.angle, 90, 10));
-            actionList.Add(new Tuple<Bullet.Action, float, int>(Bullet.Action.angle, 90, 20));
-            actionList.Add(new Tuple<Bullet.Action, float, int>(Bullet.Action.angle, 90, 30));
-            actionList.Add(new Tuple<Bullet.Action, float, int>(Bullet.Action.angle, 90, 40));
+            actionList.Add(new Tuple<Bullet.Action, float, int, int>(Bullet.Action.speed, -10, 0, 0));
+            actionList.Add(new Tuple<Bullet.Action, float, int, int>(Bullet.Action.curve, 10, 0, 100));
 
             base.Initialize();
         }
@@ -215,7 +213,7 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), -20, 90, 0, this, actionList));
+                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 0, 90, -10, this, actionList));
                         mainCooldown = 5;
                     }
                     if (keyboard.IsKeyDown(Keys.NumPad1) && optionCooldown == 0)
