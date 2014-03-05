@@ -25,7 +25,7 @@ namespace STG
                                                                                             //third item is the time into the bullet's life to perform this action, fourth is how long to finish this action
         int timer = 0; //used to see when to change actions
 
-        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, float curve, Player parent, List<Tuple<Action, float, int, int>> actionList, bool homing = false, bool spinning = false)
+        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, float curve, GameObject parent, List<Tuple<Action, float, int, int>> actionList, bool homing = false, bool spinning = false)
         {
             this.sprite = sprite;
             this.pos = pos;
@@ -79,8 +79,8 @@ namespace STG
                     angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
             }
 
-            pos.X += (int)(vel * Math.Cos((double)angle * Math.PI / 180));
-            pos.Y += (int)(vel * Math.Sin((double)angle * Math.PI / 180));
+            pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
+            pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
 
             if (boundingBox.X + boundingBox.Height < 0 || boundingBox.Y + boundingBox.Height < 0
                 || boundingBox.X > Game1.windowWidth || boundingBox.Y > Game1.windowHeight)
