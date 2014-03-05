@@ -23,6 +23,7 @@ namespace STG
             this.pos = parent.Position;
 
             time++;
+            time = time % maxTime;
 
             base.Update();
         }
