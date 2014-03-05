@@ -14,25 +14,27 @@ namespace STG
     public class Bullet:GameObject
     {
         enum Direction { clockwise, counterclockwise };
-        float vel, angle, drawAngle = 0; //velocity of bullet
+        float vel, angle, curve, drawAngle = 0; //velocity of bullet
         bool homing;
         bool spinning;
         GameObject parent;
-        public enum Action {speed, curve, velocityX, velocityY};
+        public enum Action {speed, angle, curve};
         List<Tuple<Action, float, int>> actionList = new List<Tuple<Action, float, int>>(); //list of actions for bullet to perform during its lifetime. first item in tuple is the action and second is the amount to adjust
                                                                                             //third item is the time into the bullet's life to perform this action
         int timer = 0; //used to see when to change actions
 
-        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, Player parent, List<Tuple<Action, float, int>> actionList, bool homing = false, bool spinning = false)
+        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, float curve, Player parent, List<Tuple<Action, float, int>> actionList, bool homing = false, bool spinning = false)
         {
             this.sprite = sprite;
             this.pos = pos;
             this.vel = vel;
             this.angle = angle;
             this.parent = parent;
+            this.curve = curve;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.hitbox = new Rectangle((int)(pos.X - Math.Ceiling(sprite.Width / 2.0)), (int)(pos.Y - Math.Ceiling(sprite.Height / 2.0)), sprite.Width, sprite.Height);
-            this.actionList.InsertRange(0, actionList);
+            if (actionList != null)
+                this.actionList.InsertRange(0, actionList);
             this.homing = homing;
             this.spinning = spinning;
             this.actionList.Sort(delegate(Tuple<Action, float, int> action1, Tuple<Action, float, int> action2) //sorts actionList by time the action will be performed, that way you only have to check the first item in the list
@@ -43,6 +45,8 @@ namespace STG
 
         public override void Update()
         {
+            angle += curve;
+
             angle = angle % 360;
 
             if (spinning == true)
@@ -75,13 +79,13 @@ namespace STG
                 switch (actionList[0].Item1)
                 {
                     case Action.speed:
-                        //vel = new Vector2(vel.X * actionList[0].Item2, vel.Y * actionList[0].Item2);
+                        vel += actionList[0].Item2;
+                        break;
+                    case Action.angle:
+                        angle += actionList[0].Item2;
                         break;
                     case Action.curve:
-                        break;
-                    case Action.velocityX:
-                        break;
-                    case Action.velocityY:
+                        curve += actionList[0].Item2;
                         break;
                 }
                 actionList.RemoveAt(0);
