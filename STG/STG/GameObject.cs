@@ -119,8 +119,11 @@ namespace STG
         {
             spriteBatch.Begin();
 
-            sprite.Update();
-            sprite.Draw(spriteBatch, boundingBox, Color.White, 0, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
+            if (sprite != null)
+            {
+                sprite.Update();
+                sprite.Draw(spriteBatch, boundingBox, Color.White, 0, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
+            }
 
             //Game1.spriteDict["hitbox"].Draw(spriteBatch, hitbox, Color.White);
 
