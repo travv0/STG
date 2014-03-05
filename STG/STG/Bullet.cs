@@ -15,15 +15,17 @@ namespace STG
     {
         enum Direction { clockwise, counterclockwise };
         float vel, angle, curve, drawAngle = 0; //velocity of bullet
+        int angleTime, curveTime, velTime;
+        float angleChange, curveChange, velChange;
         bool homing;
         bool spinning;
         GameObject parent;
         public enum Action {speed, angle, curve};
-        List<Tuple<Action, float, int>> actionList = new List<Tuple<Action, float, int>>(); //list of actions for bullet to perform during its lifetime. first item in tuple is the action and second is the amount to adjust
-                                                                                            //third item is the time into the bullet's life to perform this action
+        List<Tuple<Action, float, int, int>> actionList = new List<Tuple<Action, float, int, int>>(); //list of actions for bullet to perform during its lifetime. first item in tuple is the action and second is the amount to adjust
+                                                                                            //third item is the time into the bullet's life to perform this action, fourth is how long to finish this action
         int timer = 0; //used to see when to change actions
 
-        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, float curve, Player parent, List<Tuple<Action, float, int>> actionList, bool homing = false, bool spinning = false)
+        public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, float curve, Player parent, List<Tuple<Action, float, int, int>> actionList, bool homing = false, bool spinning = false)
         {
             this.sprite = sprite;
             this.pos = pos;
@@ -37,7 +39,7 @@ namespace STG
                 this.actionList.InsertRange(0, actionList);
             this.homing = homing;
             this.spinning = spinning;
-            this.actionList.Sort(delegate(Tuple<Action, float, int> action1, Tuple<Action, float, int> action2) //sorts actionList by time the action will be performed, that way you only have to check the first item in the list
+            this.actionList.Sort(delegate(Tuple<Action, float, int, int> action1, Tuple<Action, float, int, int> action2) //sorts actionList by time the action will be performed, that way you only have to check the first item in the list
             {
                 return action1.Item3.CompareTo(action2.Item3);
             });
@@ -46,6 +48,22 @@ namespace STG
         public override void Update()
         {
             angle += curve;
+
+            if (angleTime > 0)
+            {
+                angle += angleChange;
+                angleTime--;
+            }
+            if (velTime > 0)
+            {
+                vel += velChange;
+                velTime--;
+            }
+            if (curveTime > 0)
+            {
+                curve += curveChange;
+                curveTime--;
+            }
 
             angle = angle % 360;
 
@@ -79,13 +97,31 @@ namespace STG
                 switch (actionList[0].Item1)
                 {
                     case Action.speed:
-                        vel += actionList[0].Item2;
+                        if (actionList[0].Item4 != 0)
+                        {
+                            velChange = actionList[0].Item2 / actionList[0].Item4;
+                            velTime = actionList[0].Item4;
+                        }
+                        else
+                            vel += actionList[0].Item2;
                         break;
                     case Action.angle:
-                        angle += actionList[0].Item2;
+                        if (actionList[0].Item4 != 0)
+                        {
+                            angleChange = actionList[0].Item2 / actionList[0].Item4;
+                            angleTime = actionList[0].Item4;
+                        }
+                        else
+                            angle += actionList[0].Item2;
                         break;
                     case Action.curve:
-                        curve += actionList[0].Item2;
+                        if (actionList[0].Item4 != 0)
+                        {
+                            curveChange = actionList[0].Item2 / actionList[0].Item4;
+                            curveTime = actionList[0].Item4;
+                        }
+                        else
+                            curve += actionList[0].Item2;
                         break;
                 }
                 actionList.RemoveAt(0);
