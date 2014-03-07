@@ -83,8 +83,8 @@ namespace STG
             pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
             pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
 
-            if (boundingBox.X + boundingBox.Height < 0 || boundingBox.Y + boundingBox.Height < 0
-                || boundingBox.X > Game1.windowWidth || boundingBox.Y > Game1.windowHeight)
+            if (boundingBox.X + boundingBox.Height < -100 || boundingBox.Y + boundingBox.Height < -100
+                || boundingBox.X > Game1.windowWidth + 100 || boundingBox.Y > Game1.windowHeight + 100)
             {
                 Game1.objectManager.Remove(this);
             }
@@ -147,6 +147,16 @@ namespace STG
                             }
                             else
                                 curve += actionList[0].Item2;
+                        }
+                        else
+                        {
+                            if (actionList[0].Item4 != 0)
+                            {
+                                curveChange = -(curve - actionList[0].Item2) / actionList[0].Item4;
+                                curveTime = actionList[0].Item4;
+                            }
+                            else
+                                curve = actionList[0].Item2;
                         }
                         break;
                 }
