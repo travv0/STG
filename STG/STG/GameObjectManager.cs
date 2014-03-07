@@ -58,5 +58,7 @@ namespace STG
                 return (type == obj.GetType());
             });
         }
+
+        public int Count { get { return objectList.Count; } }
     }
 }

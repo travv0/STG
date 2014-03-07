@@ -144,6 +144,7 @@ namespace STG
 
             spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
             spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
+            spriteBatch.DrawString(FPSfont, "Object count: " + objectManager.Count, new Vector2(16, 48), Color.White);
 
             spriteBatch.End();
 
