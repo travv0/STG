@@ -19,6 +19,11 @@ namespace STG
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //FPS stuff
+        SpriteFont FPSfont;
+        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
+        int totalFrames = 0;
+
         public static int windowWidth;
         public static int windowHeight;
 
@@ -47,6 +52,8 @@ namespace STG
             windowWidth = GraphicsDevice.Viewport.Width;
             windowHeight = GraphicsDevice.Viewport.Height;
 
+            IsFixedTimeStep = false;
+
             base.Initialize();
         }
         
@@ -58,6 +65,8 @@ namespace STG
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            FPSfont = Content.Load<SpriteFont>("FPS");
 
             //option texture
             spriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
@@ -98,12 +107,22 @@ namespace STG
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
             //call all objects' update function
             objectManager.Update();
+
+            FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            if (FPS <= 60)
+                droppedFrames += 60 - FPS;
+            totalFrames+=60;
+
+            droppedPercent = droppedFrames / totalFrames;
+            
+            if (totalFrames % 3600 == 0)
+            {
+                drawFPS = FPS;
+                drawDropped = droppedPercent;
+            }
 
             // TODO: Add your update logic here
 
@@ -120,6 +139,13 @@ namespace STG
 
             //call all objects' draw function
             objectManager.Draw(spriteBatch);
+
+            spriteBatch.Begin();
+
+            spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
+            spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
+
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 
