@@ -32,30 +32,52 @@ namespace STG
 
         public override void Update()
         {
-            if (time == 0 || time == 100)
+            if (time % 100 == 0)
             {
                 actionList.Clear();
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, -2, 50, 10, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, AngleToTarget(Game1.player1.Position), 50, 0, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
 
                 for (int i = 0; i < 360; i += 10)
                 {
-                    Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -10, i, 0, parent, actionList));
+                    Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
                 }
 
                 actionList.Clear();
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, -2, 50, 10, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, AngleToTarget(Game1.player1.Position), 50, 0, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
 
                 for (int i = 5; i < 365; i += 10)
                 {
-                    Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -10, i, 0, parent, actionList));
+                    Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                }
+            }
+            if (time % 100 - 50 == 0)
+            {
+                actionList.Clear();
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
+
+                for (int i = 2; i < 362; i += 10)
+                {
+                    Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                }
+
+                actionList.Clear();
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
+
+                for (int i = 7; i < 367; i += 10)
+                {
+                    Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
                 }
             }
 
-            if (time == 100 || time == 140 || time == 180)
+            /*if (time % 40 == 0)
             {
                 actionList.Clear();
 
@@ -65,7 +87,7 @@ namespace STG
                 }
             }
 
-            if (time == 120 || time == 160 || time == 200)
+            if (time % 40 - 20 == 0)
             {
                 for (int i = 5; i < 365; i += 10)
                 {
@@ -77,19 +99,14 @@ namespace STG
 
             if (time % 10 == 0)
             {
-                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle, -.5f, parent, actionList, true));
-                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 90, -.5f, parent, actionList, true));
-                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 180, -.5f, parent, actionList, true));
-                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 270, -.5f, parent, actionList, true));
-            }
+                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle, -.5f, parent, actionList));
+                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 90, -.5f, parent, actionList));
+                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 180, -.5f, parent, actionList));
+                Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 270, -.5f, parent, actionList));
+            }*/
 
-            angle = angle + 2;
-
-            if (time == maxTime)
-            {
-                Game1.objectManager.Remove(this);
-            }
-
+            angle = angle + 3.5f;
+            
             base.Update();
         }
     }

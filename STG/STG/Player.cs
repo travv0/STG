@@ -29,8 +29,6 @@ namespace STG
             this.sprite = sprite;
             this.pos = pos;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
-            this.hitbox.Width = hitboxWidth;
-            this.hitbox.Height = hitboxHeight;
             this.playerNum = playerNum;
         }
         public Player(Sprite sprite, PlayerNum playerNum, Rectangle boundingBox, int hitboxWidth, int hitboxHeight)
@@ -38,8 +36,6 @@ namespace STG
             this.sprite = sprite;
             this.pos = new Vector2(boundingBox.X, boundingBox.Y);
             this.boundingBox = boundingBox;
-            this.hitbox.Width = hitboxWidth;
-            this.hitbox.Height = hitboxHeight;
             this.playerNum = playerNum;
         }
         public Player(Sprite sprite, PlayerNum playerNum, Vector2 pos)
@@ -47,7 +43,6 @@ namespace STG
             this.sprite = sprite;
             this.pos = pos;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
-            this.hitbox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
         }
         public Player(Sprite sprite, PlayerNum playerNum, Rectangle boundingBox)
@@ -55,7 +50,6 @@ namespace STG
             this.sprite = sprite;
             this.pos = new Vector2(boundingBox.X, boundingBox.Y);
             this.boundingBox = boundingBox;
-            this.hitbox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
         }
 
@@ -249,22 +243,6 @@ namespace STG
                         mainCooldown--;
 
                     break;
-            }
-
-            foreach (GameObject o in CollidingWith())
-            {
-                if (o.GetType() == typeof(Bullet))
-                {
-                    Bullet t = (Bullet)o; //make bullet variable t so you can check it's parent
-                    if (t.Parent != this)
-                    {
-                        Game1.objectManager.Remove(o);
-                        collisionGrid[(int)topLeft.X, (int)topLeft.Y].Remove(o);
-                        collisionGrid[(int)topRight.X, (int)topRight.Y].Remove(o);
-                        collisionGrid[(int)bottomLeft.X, (int)bottomLeft.Y].Remove(o);
-                        collisionGrid[(int)bottomRight.X, (int)bottomRight.Y].Remove(o);
-                    }
-                }
             }
 
             base.Update();

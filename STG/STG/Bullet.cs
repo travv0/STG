@@ -34,7 +34,6 @@ namespace STG
             this.parent = parent;
             this.curve = curve;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
-            this.hitbox = new Rectangle((int)(pos.X - Math.Ceiling(sprite.Width / 2.0)), (int)(pos.Y - Math.Ceiling(sprite.Height / 2.0)), sprite.Width, sprite.Height);
             if (actionList != null)
                 this.actionList.InsertRange(0, actionList);
             this.homing = homing;
@@ -167,6 +166,8 @@ namespace STG
 
             sprite.Update();
             sprite.Draw(spriteBatch, boundingBox, Color.White, angle * (float)Math.PI / 180 + drawAngle, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
+
+            //Game1.spriteDict["hitbox"].Draw(spriteBatch, hitbox, Color.White);
 
             spriteBatch.End();
         }
