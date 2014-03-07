@@ -157,19 +157,9 @@ namespace STG
 
             timer++;
 
+            rotation = angle * (float)Math.PI / 180 + drawAngle;
+
             base.Update();
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Begin();
-
-            sprite.Update();
-            sprite.Draw(spriteBatch, boundingBox, Color.White, angle * (float)Math.PI / 180 + drawAngle, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
-
-            //Game1.spriteDict["hitbox"].Draw(spriteBatch, hitbox, Color.White);
-
-            spriteBatch.End();
         }
 
         public GameObject Parent { get { return parent; } }

@@ -16,6 +16,7 @@ namespace STG
         protected Vector2 pos; //position
         protected Rectangle boundingBox; //boundingBox of the sprite, likely not the hitbox.  used mainly for drawing
         protected Sprite sprite;
+        protected float rotation;
         
         public GameObject()
         {
@@ -41,7 +42,7 @@ namespace STG
             if (sprite != null)
             {
                 sprite.Update();
-                sprite.Draw(spriteBatch, boundingBox, Color.White, 0, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
+                sprite.Draw(spriteBatch, boundingBox, Color.White, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
             }
 
             spriteBatch.End();
