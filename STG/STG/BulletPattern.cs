@@ -14,7 +14,7 @@ namespace STG
     public class BulletPattern:GameObject
     {
         protected GameObject parent;
-        protected int time, maxTime;
+        protected int time, maxTime, cycle = 0;
 
         public BulletPattern() { }
 
@@ -23,7 +23,12 @@ namespace STG
             this.pos = parent.Position;
 
             time++;
-            time = time % maxTime;
+            if (time == maxTime)
+            {
+                time = 0;
+                cycle++;
+            }
+            
 
             base.Update();
         }
