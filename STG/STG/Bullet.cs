@@ -42,6 +42,8 @@ namespace STG
             {
                 return action1.Item3.CompareTo(action2.Item3);
             });
+
+            rotation = angle * (float)Math.PI / 180 + drawAngle;
         }
 
         public override void Update()
@@ -85,10 +87,6 @@ namespace STG
                 || boundingBox.X > Game1.windowWidth || boundingBox.Y > Game1.windowHeight)
             {
                 Game1.objectManager.Remove(this);
-                /*collisionGrid[(int)topLeft.X, (int)topLeft.Y].Remove(this);
-                collisionGrid[(int)topRight.X, (int)topRight.Y].Remove(this);
-                collisionGrid[(int)bottomLeft.X, (int)bottomLeft.Y].Remove(this);
-                collisionGrid[(int)bottomRight.X, (int)bottomRight.Y].Remove(this);*/
             }
             
             while (actionList.Count > 0 && actionList[0].Item3 == timer)
