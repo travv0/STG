@@ -17,6 +17,7 @@ namespace STG
         PlayerNum playerNum;
         bool inFocus = false;
         int power = 0;
+        const float maxRotation = .2f; //max number of degrees for player to turn when moving left and right
 
         int mainCooldown = 0; //frames until another bullet can be fired
         int optionCooldown = 0; //frames until another option bullet can be fired
@@ -190,13 +191,29 @@ namespace STG
 
                     //movement
                     if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > 0)
+                    {
                         pos.X -= speed;
+                        if (rotation > -maxRotation)
+                            rotation -= 0.05f;
+                    }
                     if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < Game1.windowHeight)
                         pos.Y += speed;
                     if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < Game1.windowWidth)
+                    {
                         pos.X += speed;
+                        if (rotation < maxRotation)
+                            rotation += 0.05f;
+                    }
                     if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > 0)
                         pos.Y -= speed;
+
+                    if (!keyboard.IsKeyDown(Keys.Left) && !keyboard.IsKeyDown(Keys.Right))
+                    {
+                        if (rotation < 0)
+                            rotation += 0.05f;
+                        if (rotation > 0)
+                            rotation -= 0.05f;
+                    }
 
 
                     //shootin
