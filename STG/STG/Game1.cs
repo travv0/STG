@@ -113,12 +113,12 @@ namespace STG
             FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             
             if (FPS <= 60)
-                droppedFrames += 60 - FPS;
-            totalFrames+=60;
+                droppedFrames += (60 - FPS) / 60;
+            totalFrames++;
 
             droppedPercent = droppedFrames / totalFrames;
             
-            if (totalFrames % 3600 == 0)
+            if (totalFrames % 60 == 0)
             {
                 drawFPS = FPS;
                 drawDropped = droppedPercent;
