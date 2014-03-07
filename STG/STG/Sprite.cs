@@ -15,7 +15,7 @@ namespace STG
     {
         Texture2D sprite;
         int frameWidth;
-        public int numberOfFrames;
+        int numberOfFrames;
         int timePerFrame;
         int currentFrame;
         int count = 0;

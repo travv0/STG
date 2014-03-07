@@ -29,12 +29,6 @@ namespace STG
         public static Player player1;
         public static Player player2;
 
-        //keeps track of vertices for collision
-        public struct verticesObject
-        {
-            Vector2 topRight, topLeft, bottomRight, bottomLeft;
-        }
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -131,17 +125,5 @@ namespace STG
 
             base.Draw(gameTime);
         }
-
-       /* public verticesObject findVertices(Bullet currentObject)
-        {
-            /*newX = Cos(theta) * (px-ox) - Sin(theta) * (py-oy) + ox
-            newY = Sin(theta) * (px-ox) + Cos(theta) * (py-oy) + oy
-
-            //Where p is the point being rotated around point o
-
-            Vector2 tR = new Vector2(Math.Cos(currentObject.angle) * (currentObject.Position.X - ox) - Math.Sin(currentObject.angle) * (currentObject.Position.Y - oy) + ox, Math.Sin(currentObject.angle) * (currentObject.Position.X - ox) + Math.Cos(currentObject.angle) * (currentObject.Position.Y - oy) + oy);
-            verticesObject theVertices = new verticesObject();
-            return theVertices;
-        }*/
     }
 }

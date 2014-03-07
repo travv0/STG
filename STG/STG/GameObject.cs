@@ -16,7 +16,6 @@ namespace STG
         protected Vector2 pos; //position
         protected Rectangle boundingBox; //boundingBox of the sprite, likely not the hitbox.  used mainly for drawing
         protected Sprite sprite;
-        public Vector2 center;// used for vertice calculation
         protected Rectangle hitbox; //used for collision detection
         
 
@@ -40,13 +39,12 @@ namespace STG
             collisionGrid[(int)bottomLeft.X, (int)bottomLeft.Y].Add(this);
             collisionGrid[(int)bottomRight.X, (int)bottomRight.Y].Add(this);
 
-            
             Initialize();
         }
 
         virtual protected void Initialize()
         {
-    center = new Vector2(pos.X + ((sprite.Width / sprite.numberOfFrames) / 2), pos.Y + (sprite.Height / 2));//initial center
+
         }
 
         virtual public void Update()
@@ -57,9 +55,6 @@ namespace STG
             //hitbox too
             hitbox.X = (int)(pos.X - Math.Ceiling(hitbox.Width / 2.0));
             hitbox.Y = (int)(pos.Y - Math.Ceiling(hitbox.Height / 2.0));
-
-            center.X = pos.X + ((sprite.Width / sprite.numberOfFrames) / 2);
-            center.Y = pos.Y + (sprite.Height / 2);
 
             topLeft.X = (int)(hitbox.X / Game1.windowWidth * gridWidth);
             topLeft.Y = (int)(hitbox.Y / Game1.windowHeight * gridHeight);
@@ -128,10 +123,10 @@ namespace STG
             {
                 sprite.Update();
                 sprite.Draw(spriteBatch, boundingBox, Color.White, 0, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
-        
-            Game1.spriteDict["hitbox"].Draw(spriteBatch, hitbox, Color.White);
             }
-            Game1.spriteDict["hitbox"].Draw(spriteBatch, center, Color.White);
+
+            //Game1.spriteDict["hitbox"].Draw(spriteBatch, hitbox, Color.White);
+
             spriteBatch.End();
         }
 

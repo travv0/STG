@@ -14,8 +14,7 @@ namespace STG
     public class Bullet:GameObject
     {
         enum Direction { clockwise, counterclockwise };
-        float vel, curve, drawAngle = 0; //velocity of bullet
-        public float angle;
+        float vel, angle, curve, drawAngle = 0; //velocity of bullet
         int angleTime, curveTime, velTime;
         float angleChange, curveChange, velChange;
         bool homing;
