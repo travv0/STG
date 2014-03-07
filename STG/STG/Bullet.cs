@@ -71,13 +71,13 @@ namespace STG
             if (spinning == true)
                 drawAngle = (drawAngle + .1f) % 360;
             
-            float a = AngleDifference(Game1.player2);
             if (homing == true)
             {
                 if (ClosestDirection(Game1.player2) == Direction.clockwise)
-                    angle += AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
+                    angle += AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 2.5f;
                 if (ClosestDirection(Game1.player2) == Direction.counterclockwise)
-                    angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
+                    angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 2.5f;
+                vel += 0.1f;
             }
 
             pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
