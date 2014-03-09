@@ -229,7 +229,7 @@ namespace STG
                                 Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X / 4, 0, this, null, false, true));
                         if (inFocus == true)
                             foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X, 0, this, null, true, true));
+                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X / 4, 0, this, null, true, true));
                         optionCooldown = 50;
                     }
                     if (mainCooldown > 0)
