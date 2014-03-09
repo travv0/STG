@@ -43,10 +43,10 @@ namespace STG
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            objectList.Sort(delegate(GameObject obj1, GameObject obj2) //sorts objectList by Y value
+            /*objectList.Sort(delegate(GameObject obj1, GameObject obj2) //sorts objectList by Y value
             {
                 return obj1.Position.Y.CompareTo(obj2.Position.Y);
-            });
+            });*/
             foreach (GameObject o in objectList)
                 o.Draw(spriteBatch);
         }
