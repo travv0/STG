@@ -56,14 +56,14 @@ namespace STG
         {
             double deltaX = (pos2.X - pos1.X);
             double deltaY = (pos2.Y - pos1.Y);
-            return ((float)Math.Atan2(deltaY, deltaX) / ((float)Math.PI / 180)) % 360;
+            return ((float)Math.Atan2(deltaY, deltaX) / ((float)Math.PI / 180) + 360) % 360;
         }
 
         public float AngleToTarget(Vector2 targetPos)
         {
             double deltaX = (targetPos.X - pos.X);
             double deltaY = (targetPos.Y - pos.Y);
-            return ((float)Math.Atan2(deltaY, deltaX) / ((float)Math.PI / 180)) % 360;
+            return ((float)Math.Atan2(deltaY, deltaX) / ((float)Math.PI / 180) + 360) % 360;
         }
 
         public float DistanceToTarget(Vector2 pos1, Vector2 pos2)
