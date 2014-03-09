@@ -190,5 +190,3 @@ namespace STG
         }
     }
 }
-
-//test
