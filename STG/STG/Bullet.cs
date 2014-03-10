@@ -120,9 +120,9 @@ namespace STG
             pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
 
             if (boundingBox.X + boundingBox.Height < -100 || boundingBox.Y + boundingBox.Height < -100
-                || boundingBox.X > MainGame.windowWidth + 100 || boundingBox.Y > MainGame.windowHeight + 100)
+                || boundingBox.X > MainGame.WindowWidth + 100 || boundingBox.Y > MainGame.WindowHeight + 100)
             {
-                MainGame.objectManager.Remove(this);
+                MainGame.ObjectManager.Remove(this);
             }
             
             while (actionList.Count > 0 && actionList[0].Item3 == timer)
