@@ -33,7 +33,7 @@ namespace STG
         PlayerNum playerNum;
         bool inFocus = false;
         int power = 0;
-        const float maxRotation = .2f; //max number of degrees for player to turn when moving left and right
+        float maxRotation = .2f; //max number of degrees for player to turn when moving left and right
 
         int mainCooldown = 0; //frames until another bullet can be fired
         int optionCooldown = 0; //frames until another option bullet can be fired
@@ -224,6 +224,7 @@ namespace STG
                     if (keyboard.IsKeyDown(Keys.Enter) && inFocus == false)
                     {
                         speed = 2;
+                        maxRotation = 0;
                         inFocus = true;
                         foreach (Option option in options)
                         {
@@ -234,6 +235,7 @@ namespace STG
                     else if (keyboard.IsKeyUp(Keys.Enter) && inFocus == true)
                     {
                         speed = 5;
+                        maxRotation = .2f;
                         inFocus = false;
                         foreach (Option option in options)
                         {
@@ -241,6 +243,11 @@ namespace STG
                             option.relativePosition.Y = option.RelativePosition.Y + boundingBox.Height / 2;
                         }
                     }
+
+                    if (rotation < -maxRotation)
+                        rotation += 0.05f;
+                    if (rotation > maxRotation)
+                        rotation -= 0.05f;
 
                     //movement
                     if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > 0)
@@ -316,6 +323,24 @@ namespace STG
             }
 
             base.Update();
+        }
+
+        /// <summary>
+        /// Draws the hitbox on the player.
+        /// </summary>
+        /// <param name="spriteBatch">The spritebatch to be used for drawing.</param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            if (inFocus)
+            {
+                spriteBatch.Begin();
+
+                MainGame.SpriteDict["hitbox"].Draw(spriteBatch, new Rectangle((int)pos.X - 2, (int)pos.Y - 2, 4, 4), Color.White);
+
+                spriteBatch.End();
+            }
         }
 
         /// <summary>
