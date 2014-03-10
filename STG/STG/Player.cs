@@ -11,9 +11,25 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
+    /// <summary>
+    /// A playable character.
+    /// </summary>
     public class Player:GameObject
     {
-        public enum PlayerNum {One, Two};
+        /// <summary>
+        /// The player number.
+        /// </summary>
+        public enum PlayerNum 
+        {
+            /// <summary>
+            /// First player.
+            /// </summary>
+            One, 
+            /// <summary>
+            /// Second player.
+            /// </summary>
+            Two
+        };
         PlayerNum playerNum;
         bool inFocus = false;
         int power = 0;
@@ -25,6 +41,14 @@ namespace STG
 
         float speed = 5; //player's speed
 
+        /// <summary>
+        /// A playable character.
+        /// </summary>
+        /// <param name="sprite">Character's sprite.</param>
+        /// <param name="playerNum">Player one or player two.</param>
+        /// <param name="pos">Player's position.</param>
+        /// <param name="hitboxWidth">Width of the player's hitbox.</param>
+        /// <param name="hitboxHeight">Height of the player's hitbox.</param>
         public Player(Sprite sprite, PlayerNum playerNum, Vector2 pos, int hitboxWidth, int hitboxHeight)
         {
             this.sprite = sprite;
@@ -32,6 +56,15 @@ namespace STG
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
         }
+
+        /// <summary>
+        /// A playable character.
+        /// </summary>
+        /// <param name="sprite">Character's sprite.</param>
+        /// <param name="playerNum">Player one or player two.</param>
+        /// <param name="boundingBox">The bounding box of the player.</param>
+        /// <param name="hitboxWidth">The width of the player's hitbox.</param>
+        /// <param name="hitboxHeight">The height of the player's hitbox.</param>
         public Player(Sprite sprite, PlayerNum playerNum, Rectangle boundingBox, int hitboxWidth, int hitboxHeight)
         {
             this.sprite = sprite;
@@ -39,6 +72,13 @@ namespace STG
             this.boundingBox = boundingBox;
             this.playerNum = playerNum;
         }
+
+        /// <summary>
+        /// A playable character.
+        /// </summary>
+        /// <param name="sprite">Character's sprite.</param>
+        /// <param name="playerNum">Player one or player two.</param>
+        /// <param name="pos">Player's position.</param>
         public Player(Sprite sprite, PlayerNum playerNum, Vector2 pos)
         {
             this.sprite = sprite;
@@ -46,6 +86,13 @@ namespace STG
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
         }
+        
+        /// <summary>
+        /// A playable character.
+        /// </summary>
+        /// <param name="sprite">Character's sprite.</param>
+        /// <param name="playerNum">Player one or player two.</param>
+        /// <param name="boundingBox">The bounding box of the player.</param>
         public Player(Sprite sprite, PlayerNum playerNum, Rectangle boundingBox)
         {
             this.sprite = sprite;
@@ -54,6 +101,9 @@ namespace STG
             this.playerNum = playerNum;
         }
 
+        /// <summary>
+        /// Runs on creation of a new player object, adds any options in the option list.
+        /// </summary>
         protected override void Initialize()
         {
             foreach (Option option in options)
@@ -62,6 +112,9 @@ namespace STG
             base.Initialize();
         }
 
+        /// <summary>
+        /// Updates the player object.
+        /// </summary>
         public override void Update()
         {
             KeyboardState keyboard = Keyboard.GetState();
@@ -265,6 +318,9 @@ namespace STG
             base.Update();
         }
 
+        /// <summary>
+        /// Returns the player's speed.
+        /// </summary>
         public float Speed { get { return speed; } }
     }
 }
