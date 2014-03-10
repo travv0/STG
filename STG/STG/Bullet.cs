@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
+    /// <summary>
+    /// A bullet.
+    /// </summary>
     public class Bullet:GameObject
     {
         enum Direction { clockwise, counterclockwise };
@@ -20,11 +23,41 @@ namespace STG
         bool homing;
         bool spinning;
         GameObject parent;
-        public enum Action {speed, angle, curve};
+
+        /// <summary>
+        /// An enum used for modifying the bullet's properties during its lifetime.
+        /// </summary>
+        public enum Action
+        {
+            /// <summary>
+            /// Used to modify the speed of the bullet.
+            /// </summary>
+            speed,
+            /// <summary>
+            /// Used to modify the angle of the bullet.
+            /// </summary>
+            angle,
+            /// <summary>
+            /// Used to modify the curve of the bullet.
+            /// </summary>
+            curve
+        };
         List<Tuple<Action, float, int, int, bool>> actionList = new List<Tuple<Action, float, int, int, bool>>(); //list of actions for bullet to perform during its lifetime. first item in tuple is the action and second is the amount to adjust
                                                                                             //third item is the time into the bullet's life to perform this action, fourth is how long to finish this action, fifth is whether the change is relative
         int timer = 0; //used to see when to change actions
 
+        /// <summary>
+        /// Creates a new bullet object.
+        /// </summary>
+        /// <param name="sprite">The bullet's sprite.</param>
+        /// <param name="pos">The bullet's position.</param>
+        /// <param name="vel">The bullet's velocity.</param>
+        /// <param name="angle">The bullet's angle.</param>
+        /// <param name="curve">The curve of the bullet.</param>
+        /// <param name="parent">The object that created the bullet.</param>
+        /// <param name="actionList">The list of actions for the bullet to do during its lifetime.</param>
+        /// <param name="homing">Does the bullet home in on an object?</param>
+        /// <param name="spinning">Should the bullet's sprite spin around?</param>
         public Bullet(Sprite sprite, Vector2 pos, float vel, float angle, float curve, GameObject parent, List<Tuple<Action, float, int, int, bool>> actionList, bool homing = false, bool spinning = false)
         {
             this.sprite = sprite;
@@ -46,6 +79,9 @@ namespace STG
             rotation = angle * (float)Math.PI / 180 + drawAngle;
         }
 
+        /// <summary>
+        /// Updates the bullet.
+        /// </summary>
         public override void Update()
         {
             angle += curve;
@@ -71,22 +107,22 @@ namespace STG
             if (spinning == true)
                 drawAngle = (drawAngle + .1f) % 360;
             
-            float a = AngleDifference(Game1.player2);
             if (homing == true)
             {
-                if (ClosestDirection(Game1.player2) == Direction.clockwise)
-                    angle += AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
-                if (ClosestDirection(Game1.player2) == Direction.counterclockwise)
-                    angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 3;
+                if (ClosestDirection(MainGame.player2) == Direction.clockwise)
+                    angle += AngleDifference(MainGame.player2) / DistanceToTarget(MainGame.player2.Position) * Math.Abs(vel) * 2.5f;
+                if (ClosestDirection(MainGame.player2) == Direction.counterclockwise)
+                    angle -= AngleDifference(MainGame.player2) / DistanceToTarget(MainGame.player2.Position) * Math.Abs(vel) * 2.5f;
+                vel += 0.1f;
             }
 
             pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
             pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
 
             if (boundingBox.X + boundingBox.Height < -100 || boundingBox.Y + boundingBox.Height < -100
-                || boundingBox.X > Game1.windowWidth + 100 || boundingBox.Y > Game1.windowHeight + 100)
+                || boundingBox.X > MainGame.WindowWidth + 100 || boundingBox.Y > MainGame.WindowHeight + 100)
             {
-                Game1.objectManager.Remove(this);
+                MainGame.ObjectManager.Remove(this);
             }
             
             while (actionList.Count > 0 && actionList[0].Item3 == timer)
@@ -170,6 +206,9 @@ namespace STG
             base.Update();
         }
 
+        /// <summary>
+        /// Returns the parent of the bullet, usually the object that created it.
+        /// </summary>
         public GameObject Parent { get { return parent; } }
 
         private Direction ClosestDirection(GameObject obj)
@@ -182,8 +221,8 @@ namespace STG
 
         private float AngleDifference(GameObject obj)
         {
-            if (Math.Abs(AngleToTarget(obj.Position) - angle) > 180)
-                return (360 - Math.Abs(AngleToTarget(obj.Position) - angle));
+            if (AngleToTarget(obj.Position) - angle > 180)
+                return (360 - AngleToTarget(obj.Position) - angle);
             else
                 return Math.Abs(AngleToTarget(obj.Position) - angle);
         }
