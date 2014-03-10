@@ -73,7 +73,7 @@ namespace STG
             if (sprite != null)
             {
                 sprite.Update();
-                sprite.Draw(spriteBatch, boundingBox, Color.White, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / Game1.windowHeight));
+                sprite.Draw(spriteBatch, boundingBox, Color.White, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.windowHeight));
             }
 
             spriteBatch.End();

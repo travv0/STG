@@ -107,7 +107,7 @@ namespace STG
         protected override void Initialize()
         {
             foreach (Option option in options)
-                Game1.objectManager.Add(option);
+                MainGame.objectManager.Add(option);
 
             base.Initialize();
         }
@@ -136,15 +136,15 @@ namespace STG
                     if (power == 0 && options.Count != 0)
                     {
                         while (options.Count > 0)
-                            Game1.objectManager.Remove(options.Pop());
+                            MainGame.objectManager.Remove(options.Pop());
                     }
                     if (power == 1 && options.Count != 2)
                     {
                         if (options.Count < 2)
                         {
-                            tempOption = new Option(this, Game1.spriteDict["option"], new Vector2(-30, 0));
+                            tempOption = new Option(this, MainGame.spriteDict["option"], new Vector2(-30, 0));
                             options.Push(tempOption);
-                            Game1.objectManager.Add(tempOption);
+                            MainGame.objectManager.Add(tempOption);
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
@@ -152,9 +152,9 @@ namespace STG
                                 tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
-                            tempOption = new Option(this, Game1.spriteDict["option"], new Vector2(30, 0));
+                            tempOption = new Option(this, MainGame.spriteDict["option"], new Vector2(30, 0));
                             options.Push(tempOption);
-                            Game1.objectManager.Add(tempOption);
+                            MainGame.objectManager.Add(tempOption);
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
@@ -164,7 +164,7 @@ namespace STG
 
                         }
                         else while (options.Count > 2)
-                                Game1.objectManager.Remove(options.Pop());
+                                MainGame.objectManager.Remove(options.Pop());
 
                         
                     }
@@ -172,9 +172,9 @@ namespace STG
                     {
                         if (options.Count < 4)
                         {
-                            tempOption = new Option(this, Game1.spriteDict["option"], new Vector2(-50, 10));
+                            tempOption = new Option(this, MainGame.spriteDict["option"], new Vector2(-50, 10));
                             options.Push(tempOption);
-                            Game1.objectManager.Add(tempOption);
+                            MainGame.objectManager.Add(tempOption);
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
@@ -182,9 +182,9 @@ namespace STG
                                 tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
-                            tempOption = new Option(this, Game1.spriteDict["option"], new Vector2(50, 10));
+                            tempOption = new Option(this, MainGame.spriteDict["option"], new Vector2(50, 10));
                             options.Push(tempOption);
-                            Game1.objectManager.Add(tempOption);
+                            MainGame.objectManager.Add(tempOption);
                             //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
@@ -194,13 +194,13 @@ namespace STG
 
                         }
                         else while (options.Count > 4)
-                                Game1.objectManager.Remove(options.Pop());
+                                MainGame.objectManager.Remove(options.Pop());
                     }
                     if (power == 3 && options.Count != 6)
                     {
-                        tempOption = new Option(this, Game1.spriteDict["option"], new Vector2(-70, 20));
+                        tempOption = new Option(this, MainGame.spriteDict["option"], new Vector2(-70, 20));
                         options.Push(tempOption);
-                        Game1.objectManager.Add(tempOption);
+                        MainGame.objectManager.Add(tempOption);
                         //start them in focus mode if player is in focus
                         if (inFocus == true)
                         {
@@ -208,9 +208,9 @@ namespace STG
                             tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
                         }
 
-                        tempOption = new Option(this, Game1.spriteDict["option"], new Vector2(70, 20));
+                        tempOption = new Option(this, MainGame.spriteDict["option"], new Vector2(70, 20));
                         options.Push(tempOption);
-                        Game1.objectManager.Add(tempOption);
+                        MainGame.objectManager.Add(tempOption);
                         //start them in focus mode if player is in focus
                         if (inFocus == true)
                         {
@@ -249,9 +249,9 @@ namespace STG
                         if (rotation > -maxRotation)
                             rotation -= 0.05f;
                     }
-                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < Game1.windowHeight)
+                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.windowHeight)
                         pos.Y += speed;
-                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < Game1.windowWidth)
+                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.windowWidth)
                     {
                         pos.X += speed;
                         if (rotation < maxRotation)
@@ -272,17 +272,17 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0)
                     {
-                        Game1.objectManager.Add(new Bullet(Game1.spriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 20, 270, 0, this, null));
+                        MainGame.objectManager.Add(new Bullet(MainGame.spriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 20, 270, 0, this, null));
                         mainCooldown = 5;
                     }
                     if (keyboard.IsKeyDown(Keys.NumPad1) && optionCooldown == 0)
                     {
                         if (inFocus == false)
                             foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X / 4, 0, this, null, false, true));
+                                MainGame.objectManager.Add(new Bullet(MainGame.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X / 4, 0, this, null, false, true));
                         if (inFocus == true)
                             foreach (Option option in options)
-                                Game1.objectManager.Add(new Bullet(Game1.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X / 4, 0, this, null, true, true));
+                                MainGame.objectManager.Add(new Bullet(MainGame.spriteDict["duckyBullet"], new Vector2(option.Position.X, option.Position.Y - 20), 10, 270 + option.RelativePosition.X / 4, 0, this, null, true, true));
                         optionCooldown = 50;
                     }
                     if (mainCooldown > 0)
@@ -296,9 +296,9 @@ namespace STG
                     //movement
                     if (keyboard.IsKeyDown(Keys.A) && pos.X - sprite.Width / 2 > 0)
                         pos.X -= speed;
-                    if (keyboard.IsKeyDown(Keys.S) && pos.Y + sprite.Height / 2 < Game1.windowHeight)
+                    if (keyboard.IsKeyDown(Keys.S) && pos.Y + sprite.Height / 2 < MainGame.windowHeight)
                         pos.Y += speed;
-                    if (keyboard.IsKeyDown(Keys.D) && pos.X + sprite.Width / 2 < Game1.windowWidth)
+                    if (keyboard.IsKeyDown(Keys.D) && pos.X + sprite.Width / 2 < MainGame.windowWidth)
                         pos.X += speed;
                     if (keyboard.IsKeyDown(Keys.W) && pos.Y - sprite.Height / 2 > 0)
                         pos.Y -= speed;
@@ -306,7 +306,7 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.G) && mainCooldown == 0)
                     {
-                        Game1.objectManager.Add(new TestPattern(this));
+                        MainGame.objectManager.Add(new TestPattern(this));
                         mainCooldown = 50;
                     }
                     if (mainCooldown > 0)
