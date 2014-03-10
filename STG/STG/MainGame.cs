@@ -14,7 +14,7 @@ namespace STG
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class MainGame : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -24,17 +24,26 @@ namespace STG
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
-        public static int windowWidth;
-        public static int windowHeight;
+        private static int windowWidth;
+        private static int windowHeight;
 
-        //static containers for accessing objects and textures
-        public static GameObjectManager objectManager = new GameObjectManager();
-        public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>(); //use filename as key
+        private static GameObjectManager objectManager = new GameObjectManager();
+        private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
+        /// <summary>
+        /// Player one.
+        /// </summary>
         public static Player player1;
+
+        /// <summary>
+        /// Player two.
+        /// </summary>
         public static Player player2;
 
-        public Game1()
+        /// <summary>
+        /// Initializes the game.
+        /// </summary>
+        public MainGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -69,24 +78,24 @@ namespace STG
             FPSfont = Content.Load<SpriteFont>("FPS");
 
             //option texture
-            spriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
+            SpriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
 
             //player 1 stuff
-            spriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 3, 5);
-            player1 = new Player(spriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(windowWidth / 2, 200), 5, 5);
-            objectManager.Add(player1);
+            SpriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 3, 5);
+            player1 = new Player(SpriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(WindowWidth / 2, 200), 5, 5);
+            ObjectManager.Add(player1);
 
             //player 2 stuff
-            spriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
-            player2 = new Player(spriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(windowWidth / 2, 100));
-            objectManager.Add(player2);
+            SpriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
+            player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(WindowWidth / 2, 100));
+            ObjectManager.Add(player2);
 
             //bullet textures
-            spriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
-            spriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
-            spriteDict["bullet3"] = new Sprite(Content.Load<Texture2D>("bullet3"));
+            SpriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
+            SpriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
+            SpriteDict["bullet3"] = new Sprite(Content.Load<Texture2D>("bullet3"));
             //hitbox texture
-            spriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
+            SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
             // TODO: use this.Content to load your game content here
         }
@@ -108,7 +117,7 @@ namespace STG
         protected override void Update(GameTime gameTime)
         {
             //call all objects' update function
-            objectManager.Update();
+            ObjectManager.Update();
 
             FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             
@@ -138,13 +147,13 @@ namespace STG
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //call all objects' draw function
-            objectManager.Draw(spriteBatch);
+            ObjectManager.Draw(spriteBatch);
 
             spriteBatch.Begin();
 
             spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
             spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
-            spriteBatch.DrawString(FPSfont, "Object count: " + objectManager.Count, new Vector2(16, 48), Color.White);
+            spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
 
             spriteBatch.End();
 
@@ -152,5 +161,25 @@ namespace STG
 
             base.Draw(gameTime);
         }
+
+        /// <summary>
+        /// A list of every object in the game.
+        /// </summary>
+        public static GameObjectManager ObjectManager { get { return objectManager; } }
+
+        /// <summary>
+        /// A dictionary of every sprite in the game.  The index should have the same name as the file.
+        /// </summary>
+        public static Dictionary<string, Sprite> SpriteDict { get { return spriteDict; } }
+
+        /// <summary>
+        /// The width of the game window.
+        /// </summary>
+        public static int WindowWidth { get { return windowWidth; } }
+
+        /// <summary>
+        /// The height of the game window.
+        /// </summary>
+        public static int WindowHeight { get { return windowHeight; } }
     }
 }
