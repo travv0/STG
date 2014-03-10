@@ -24,16 +24,40 @@ namespace STG
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
+        /// <summary>
+        /// The height of the game window.
+        /// </summary>
         public static int windowWidth;
+
+        /// <summary>
+        /// The width of the game window.
+        /// </summary>
         public static int windowHeight;
 
-        //static containers for accessing objects and textures
+        /// <summary>
+        /// A container holding every object in the game.
+        /// </summary>
         public static GameObjectManager objectManager = new GameObjectManager();
-        public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>(); //use filename as key
 
+        /// <summary>
+        /// A dictionary holding every sprite in the game.
+        /// </summary>
+        /// <remarks>Use the sprite's filename as the dictionary key.</remarks>
+        public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
+
+        /// <summary>
+        /// Player one.
+        /// </summary>
         public static Player player1;
+
+        /// <summary>
+        /// Player two.
+        /// </summary>
         public static Player player2;
 
+        /// <summary>
+        /// Initializes the game.
+        /// </summary>
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
