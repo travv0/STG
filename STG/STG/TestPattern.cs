@@ -25,8 +25,6 @@ namespace STG
 
         protected override void Initialize()
         {
-            maxTime = 200;
-
  	        base.Initialize();
         }
 
@@ -77,7 +75,7 @@ namespace STG
                 }
             }
 
-            /*if (time % 40 == 0)
+            if (time % 40 == 0)
             {
                 actionList.Clear();
 
@@ -103,7 +101,7 @@ namespace STG
                 Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 90, -.5f, parent, actionList));
                 Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 180, -.5f, parent, actionList));
                 Game1.objectManager.Add(new Bullet(Game1.spriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 270, -.5f, parent, actionList));
-            }*/
+            }
 
             angle = angle + 3.5f;
             
