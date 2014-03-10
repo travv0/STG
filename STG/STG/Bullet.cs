@@ -109,10 +109,10 @@ namespace STG
             
             if (homing == true)
             {
-                if (ClosestDirection(Game1.player2) == Direction.clockwise)
-                    angle += AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 2.5f;
-                if (ClosestDirection(Game1.player2) == Direction.counterclockwise)
-                    angle -= AngleDifference(Game1.player2) / DistanceToTarget(Game1.player2.Position) * Math.Abs(vel) * 2.5f;
+                if (ClosestDirection(MainGame.player2) == Direction.clockwise)
+                    angle += AngleDifference(MainGame.player2) / DistanceToTarget(MainGame.player2.Position) * Math.Abs(vel) * 2.5f;
+                if (ClosestDirection(MainGame.player2) == Direction.counterclockwise)
+                    angle -= AngleDifference(MainGame.player2) / DistanceToTarget(MainGame.player2.Position) * Math.Abs(vel) * 2.5f;
                 vel += 0.1f;
             }
 
@@ -120,9 +120,9 @@ namespace STG
             pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
 
             if (boundingBox.X + boundingBox.Height < -100 || boundingBox.Y + boundingBox.Height < -100
-                || boundingBox.X > Game1.windowWidth + 100 || boundingBox.Y > Game1.windowHeight + 100)
+                || boundingBox.X > MainGame.windowWidth + 100 || boundingBox.Y > MainGame.windowHeight + 100)
             {
-                Game1.objectManager.Remove(this);
+                MainGame.objectManager.Remove(this);
             }
             
             while (actionList.Count > 0 && actionList[0].Item3 == timer)
