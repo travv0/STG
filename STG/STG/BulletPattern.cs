@@ -29,7 +29,7 @@ namespace STG
         /// <summary>
         /// The maximum time the bullet pattern should exist.
         /// </summary>
-        protected int maxTime;
+        protected int maxTime = Int32.MaxValue;
 
         /// <summary>
         /// The number of times the bullet pattern has cycled through.
