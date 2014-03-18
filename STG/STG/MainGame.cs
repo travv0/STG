@@ -81,7 +81,11 @@ namespace STG
             SpriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
 
             //player 1 stuff
+<<<<<<< HEAD
             SpriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation2"), 4, 5);
+=======
+            SpriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 4, 5);
+>>>>>>> a168992ef20c0a784cb8616d248b7571726990a3
             player1 = new Player(SpriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(WindowWidth / 2, 200), 5, 5);
             ObjectManager.Add(player1);
 
