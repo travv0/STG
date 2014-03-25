@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="BulletPattern.cs" />
     <Compile Include="CollectibleItem.cs" />
+    <Compile Include="Collision.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Bullet.cs" />

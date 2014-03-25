@@ -26,6 +26,7 @@ namespace STG
         /// </summary>
         protected Rectangle boundingBox;
 
+        protected int collisionColumn, collisionRow;
         /// <summary>
         /// The sprite for this game object.
         /// </summary>
@@ -35,7 +36,7 @@ namespace STG
         /// The angle that the sprite will be drawn at.
         /// </summary>
         protected float rotation;
-        
+
         /// <summary>
         /// Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
         /// </summary>
@@ -60,6 +61,7 @@ namespace STG
             //update the boundingBox's coords to move with the object
             boundingBox.X = (int)pos.X;
             boundingBox.Y = (int)pos.Y;
+            calculateCollisionGridCell();
         }
 
         /// <summary>
@@ -83,6 +85,22 @@ namespace STG
         /// Returns the position of the object.
         /// </summary>
         public Vector2 Position { get { return pos; } }
+
+        /// <summary>
+        /// Returns the collision column for collision grid.
+        /// </summary>
+        public int getCollisionColumn()
+        {
+            return collisionColumn;
+        }
+
+        /// <summary>
+        /// Returns the collision row for collision grid.
+        /// </summary>
+        public int getCollisionRow()
+        {
+            return collisionRow;
+        }
 
         /// <summary>
         /// Returns the object's bounding box.
@@ -134,6 +152,14 @@ namespace STG
         {
             return (float)Math.Sqrt(Math.Pow((float)pos.X - targetPos.X, 2) + Math.Pow((float)pos.Y - targetPos.Y, 2));
 
+        }
+        /// <summary>
+        /// Calculates where in the collision grid the cell is currently
+        /// </summary>
+        private void calculateCollisionGridCell()
+        {
+            collisionColumn = (int)Math.Floor(Position.X / Collision.getCellWidth());
+            collisionRow = (int)Math.Floor(Position.Y / Collision.getCellHeight());
         }
     }
 }
