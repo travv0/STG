@@ -24,6 +24,7 @@ namespace STG
             pos.X = parent.Position.X + relativePosition.X;
             pos.Y = parent.Position.Y + relativePosition.Y;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
+            objType = 'O';
         }
 
         public override void Update()

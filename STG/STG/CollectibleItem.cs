@@ -35,6 +35,7 @@ namespace STG
             this.pos = pos;
             this.vel = vel;
             this.powerLevel = powerLevel;
+            objType = 'C';
         }
         /// <summary>
         /// Updates the Collectible Item.
