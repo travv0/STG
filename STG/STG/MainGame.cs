@@ -167,7 +167,6 @@ namespace STG
 
             spriteBatch.Begin();
 
-            spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
             spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
             spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
             spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
@@ -176,6 +175,12 @@ namespace STG
 
             //call all objects' draw function
             ObjectManager.Draw(spriteBatch);
+            
+            spriteBatch.Begin();
+            
+            spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
+            
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 
