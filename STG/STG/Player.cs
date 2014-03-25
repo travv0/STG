@@ -250,21 +250,21 @@ namespace STG
                         rotation -= 0.05f;
 
                     //movement
-                    if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > 0)
+                    if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
                     {
                         pos.X -= speed;
                         if (rotation > -maxRotation)
                             rotation -= 0.05f;
                     }
-                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.WindowHeight)
+                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height)
                         pos.Y += speed;
-                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.WindowWidth)
+                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                     {
                         pos.X += speed;
                         if (rotation < maxRotation)
                             rotation += 0.05f;
                     }
-                    if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > 0)
+                    if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
                         pos.Y -= speed;
 
                     if (!keyboard.IsKeyDown(Keys.Left) && !keyboard.IsKeyDown(Keys.Right))
