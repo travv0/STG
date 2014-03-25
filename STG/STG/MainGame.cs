@@ -26,7 +26,7 @@ namespace STG
 
         private static int windowWidth;
         private static int windowHeight;
-        private static Rectangle playingArea;
+        private static Rectangle playingArea = new Rectangle(20, 20, 620, 680);
 
         private static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
@@ -62,8 +62,6 @@ namespace STG
             //Set the screen height and width       
             graphics.PreferredBackBufferWidth = 960;
             graphics.PreferredBackBufferHeight = 720;
-
-            playingArea = new Rectangle(20, 20, 620, 680);
 
             //Apply the changes made to the device
             graphics.ApplyChanges();

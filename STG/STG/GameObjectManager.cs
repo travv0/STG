@@ -19,7 +19,7 @@ namespace STG
         List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from objectList
-
+        Collision collisionGrid = new Collision(); //makes the collision instance
         /// <summary>
         /// Initializes a new GameObjectManager with an empty list of GameObjects.
         /// </summary>
@@ -53,6 +53,8 @@ namespace STG
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
                 objectList.Add(o);
             addList.Clear(); //clears the temp list
+            foreach (GameObject o in objectList)
+                collisionGrid.updateGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
             foreach (GameObject o in removeList) //now that we're done looping through objectList, we can remove objects from it
                 objectList.Remove(o);
             removeList.Clear();
