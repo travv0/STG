@@ -17,6 +17,8 @@ namespace STG
         const int ROWS = 5, COLUMNS = 5;
         static int CELLWIDTH = MainGame.PlayingArea.Width / COLUMNS, CELLHEIGHT = MainGame.PlayingArea.Height / ROWS;//constants for the size of the collision grid as well as the cell dimensions
         public List<GameObject>[,] collisionGrid = new List<GameObject>[ROWS, COLUMNS];//list of the gameobjects in each square of the collision grid
+        List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to the collision grid
+        List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from the collision grid
 
         /// <summary>
         /// Getter for collision grid cell width
@@ -54,9 +56,20 @@ namespace STG
         /// <param name="column"></param>
         /// <param name="row"></param>
         /// <param name="o"></param>
-        public void updateGrid(int column, int row, GameObject o)
+        public void addToGrid(int column, int row, GameObject o)
         {
             collisionGrid[row, column].Add(o);
+        }
+
+        /// <summary>
+        /// Removes game object from collision grid
+        /// </summary>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        /// <param name="o"></param>
+        public void removeFromGrid(int column, int row, GameObject o)
+        {
+            collisionGrid[row, column].Remove(o);
         }
     }
 }

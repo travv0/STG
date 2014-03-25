@@ -22,11 +22,17 @@ namespace STG
         protected Vector2 pos;
 
         /// <summary>
+        /// position shifted for collision grid to work with a play area moved away from the origin
+        /// </summary>
+        protected Vector2 colPos;
+
+        /// <summary>
         /// The bounding box of the sprite.  This is the rectangle that the sprite will be drawn in.
         /// </summary>
         protected Rectangle boundingBox;
 
         protected int collisionColumn, collisionRow;
+        protected char objType;
         /// <summary>
         /// The sprite for this game object.
         /// </summary>
@@ -50,7 +56,8 @@ namespace STG
         /// </summary>
         virtual protected void Initialize()
         {
-
+            colPos.X = Position.X - 20;
+            colPos.Y = Position.Y - 20;
         }
 
         /// <summary>
@@ -61,7 +68,10 @@ namespace STG
             //update the boundingBox's coords to move with the object
             boundingBox.X = (int)pos.X;
             boundingBox.Y = (int)pos.Y;
+            colPos.X = Position.X - 20;
+            colPos.Y = Position.Y - 20;
             calculateCollisionGridCell();
+            
         }
 
         /// <summary>
@@ -85,6 +95,24 @@ namespace STG
         /// Returns the position of the object.
         /// </summary>
         public Vector2 Position { get { return pos; } }
+
+        /// <summary>
+        /// Returns the collision position of the object.
+        /// </summary>
+        public Vector2 collisionPosition { get { return colPos; } }
+
+        /// <summary>
+        /// Returns object type
+        /// used to detect if an object should be deleted or not drawn when it is outside of the playing area
+        /// For example options should not be deleted only disabled and not drawn temporarily but bullets should be removed and cleaned up
+        /// 'O' for options, 'C' for collectibles, 'B' for bullets, 'P' for players 
+        /// </summary>
+        public char objectType { get { return objType; } }
+
+        /// <summary>
+        /// Returns sprite of object
+        /// </summary>
+        public Sprite getSprite { get { return sprite; } }
 
         /// <summary>
         /// Returns the collision column for collision grid.
@@ -155,11 +183,12 @@ namespace STG
         }
         /// <summary>
         /// Calculates where in the collision grid the cell is currently
+        /// collision positions are shifted 20 pixels from actual position to accomadate for the play area being moved away from the origin
         /// </summary>
         private void calculateCollisionGridCell()
         {
-            collisionColumn = (int)Math.Floor(Position.X / Collision.getCellWidth());
-            collisionRow = (int)Math.Floor(Position.Y / Collision.getCellHeight());
+            collisionColumn = (int)Math.Floor(collisionPosition.X / Collision.getCellWidth());
+            collisionRow = (int)Math.Floor(collisionPosition.Y / Collision.getCellHeight());
         }
     }
 }

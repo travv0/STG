@@ -114,7 +114,7 @@ namespace STG
             SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\FullItem"));
             SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\LargeItem"));
             SpriteDict["SmallItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\SmallItem"));
-            ObjectManager.Add(new CollectibleItem(SpriteDict["FullItem"], new Vector2(200, 0), 0, 5f));
+            ObjectManager.Add(new CollectibleItem(SpriteDict["FullItem"], new Vector2(200, 20 + (SpriteDict["FullItem"].Height / 2)), 0, 5f)); //I adjusted starting position to fit in playing area
 
             // TODO: use this.Content to load your game content here
         }

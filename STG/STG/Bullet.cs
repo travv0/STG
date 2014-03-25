@@ -77,6 +77,7 @@ namespace STG
             });
 
             rotation = angle * (float)Math.PI / 180 + drawAngle;
+            objType = 'B';
         }
 
         /// <summary>

@@ -85,6 +85,7 @@ namespace STG
             this.pos = pos;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
+            objType = 'P';
         }
         
         /// <summary>
@@ -99,6 +100,7 @@ namespace STG
             this.pos = new Vector2(boundingBox.X, boundingBox.Y);
             this.boundingBox = boundingBox;
             this.playerNum = playerNum;
+            objType = 'P';
         }
 
         /// <summary>
