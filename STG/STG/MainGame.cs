@@ -26,6 +26,7 @@ namespace STG
 
         private static int windowWidth;
         private static int windowHeight;
+        private static Rectangle playingArea;
 
         private static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
@@ -62,6 +63,8 @@ namespace STG
             graphics.PreferredBackBufferWidth = 960;
             graphics.PreferredBackBufferHeight = 720;
 
+            playingArea = new Rectangle(20, 20, 620, 680);
+
             //Apply the changes made to the device
             graphics.ApplyChanges();
 
@@ -83,6 +86,9 @@ namespace STG
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             FPSfont = Content.Load<SpriteFont>("FPS");
+
+            //background stuff
+            SpriteDict["HUD"] = new Sprite(Content.Load<Texture2D>("HUD"));
 
             //option texture
             SpriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
@@ -155,16 +161,17 @@ namespace STG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //call all objects' draw function
-            ObjectManager.Draw(spriteBatch);
-
             spriteBatch.Begin();
 
+            spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
             spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
             spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
             spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
 
             spriteBatch.End();
+
+            //call all objects' draw function
+            ObjectManager.Draw(spriteBatch);
 
             // TODO: Add your drawing code here
 
@@ -190,5 +197,10 @@ namespace STG
         /// The height of the game window.
         /// </summary>
         public static int WindowHeight { get { return windowHeight; } }
+
+        /// <summary>
+        /// The ractangle containing the playing area.
+        /// </summary>
+        public static Rectangle PlayingArea { get { return playingArea; } }
     }
 }
