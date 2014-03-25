@@ -58,6 +58,13 @@ namespace STG
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            //Set the screen height and width       
+            graphics.PreferredBackBufferWidth = 960;
+            graphics.PreferredBackBufferHeight = 720;
+
+            //Apply the changes made to the device
+            graphics.ApplyChanges();
+
             windowWidth = GraphicsDevice.Viewport.Width;
             windowHeight = GraphicsDevice.Viewport.Height;
 
