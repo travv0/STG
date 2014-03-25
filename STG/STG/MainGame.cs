@@ -99,6 +99,12 @@ namespace STG
             //hitbox texture
             SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
+            //Item textures
+            SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\FullItem"));
+            SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\LargeItem"));
+            SpriteDict["SmallItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\SmallItem"));
+            ObjectManager.Add(new CollectibleItem(SpriteDict["FullItem"], new Vector2(200, 0), 0, 5f));
+
             // TODO: use this.Content to load your game content here
         }
 
