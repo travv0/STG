@@ -303,13 +303,13 @@ namespace STG
 
                 case PlayerNum.Two:
                     //movement
-                    if (keyboard.IsKeyDown(Keys.A) && pos.X - sprite.Width / 2 > 0)
+                    if (keyboard.IsKeyDown(Keys.A) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
                         pos.X -= speed;
-                    if (keyboard.IsKeyDown(Keys.S) && pos.Y + sprite.Height / 2 < MainGame.WindowHeight)
+                    if (keyboard.IsKeyDown(Keys.S) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 2)
                         pos.Y += speed;
-                    if (keyboard.IsKeyDown(Keys.D) && pos.X + sprite.Width / 2 < MainGame.WindowWidth)
+                    if (keyboard.IsKeyDown(Keys.D) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                         pos.X += speed;
-                    if (keyboard.IsKeyDown(Keys.W) && pos.Y - sprite.Height / 2 > 0)
+                    if (keyboard.IsKeyDown(Keys.W) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
                         pos.Y -= speed;
 
                     //shootin
