@@ -24,9 +24,20 @@ namespace STG
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
+        enum GameStates { TitleScreen, Playing };
+        GameStates gameState = GameStates.TitleScreen;
+
         private static int windowWidth;
         private static int windowHeight;
         private static Rectangle playingArea = new Rectangle(20, 20, 620, 680);
+
+        Texture2D titleBackgroundTexture;
+        Rectangle titleViewportRect;
+
+        Texture2D startButton;
+        Rectangle startRect;
+        Texture2D quitButton;
+        Rectangle quitRect;
 
         private static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
@@ -71,6 +82,8 @@ namespace STG
 
             IsFixedTimeStep = false;
 
+            this.IsMouseVisible = true;
+
             base.Initialize();
         }
         
@@ -82,6 +95,22 @@ namespace STG
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            titleBackgroundTexture =
+                    Content.Load<Texture2D>("BG");
+
+            startButton =
+                    Content.Load<Texture2D>("StartButton");
+            quitButton =
+                    Content.Load<Texture2D>("QuitButton");
+
+            titleViewportRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
+
+            startRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (startButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height / 3, startButton.Width, startButton.Height);
+
+            quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
             FPSfont = Content.Load<SpriteFont>("FPS");
 
@@ -138,6 +167,29 @@ namespace STG
             //call all objects' update function
             ObjectManager.Update();
 
+            switch (gameState)
+            {
+                // title screen section 
+                case GameStates.TitleScreen:
+
+                    MouseState mouse = Mouse.GetState();
+
+                    if ((mouse.LeftButton == ButtonState.Pressed) && (startRect.Contains(mouse.X, mouse.Y)))
+                    {
+                        gameState = GameStates.Playing;
+                        this.IsMouseVisible = false;
+                    }
+                    if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
+                    {
+                        this.Exit();
+                    }
+                    break;
+                // end of title screen section
+                // game play section
+                case GameStates.Playing:
+                    break;
+            }
+
             FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             
             if (FPS <= 60)
@@ -165,23 +217,43 @@ namespace STG
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-
-            spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
-            spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
-            spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
-
-            spriteBatch.End();
-
-            //call all objects' draw function
-            ObjectManager.Draw(spriteBatch);
             
-            spriteBatch.Begin();
-            
-            spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
-            
-            spriteBatch.End();
 
+            if (gameState == GameStates.TitleScreen)//drawing for title screen
+            {
+                spriteBatch.Begin();
+
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(titleBackgroundTexture, titleViewportRect,
+                    Color.White);
+
+                spriteBatch.Draw(startButton, startRect, Color.CornflowerBlue);
+
+                spriteBatch.Draw(quitButton, quitRect, Color.CornflowerBlue);
+
+                spriteBatch.End();
+            }
+
+            if (gameState == GameStates.Playing)
+            {
+                spriteBatch.Begin();
+
+                spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
+                spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
+                spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
+
+                spriteBatch.End();
+
+                //call all objects' draw function
+                ObjectManager.Draw(spriteBatch);
+
+                spriteBatch.Begin();
+
+                spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
+
+                spriteBatch.End();
+            }
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
