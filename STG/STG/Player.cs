@@ -256,11 +256,7 @@ namespace STG
                     //movement
                     if (keyboard.IsKeyDown(Keys.Left) && pos.X - (sprite.Width / 2) + 20 > MainGame.PlayingArea.X)
                     {
-                        prevX = pos.X;
                         pos.X -= speed;
-
-                        if (prevX == pos.X)
-                            againstWall = true;
 
                         if (rotation > -maxRotation)
                             rotation -= 0.05f;
@@ -269,9 +265,10 @@ namespace STG
                     if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height)
                         pos.Y += speed;
 
+
                     if (keyboard.IsKeyDown(Keys.Right) && pos.X + (sprite.Width / 2) - 20 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                     {
-                        prevX = pos.X;
+                        
                         pos.X += speed;
 
                         if (rotation < maxRotation)
@@ -281,15 +278,17 @@ namespace STG
                     if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
                         pos.Y -= speed;
 
-                    if (prevX == pos.X)
+                    if (pos.X - (sprite.Width / 2) + 20 <= MainGame.PlayingArea.X || pos.X + (sprite.Width / 2) - 20 >= MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                         againstWall = true;
+                    else
+                        againstWall = false;
 
                     if ((!keyboard.IsKeyDown(Keys.Left) && !keyboard.IsKeyDown(Keys.Right)) || againstWall == true)
                     {
                         if (rotation < 0)
                             rotation += 0.05f;
                         if (rotation > 0)
-                            rotation -= 0.05f;
+                            rotation -= 0.05f;                     
                     }
 
 
