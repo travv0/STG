@@ -57,18 +57,21 @@ namespace STG
             //Updates for collision grid
             foreach (GameObject o in objectList)
             {
-                if (!(o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
-                o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
-                o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                if (o.getSprite != null)
                 {
-                    collisionGrid.addToGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
-                }
-                if (o.objectType == 'C' && (o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
-                o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
-                o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
-                {
-                    collisionGrid.removeFromGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
-                    Remove(o);
+                    if (!(o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
+                    o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
+                    o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                    {
+                        collisionGrid.addToGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
+                    }
+                    if (o.objectType == 'C' && (o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
+                    o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
+                    o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                    {
+                        collisionGrid.removeFromGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
+                        Remove(o);
+                    }
                 }
             }
             foreach (GameObject o in removeList) //now that we're done looping through objectList, we can remove objects from it
