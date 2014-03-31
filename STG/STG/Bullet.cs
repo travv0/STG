@@ -214,7 +214,7 @@ namespace STG
 
         private Direction ClosestDirection(GameObject obj)
         {
-            if (((AngleToTarget(obj.Position) + 180) % 360 > angle && AngleToTarget(obj.Position) > angle && AngleToTarget(obj.Position) > 180) || AngleToTarget(obj.Position) < angle)
+            if (((AngleToTarget(obj.Position) + 180) % 360 > angle && AngleToTarget(obj.Position) > angle && (AngleToTarget(obj.Position) + 180) % 360 > 180) || AngleToTarget(obj.Position) < angle)
                 return Direction.counterclockwise;
             else
                 return Direction.clockwise;
