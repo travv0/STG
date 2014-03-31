@@ -173,8 +173,14 @@ namespace STG
                 case GameStates.TitleScreen:
 
                     MouseState mouse = Mouse.GetState();
+                    KeyboardState keyboard = Keyboard.GetState();
 
                     if ((mouse.LeftButton == ButtonState.Pressed) && (startRect.Contains(mouse.X, mouse.Y)))
+                    {
+                        gameState = GameStates.Playing;
+                        this.IsMouseVisible = false;
+                    }
+                    if((keyboard.IsKeyDown(Keys.Enter)) && (gameState == GameStates.TitleScreen))
                     {
                         gameState = GameStates.Playing;
                         this.IsMouseVisible = false;
