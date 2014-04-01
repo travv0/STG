@@ -59,18 +59,14 @@ namespace STG
             {
                 if (o.getSprite != null)
                 {
-                    
-                    if (!(o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
-                    o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
-                    o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                    collisionGrid.addToCollisionGrid(o);
+                    collisionGrid.removeFromCollisionGrid(o);
+                    if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()))
                     {
-                        collisionGrid.addToGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
+                        Remove(o);
                     }
-                    if (o.objectType == 'C' && (o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
-                    o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
-                    o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                    if (o.objectType == 'C' && (!collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
                     {
-                        collisionGrid.removeFromGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
                         Remove(o);
                     }
                 }

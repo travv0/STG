@@ -31,7 +31,7 @@ namespace STG
         /// </summary>
         protected Rectangle boundingBox;
 
-        protected int collisionColumn, collisionRow;
+        protected int[] collisionColumns = new int[4], collisionRows = new int[4];
         protected char objType;
         /// <summary>
         /// The sprite for this game object.
@@ -44,7 +44,7 @@ namespace STG
         protected float rotation;
 
         /// <summary>
-        /// Vertice positions of all corners based on position and rotation of the object as calculated in calculateVertices
+        /// Vertice positions of all corners based on collision position and rotation of the object as calculated in calculateVertices
         /// 
         /// </summary>
         protected Vector2 tlVertex, trVertex, blVertex, brVertex; 
@@ -62,6 +62,7 @@ namespace STG
         /// </summary>
         virtual protected void Initialize()
         {
+            rotation = 0;
             colPos.X = Position.X - 20;
             colPos.Y = Position.Y - 20;
         }
@@ -76,6 +77,7 @@ namespace STG
             boundingBox.Y = (int)pos.Y;
             colPos.X = Position.X - 20;
             colPos.Y = Position.Y - 20;
+            calculateVertices();
             calculateCollisionGridCell();
             
         }
@@ -92,6 +94,10 @@ namespace STG
             {
                 sprite.Update();
                 sprite.Draw(spriteBatch, boundingBox, Color.White, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.WindowHeight));
+                for (int i = 0; i < 4; i++)
+                {
+                    sprite.Draw(spriteBatch, new Rectangle((int)this.getVertices()[i].X, (int)this.getVertices()[i].Y, 2, 2), Color.White);
+                }
             }
 
             spriteBatch.End();
@@ -127,6 +133,7 @@ namespace STG
         /// <returns></returns>
         public List<Vector2> getVertices()
         {
+            calculateVertices();
             List<Vector2> vertices = new List<Vector2>();
             vertices.Add(tlVertex);
             vertices.Add(trVertex);
@@ -138,17 +145,17 @@ namespace STG
         /// <summary>
         /// Returns the collision column for collision grid.
         /// </summary>
-        public int getCollisionColumn()
+        public int[] getCollisionColumn()
         {
-            return collisionColumn;
+            return collisionColumns;
         }
 
         /// <summary>
         /// Returns the collision row for collision grid.
         /// </summary>
-        public int getCollisionRow()
+        public int[] getCollisionRow()
         {
-            return collisionRow;
+            return collisionRows;
         }
 
         /// <summary>
@@ -208,20 +215,26 @@ namespace STG
         /// </summary>
         private void calculateCollisionGridCell()
         {
-            collisionColumn = (int)Math.Floor(collisionPosition.X / Collision.getCellWidth());
-            collisionRow = (int)Math.Floor(collisionPosition.Y / Collision.getCellHeight());
+            collisionColumns[0] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
+            collisionRows[0] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[1] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
+            collisionRows[1] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[2] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
+            collisionRows[2] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[3] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
+            collisionRows[3] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
         }
 
         private void calculateVertices()
         {
-            tlVertex.X = (float)(pos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(pos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
-            tlVertex.Y = (float)(pos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(pos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
-            trVertex.X = (float)(pos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(pos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
-            trVertex.X = (float)(pos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(pos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
-            blVertex.X = (float)(pos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(pos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
-            blVertex.X = (float)(pos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(pos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
-            brVertex.X = (float)(pos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(pos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
-            brVertex.X = (float)(pos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(pos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
+            tlVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
+            tlVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
+            trVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
+            trVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
+            blVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
+            blVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
+            brVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
+            brVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
         }
     }
 }
