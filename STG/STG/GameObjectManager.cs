@@ -59,6 +59,7 @@ namespace STG
             {
                 if (o.getSprite != null)
                 {
+                    
                     if (!(o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
                     o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
                     o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
