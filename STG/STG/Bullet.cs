@@ -214,7 +214,8 @@ namespace STG
 
         private Direction ClosestDirection(GameObject obj)
         {
-            if (((AngleToTarget(obj.Position) + 180) % 360 > angle && AngleToTarget(obj.Position) > angle && (AngleToTarget(obj.Position) + 180) % 360 > 180) || AngleToTarget(obj.Position) < angle)
+            float tempAtT = NormalizeAngle(AngleToTarget(obj.Position) - angle);
+            if (tempAtT > 180)
                 return Direction.counterclockwise;
             else
                 return Direction.clockwise;
@@ -226,6 +227,19 @@ namespace STG
                 return (360 - AngleToTarget(obj.Position) - angle);
             else
                 return Math.Abs(AngleToTarget(obj.Position) - angle);
+        }
+
+        private float NormalizeAngle(float angle)
+        {
+            while (angle < 0 || angle > 360)
+            {
+                if (angle < 0)
+                    angle += 360;
+                if (angle > 360)
+                    angle -= 360;
+            }
+
+            return angle;
         }
     }
 }
