@@ -43,6 +43,7 @@ namespace STG
         /// </summary>
         protected float rotation;
 
+
         /// <summary>
         /// Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
         /// </summary>
@@ -113,6 +114,8 @@ namespace STG
         /// Returns sprite of object
         /// </summary>
         public Sprite getSprite { get { return sprite; } }
+
+       
 
         /// <summary>
         /// Returns the collision column for collision grid.
