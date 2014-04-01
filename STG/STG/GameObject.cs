@@ -43,6 +43,11 @@ namespace STG
         /// </summary>
         protected float rotation;
 
+        /// <summary>
+        /// Vertice positions of all corners based on position and rotation of the object as calculated in calculateVertices
+        /// 
+        /// </summary>
+        protected Vector2 tlVertex, trVertex, blVertex, brVertex; 
 
         /// <summary>
         /// Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
@@ -115,7 +120,20 @@ namespace STG
         /// </summary>
         public Sprite getSprite { get { return sprite; } }
 
-       
+        /// <summary>
+        /// puts all vertices of an object into a list and returns it
+        /// will be used for collision purposes
+        /// </summary>
+        /// <returns></returns>
+        public List<Vector2> getVertices()
+        {
+            List<Vector2> vertices = new List<Vector2>();
+            vertices.Add(tlVertex);
+            vertices.Add(trVertex);
+            vertices.Add(blVertex);
+            vertices.Add(brVertex);
+            return vertices;
+        }
 
         /// <summary>
         /// Returns the collision column for collision grid.
