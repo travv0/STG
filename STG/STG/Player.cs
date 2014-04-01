@@ -39,7 +39,8 @@ namespace STG
         int optionCooldown = 0; //frames until another option bullet can be fired
         Stack<Option> options = new Stack<Option>();
 
-        float speed = 5; //player's speed
+        const float SPEED = 7; //player's speed
+        float speed = SPEED; //change to player's x and y value (smaller if moving diagonal)
         float prevX;
         bool againstWall = false;
 
@@ -225,27 +226,29 @@ namespace STG
                     }
 
                     //going in and out of focus mode
-                    if (keyboard.IsKeyDown(Keys.Enter) && inFocus == false)
+                    if (keyboard.IsKeyDown(Keys.Enter))
                     {
-                        speed = 2;
+                        speed = SPEED * (2 / 5.0f);
                         maxRotation = 0;
+                        if (inFocus == false)
+                            foreach (Option option in options)
+                            {
+                                option.relativePosition.X = option.RelativePosition.X * 3 / 4;
+                                option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
+                            }
                         inFocus = true;
-                        foreach (Option option in options)
-                        {
-                            option.relativePosition.X = option.RelativePosition.X * 3 / 4;
-                            option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
-                        }
                     }
-                    else if (keyboard.IsKeyUp(Keys.Enter) && inFocus == true)
+                    else if (keyboard.IsKeyUp(Keys.Enter))
                     {
-                        speed = 5;
+                        speed = SPEED;
                         maxRotation = .2f;
+                        if (inFocus == true)
+                            foreach (Option option in options)
+                            {
+                                option.relativePosition.X = option.RelativePosition.X * 4 / 3;
+                                option.relativePosition.Y = option.RelativePosition.Y + boundingBox.Height / 2;
+                            }
                         inFocus = false;
-                        foreach (Option option in options)
-                        {
-                            option.relativePosition.X = option.RelativePosition.X * 4 / 3;
-                            option.relativePosition.Y = option.RelativePosition.Y + boundingBox.Height / 2;
-                        }
                     }
 
                     if (rotation < -maxRotation)
@@ -254,6 +257,14 @@ namespace STG
                         rotation -= 0.05f;
 
                     //movement
+                    if ((keyboard.IsKeyDown(Keys.Left) && keyboard.IsKeyDown(Keys.Up)
+                        || keyboard.IsKeyDown(Keys.Left) && keyboard.IsKeyDown(Keys.Down)
+                        || keyboard.IsKeyDown(Keys.Up) && keyboard.IsKeyDown(Keys.Right)
+                        || keyboard.IsKeyDown(Keys.Right) && keyboard.IsKeyDown(Keys.Down))
+                        && (speed == SPEED || speed == SPEED * (2 / 5.0f)))
+                        speed = (float)(speed / Math.Sqrt(2));
+                    
+
                     if (keyboard.IsKeyDown(Keys.Left) && pos.X - (sprite.Width / 2) + 20 > MainGame.PlayingArea.X)
                     {
                         pos.X -= speed;
