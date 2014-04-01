@@ -61,7 +61,7 @@ namespace STG
                 {
                     collisionGrid.addToCollisionGrid(o);
                     collisionGrid.removeFromCollisionGrid(o);
-                    if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()))
+                    if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()) && o != objectList[1])
                     {
                         Remove(o);
                     }
