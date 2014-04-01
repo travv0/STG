@@ -217,12 +217,12 @@ namespace STG
         {
             collisionColumns[0] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
             collisionRows[0] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
-            collisionColumns[1] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
-            collisionRows[1] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
-            collisionColumns[2] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
-            collisionRows[2] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
-            collisionColumns[3] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
-            collisionRows[3] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[1] = (int)Math.Floor(trVertex.X / Collision.getCellWidth());
+            collisionRows[1] = (int)Math.Floor(trVertex.Y / Collision.getCellHeight());
+            collisionColumns[2] = (int)Math.Floor(blVertex.X / Collision.getCellWidth());
+            collisionRows[2] = (int)Math.Floor(blVertex.Y / Collision.getCellHeight());
+            collisionColumns[3] = (int)Math.Floor(brVertex.X / Collision.getCellWidth());
+            collisionRows[3] = (int)Math.Floor(brVertex.Y / Collision.getCellHeight());
         }
 
         private void calculateVertices()

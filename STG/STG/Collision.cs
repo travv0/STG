@@ -15,7 +15,7 @@ namespace STG
     class Collision
     {
         const int ROWS = 5, COLUMNS = 5;
-        static int CELLWIDTH = MainGame.PlayingArea.Width / COLUMNS, CELLHEIGHT = MainGame.PlayingArea.Height / ROWS;//constants for the size of the collision grid as well as the cell dimensions
+        static int CELLWIDTH = (MainGame.PlayingArea.Width + 100) / COLUMNS, CELLHEIGHT = (MainGame.PlayingArea.Height + 100) / ROWS;//constants for the size of the collision grid as well as the cell dimensions
         public List<GameObject>[,] collisionGrid = new List<GameObject>[ROWS, COLUMNS];//list of the gameobjects in each square of the collision grid
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to the collision grid
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from the collision grid
@@ -57,19 +57,30 @@ namespace STG
         public void addToCollisionGrid(GameObject o){
             if (this.collides(o.getVertices(), MainGame.PlayingArea))
             {
-                this.addToGrid(o.getCollisionColumn()[0], o.getCollisionRow()[0], o);
-                this.addToGrid(o.getCollisionColumn()[1], o.getCollisionRow()[1], o);
-                this.addToGrid(o.getCollisionColumn()[2], o.getCollisionRow()[2], o);
-                this.addToGrid(o.getCollisionColumn()[3], o.getCollisionRow()[3], o);
+                if(MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[0].X, (int)o.getVertices()[0].Y)))
+                    this.addToGrid(o.getCollisionColumn()[0], o.getCollisionRow()[0], o);
+                if (MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[1].X, (int)o.getVertices()[1].Y)))
+                    this.addToGrid(o.getCollisionColumn()[1], o.getCollisionRow()[1], o);
+                if (MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[2].X, (int)o.getVertices()[2].Y)))
+                    this.addToGrid(o.getCollisionColumn()[2], o.getCollisionRow()[2], o);
+                if (MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[3].X, (int)o.getVertices()[3].Y)))
+                    this.addToGrid(o.getCollisionColumn()[3], o.getCollisionRow()[3], o);
             }
         }
         public void removeFromCollisionGrid(GameObject o){
-            if (this.collides(o.getVertices(), MainGame.PlayingArea))
+            if (!this.collides(o.getVertices(), MainGame.PlayingArea))
             {
-                this.removeFromGrid(o.getCollisionColumn()[0], o.getCollisionRow()[0], o);
-                this.removeFromGrid(o.getCollisionColumn()[1], o.getCollisionRow()[1], o);
-                this.removeFromGrid(o.getCollisionColumn()[2], o.getCollisionRow()[2], o);
-                this.removeFromGrid(o.getCollisionColumn()[3], o.getCollisionRow()[3], o);
+                for (int i = 0; i < ROWS; i++)
+                {
+                    for (int j = 0; j < COLUMNS; j++)
+                    {
+                        for (int k = 0; k < 4; k++)
+                        {
+                            if (collisionGrid[i, j].Contains(o) && (o.getCollisionColumn()[k] != j || o.getCollisionRow()[k] != i))
+                                collisionGrid[i, j].Remove(o);
+                        }
+                    }
+                }
             }
         }
 
@@ -82,17 +93,6 @@ namespace STG
         public void addToGrid(int column, int row, GameObject o)
         {
             collisionGrid[row, column].Add(o);
-        }
-
-        /// <summary>
-        /// Removes game object from collision grid
-        /// </summary>
-        /// <param name="column"></param>
-        /// <param name="row"></param>
-        /// <param name="o"></param>
-        public void removeFromGrid(int column, int row, GameObject o)
-        {
-            collisionGrid[row, column].Remove(o);
         }
 
         /// <summary>
