@@ -294,7 +294,7 @@ namespace STG
                     else
                         againstWall = false;
 
-                    if ((!keyboard.IsKeyDown(Keys.Left) && !keyboard.IsKeyDown(Keys.Right)) || againstWall == true)
+                    if ((!keyboard.IsKeyDown(Keys.Left) && !keyboard.IsKeyDown(Keys.Right)) || againstWall == true || ((keyboard.IsKeyDown(Keys.Left) == true) && (keyboard.IsKeyDown(Keys.Right) == true)))
                     {
                         if (rotation < 0)
                             rotation += 0.05f;
