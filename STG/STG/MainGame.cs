@@ -21,7 +21,7 @@ namespace STG
 
         //FPS stuff
         SpriteFont FPSfont;
-        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
+        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped, powerLevel;
         int totalFrames = 0;
 
         enum GameStates { TitleScreen, Playing };
@@ -248,6 +248,7 @@ namespace STG
                 spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
                 spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
                 spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
+                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.White);
 
                 spriteBatch.End();
 
