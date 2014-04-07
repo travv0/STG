@@ -135,7 +135,7 @@ namespace STG
             //bullet textures
             SpriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
             SpriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
-            SpriteDict["bullet3"] = new Sprite(Content.Load<Texture2D>("bullet3"));
+            SpriteDict["prettyArrowBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\prettyArrowBullet"));
             //hitbox texture
             SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
@@ -173,8 +173,14 @@ namespace STG
                 case GameStates.TitleScreen:
 
                     MouseState mouse = Mouse.GetState();
+                    KeyboardState keyboard = Keyboard.GetState();
 
                     if ((mouse.LeftButton == ButtonState.Pressed) && (startRect.Contains(mouse.X, mouse.Y)))
+                    {
+                        gameState = GameStates.Playing;
+                        this.IsMouseVisible = false;
+                    }
+                    if((keyboard.IsKeyDown(Keys.Enter)) && (gameState == GameStates.TitleScreen))
                     {
                         gameState = GameStates.Playing;
                         this.IsMouseVisible = false;

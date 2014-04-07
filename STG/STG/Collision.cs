@@ -71,5 +71,6 @@ namespace STG
         {
             collisionGrid[row, column].Remove(o);
         }
+
     }
 }

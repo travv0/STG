@@ -39,7 +39,7 @@ namespace STG
 
                 for (int i = 0; i < 360; i += 10)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
                 }
 
                 actionList.Clear();
@@ -49,7 +49,7 @@ namespace STG
 
                 for (int i = 5; i < 365; i += 10)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
                 }
             }
             if (time % 100 - 50 == 0)
@@ -61,7 +61,7 @@ namespace STG
 
                 for (int i = 2; i < 362; i += 10)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
                 }
 
                 actionList.Clear();
@@ -71,7 +71,7 @@ namespace STG
 
                 for (int i = 7; i < 367; i += 10)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
                 }
             }
 
@@ -81,7 +81,7 @@ namespace STG
 
                 for (int i = 0; i < 360; i += 10)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), -5, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 5, i, 0, parent, actionList));
                 }
             }
 
@@ -89,7 +89,7 @@ namespace STG
             {
                 for (int i = 5; i < 365; i += 10)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), -5, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 5, i, 0, parent, actionList));
                 }
             }
 
@@ -97,10 +97,10 @@ namespace STG
 
             if (time % 10 == 0)
             {
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle, -.5f, parent, actionList));
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 90, -.5f, parent, actionList));
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 180, -.5f, parent, actionList));
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["bullet3"], new Vector2(Position.X, Position.Y), -3, angle - 270, -.5f, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle, -.5f, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 90, -.5f, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 180, -.5f, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 270, -.5f, parent, actionList));
             }
 
             angle = angle + 3.5f;
