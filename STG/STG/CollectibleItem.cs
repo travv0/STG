@@ -17,7 +17,7 @@ namespace STG
     /// </summary>
     public class CollectibleItem:GameObject
     {
-        float vel=0f, maxVel = 3f, powerLevel;
+        public float vel=0f, maxVel = 3f, powerLevel;
         /// <summary>
         /// Accessor for power level of item.
         /// </summary>
@@ -36,6 +36,10 @@ namespace STG
             this.vel = vel;
             this.powerLevel = powerLevel;
             objType = 'C';
+        }
+        public CollectibleItem()
+        {
+            objType = 'C';            
         }
         /// <summary>
         /// Updates the Collectible Item.
