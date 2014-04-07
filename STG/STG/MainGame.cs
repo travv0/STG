@@ -164,9 +164,6 @@ namespace STG
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //call all objects' update function
-            ObjectManager.Update();
-
             switch (gameState)
             {
                 // title screen section 
@@ -193,22 +190,27 @@ namespace STG
                 // end of title screen section
                 // game play section
                 case GameStates.Playing:
+                    //call all objects' update function
+                    ObjectManager.Update();
+                    
+                    FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+                    if (FPS <= 60)
+                        droppedFrames += (60 - FPS) / 60;
+                    totalFrames++;
+
+                    droppedPercent = droppedFrames / totalFrames;
+            
+                    if (totalFrames % 60 == 0)
+                    {
+                        drawFPS = FPS;
+                        drawDropped = droppedPercent;
+                    }
+
                     break;
             }
 
-            FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             
-            if (FPS <= 60)
-                droppedFrames += (60 - FPS) / 60;
-            totalFrames++;
-
-            droppedPercent = droppedFrames / totalFrames;
-            
-            if (totalFrames % 60 == 0)
-            {
-                drawFPS = FPS;
-                drawDropped = droppedPercent;
-            }
 
             // TODO: Add your update logic here
 
