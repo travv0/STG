@@ -227,14 +227,17 @@ namespace STG
 
         private void calculateVertices()
         {
-            tlVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
-            tlVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
-            trVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
-            trVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
-            blVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
-            blVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
-            brVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
-            brVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
+            if (sprite != null)
+            {
+                tlVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
+                tlVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
+                trVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
+                trVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
+                blVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
+                blVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
+                brVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
+                brVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
+            }
         }
     }
 }
