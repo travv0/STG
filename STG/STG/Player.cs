@@ -128,9 +128,11 @@ namespace STG
             {
                 case PlayerNum.One:
                     if (keyboard.IsKeyDown(Keys.O) && keyboard.IsKeyUp(Keys.P) && power > 0)
-                        power -= 0.0083f;
+                        power -= 0.01f;
                     if (keyboard.IsKeyDown(Keys.P) && keyboard.IsKeyUp(Keys.O) && power < 3)
-                        power += 0.0083f;
+                        power += 0.01f;
+                    if (keyboard.IsKeyDown(Keys.I))
+                        power = 3;
 
                     //changing options at different powers
                     if ((power >= 0 && power < 1) && options.Count != 0)
