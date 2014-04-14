@@ -32,7 +32,7 @@ namespace STG
         };
         PlayerNum playerNum;
         bool inFocus = false;
-        int power = 0;
+        float power = 0f;
         float maxRotation = .2f; //max number of degrees for player to turn when moving left and right
 
         int mainCooldown = 0; //frames until another bullet can be fired
@@ -41,7 +41,6 @@ namespace STG
 
         const float SPEED = 7; //player's speed
         float speed = SPEED; //change to player's x and y value (smaller if moving diagonal)
-        float prevX;
         bool againstWall = false;
 
         /// <summary>
@@ -128,22 +127,22 @@ namespace STG
             switch (playerNum)
             {
                 case PlayerNum.One:
-                    if (keyboard.IsKeyDown(Keys.Q) && power == 1)
-                        power = 0;
-                    if (keyboard.IsKeyDown(Keys.W) && (power == 0 || power == 2))
-                        power = 1;
-                    if (keyboard.IsKeyDown(Keys.E) && (power == 1 || power == 3))
-                        power = 2;
-                    if (keyboard.IsKeyDown(Keys.R) && power == 2)
+                    if (keyboard.IsKeyDown(Keys.O) && keyboard.IsKeyUp(Keys.P) && power > 0)
+                        power -= 0.01f;
+                    if (keyboard.IsKeyDown(Keys.P) && keyboard.IsKeyUp(Keys.O) && power < 3)
+                        power += 0.01f;
+                    if (keyboard.IsKeyDown(Keys.I))
                         power = 3;
+                    if (keyboard.IsKeyDown(Keys.U))
+                        power = 0;
 
                     //changing options at different powers
-                    if (power == 0 && options.Count != 0)
+                    if ((power >= 0 && power < 1) && options.Count != 0)
                     {
                         while (options.Count > 0)
                             MainGame.ObjectManager.Remove(options.Pop());
                     }
-                    if (power == 1 && options.Count != 2)
+                    if ((power >= 1) && options.Count != 2)
                     {
                         if (options.Count < 2)
                         {
@@ -173,7 +172,7 @@ namespace STG
 
                         
                     }
-                    if (power == 2 && options.Count != 4)
+                    if ((power >= 2) && options.Count != 4)
                     {
                         if (options.Count < 4)
                         {
@@ -201,7 +200,7 @@ namespace STG
                         else while (options.Count > 4)
                                 MainGame.ObjectManager.Remove(options.Pop());
                     }
-                    if (power == 3 && options.Count != 6)
+                    if (power >= 3 && options.Count != 6)
                     {
                         tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70, 20));
                         options.Push(tempOption);
@@ -374,5 +373,10 @@ namespace STG
         /// Returns the player's speed.
         /// </summary>
         public float Speed { get { return speed; } }
+
+        /// <summary>
+        /// Returns the player's power.
+        /// </summary>
+        public float Power { get { return power; } }
     }
 }
