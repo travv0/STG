@@ -133,6 +133,8 @@ namespace STG
                         power += 0.01f;
                     if (keyboard.IsKeyDown(Keys.I))
                         power = 3;
+                    if (keyboard.IsKeyDown(Keys.U))
+                        power = 0;
 
                     //changing options at different powers
                     if ((power >= 0 && power < 1) && options.Count != 0)
@@ -140,7 +142,7 @@ namespace STG
                         while (options.Count > 0)
                             MainGame.ObjectManager.Remove(options.Pop());
                     }
-                    if ((power >= 1 && power < 2) && options.Count != 2)
+                    if ((power >= 1) && options.Count != 2)
                     {
                         if (options.Count < 2)
                         {
@@ -170,7 +172,7 @@ namespace STG
 
                         
                     }
-                    if ((power >= 2 && power < 3) && options.Count != 4)
+                    if ((power >= 2) && options.Count != 4)
                     {
                         if (options.Count < 4)
                         {
