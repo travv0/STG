@@ -111,7 +111,10 @@
     <Compile Include="BulletPattern.cs" />
     <Compile Include="CollectibleItem.cs" />
     <Compile Include="Collision.cs" />
+    <Compile Include="FullPowerItem.cs" />
+    <Compile Include="LargePowerItem.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="SmallPowerItem.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="GameObject.cs" />
