@@ -94,6 +94,7 @@ namespace STG
             }
 
             actionList.Clear();
+            actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.curve, 0, 600, 5, false));
 
             if (time % 10 == 0)
             {
