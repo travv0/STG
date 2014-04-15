@@ -128,7 +128,7 @@ namespace STG
             {
                 case PlayerNum.One:
                     if (keyboard.IsKeyDown(Keys.O) && keyboard.IsKeyUp(Keys.P) && power > 0)
-                        power -= 0.01f;
+                        power -= 0.0083f;
                     if (keyboard.IsKeyDown(Keys.P) && keyboard.IsKeyUp(Keys.O) && power < 3)
                         power += 0.01f;
                     if (keyboard.IsKeyDown(Keys.I))
