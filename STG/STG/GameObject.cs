@@ -43,6 +43,7 @@ namespace STG
         /// </summary>
         protected float rotation;
 
+        public Color color = Color.White;
 
         /// <summary>
         /// Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
@@ -86,7 +87,7 @@ namespace STG
             if (sprite != null)
             {
                 sprite.Update();
-                sprite.Draw(spriteBatch, boundingBox, Color.White, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.WindowHeight));
+                sprite.Draw(spriteBatch, boundingBox, color, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.WindowHeight));
             }
 
             spriteBatch.End();
