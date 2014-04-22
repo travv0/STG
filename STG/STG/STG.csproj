@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bomb.cs" />
     <Compile Include="BulletPattern.cs" />
     <Compile Include="CollectibleItem.cs" />
     <Compile Include="Collision.cs" />

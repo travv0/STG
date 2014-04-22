@@ -303,10 +303,15 @@ namespace STG
 
 
                     //shootin
-                    if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.NumPad9) && mainCooldown == 0)
                     {
                         MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 20, 270, 0, this, null));
                         mainCooldown = 5;
+                    }
+                    if (keyboard.IsKeyDown(Keys.D0) && optionCooldown == 0)
+                    {
+                        MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
+                        optionCooldown = 50;
                     }
                     if (keyboard.IsKeyDown(Keys.NumPad1) && optionCooldown == 0)
                     {

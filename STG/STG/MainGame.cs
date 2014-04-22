@@ -139,6 +139,9 @@ namespace STG
             //hitbox texture
             SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
+            //Bomb Texture
+            SpriteDict["bombRad"] = new Sprite(Content.Load<Texture2D>("bombRad"));
+
             //Item textures
             SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\FullItem"));
             SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\LargeItem"));
