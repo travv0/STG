@@ -11,38 +11,35 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
-    class Bomb:GameObject
+    class BombCenter:GameObject
     {
         float vel;
-        int bombRad = 50;
-        Color[] colors = new Color[7] { Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet };
-        int colorNum = 0;
-
-        public Bomb(Sprite sprite, Vector2 pos, float vel)
+        int centRad = 50;
+        
+        public BombCenter(Sprite sprite, Vector2 pos, float vel)
         {
             this.sprite = sprite;
             this.pos = pos;
             this.vel = vel;
-            this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, bombRad, bombRad);
-            this.color = colors[colorNum];
+            this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, centRad, centRad);
+            this.color = Color.CornflowerBlue;
         }
 
         public override void Update()
         {
-            if (bombRad < 1500)
+            if (centRad < 1500)
             {
                 this.boundingBox.Width += 5;
                 this.boundingBox.Height += 5;
-                bombRad++;
-                colorNum++;
-                this.color = colors[colorNum % 7];
+                centRad++;
             }
-            if ((this.boundingBox.Width > (MainGame.WindowWidth*2))&&(this.boundingBox.Height > (MainGame.WindowHeight*2)))
+            if ((this.boundingBox.Width > (MainGame.WindowWidth * 2)) && (this.boundingBox.Height > (MainGame.WindowHeight * 2)))
             {
                 MainGame.ObjectManager.Remove(this);
                 base.Update();
             }
             base.Update();
         }
+
     }
 }
