@@ -55,7 +55,7 @@ namespace STG
         /// </summary>
         /// <param name="o"></param>
         public void addToCollisionGrid(GameObject o){
-            if (this.collides(o.getVertices(), MainGame.PlayingArea))
+            if (o.insidePlayingArea(0))
             {
                 if(MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[0].X, (int)o.getVertices()[0].Y)))
                     this.addToGrid(o.getCollisionColumn()[0], o.getCollisionRow()[0], o);
