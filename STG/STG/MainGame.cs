@@ -141,6 +141,7 @@ namespace STG
 
             //Bomb Texture
             SpriteDict["bombRad"] = new Sprite(Content.Load<Texture2D>("bombRad"));
+            SpriteDict["bombInt"] = new Sprite(Content.Load<Texture2D>("bombInt"));
 
             //Item textures
             SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\FullItem"));
