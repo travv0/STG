@@ -229,15 +229,24 @@ namespace STG
         {
             if (sprite != null)
             {
-                tlVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
-                tlVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
-                trVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y - sprite.Height / 2) * (float)Math.Sin(rotation);
-                trVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y - sprite.Height / 2) * (float)Math.Cos(rotation);
-                blVertex.X = (float)(colPos.X - sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
-                blVertex.Y = (float)(colPos.X - sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
-                brVertex.X = (float)(colPos.X + sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(colPos.Y + sprite.Height / 2) * (float)Math.Sin(rotation);
-                brVertex.Y = (float)(colPos.X + sprite.Width / 2) * (float)Math.Sin(rotation) + (float)(colPos.Y + sprite.Height / 2) * (float)Math.Cos(rotation);
+                tlVertex.X = colPos.X + ((float)(-sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(-sprite.Height / 2) * (float)Math.Sin(rotation));
+                tlVertex.Y = colPos.Y + ((float)(-sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(-sprite.Height / 2) * (float)Math.Cos(rotation));
+                trVertex.X = colPos.X + ((float)(sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(-sprite.Height / 2) * (float)Math.Sin(rotation));
+                trVertex.Y = colPos.Y + ((float)(sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(-sprite.Height / 2) * (float)Math.Cos(rotation));
+                blVertex.X = colPos.X + ((float)(-sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(sprite.Height / 2) * (float)Math.Sin(rotation));
+                blVertex.Y = colPos.Y + ((float)(-sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(sprite.Height / 2) * (float)Math.Cos(rotation));
+                brVertex.X = colPos.X + ((float)(sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(sprite.Height / 2) * (float)Math.Sin(rotation));
+                brVertex.Y = colPos.Y + ((float)(sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(sprite.Height / 2) * (float)Math.Cos(rotation));
             }
+        }
+        /// <summary>
+        /// checks if the object is inside the playing area at all
+        /// remove buffer is how far outside (int pixels) the playing area you want to check if the object is in
+        /// </summary>
+        /// <returns></returns>
+        public bool insidePlayingArea(int removeBuffer)
+        {
+            return (this.tlVertex.X > MainGame.PlayingArea.X - removeBuffer && this.tlVertex.Y > MainGame.PlayingArea.Y - removeBuffer && this.brVertex.X < MainGame.PlayingArea.X + MainGame.PlayingArea.Width + removeBuffer && this.brVertex.Y < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height + removeBuffer);
         }
     }
 }

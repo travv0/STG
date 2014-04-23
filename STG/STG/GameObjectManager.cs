@@ -60,14 +60,17 @@ namespace STG
                 if (o.getSprite != null)
                 {
                     collisionGrid.addToCollisionGrid(o);
-                    collisionGrid.removeFromCollisionGrid(o);
-                    if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()) && o != objectList[1])
+                    /*if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()) && o != objectList[1])
                     {
-                        Remove(o);
-                    }
-                    if (o.objectType == 'C' && (!collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
+                        removeList.Add(o);
+                    }*/
+                    if (/*o.objectType == 'C' || */o.objectType == 'B' && !(o.insidePlayingArea(0)))
                     {
-                        Remove(o);
+                        collisionGrid.removeFromCollisionGrid(o);
+                        if (/*o.objectType == 'C' ||*/ o.objectType == 'B' && !(o.insidePlayingArea(500)))
+                        {
+                            removeList.Add(o);
+                        }
                     }
                 }
             }
