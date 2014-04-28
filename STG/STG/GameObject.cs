@@ -30,7 +30,7 @@ namespace STG
         /// The bounding box of the sprite.  This is the rectangle that the sprite will be drawn in.
         /// </summary>
         protected Rectangle boundingBox;
-
+        protected Vector2 hitboxSize;
         protected int[] collisionColumns = new int[4], collisionRows = new int[4];
         protected char objType;
         /// <summary>
@@ -38,6 +38,7 @@ namespace STG
         /// </summary>
         protected Sprite sprite;
 
+        protected float sWidth, sHeight;
         /// <summary>
         /// The angle that the sprite will be drawn at.
         /// </summary>
@@ -79,7 +80,6 @@ namespace STG
             colPos.Y = Position.Y - 20;
             calculateVertices();
             calculateCollisionGridCell();
-            
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace STG
                 sprite.Draw(spriteBatch, boundingBox, Color.White, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.WindowHeight));
                 for (int i = 0; i < 4; i++)
                 {
-                    sprite.Draw(spriteBatch, new Rectangle((int)this.getVertices()[i].X, (int)this.getVertices()[i].Y, 2, 2), Color.White);
+                    MainGame.SpriteDict["hitbox"].Draw(spriteBatch, new Rectangle((int)this.getVertices()[i].X + 20, (int)this.getVertices()[i].Y + 20, 2, 2), Color.White);
                 }
             }
 
@@ -224,19 +224,29 @@ namespace STG
             collisionColumns[3] = (int)Math.Floor(brVertex.X / Collision.getCellWidth());
             collisionRows[3] = (int)Math.Floor(brVertex.Y / Collision.getCellHeight());
         }
-
+        #region Gamelogic
         private void calculateVertices()
         {
             if (sprite != null)
             {
-                tlVertex.X = colPos.X + ((float)(-sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(-sprite.Height / 2) * (float)Math.Sin(rotation));
-                tlVertex.Y = colPos.Y + ((float)(-sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(-sprite.Height / 2) * (float)Math.Cos(rotation));
-                trVertex.X = colPos.X + ((float)(sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(-sprite.Height / 2) * (float)Math.Sin(rotation));
-                trVertex.Y = colPos.Y + ((float)(sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(-sprite.Height / 2) * (float)Math.Cos(rotation));
-                blVertex.X = colPos.X + ((float)(-sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(sprite.Height / 2) * (float)Math.Sin(rotation));
-                blVertex.Y = colPos.Y + ((float)(-sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(sprite.Height / 2) * (float)Math.Cos(rotation));
-                brVertex.X = colPos.X + ((float)(sprite.Width / 2) * (float)Math.Cos(rotation) - (float)(sprite.Height / 2) * (float)Math.Sin(rotation));
-                brVertex.Y = colPos.Y + ((float)(sprite.Width / 2) * (float)Math.Sin(rotation) - (float)(sprite.Height / 2) * (float)Math.Cos(rotation));
+                if (objectType == 'P')
+                {
+                    hitboxSize.X = 2;
+                    hitboxSize.Y = 2;
+                }
+                else
+                {
+                    hitboxSize.X = boundingBox.Width / 4;
+                    hitboxSize.Y = boundingBox.Height / 4;
+                }
+                tlVertex.X = colPos.X + ((float)(-hitboxSize.X) * (float)Math.Cos(rotation) - (float)(-hitboxSize.Y) * (float)Math.Sin(rotation));
+                tlVertex.Y = colPos.Y + ((float)(-hitboxSize.X) * (float)Math.Sin(rotation) + (float)(-hitboxSize.Y) * (float)Math.Cos(rotation));
+                trVertex.X = colPos.X + ((float)(hitboxSize.X) * (float)Math.Cos(rotation) - (float)(-hitboxSize.Y) * (float)Math.Sin(rotation));
+                trVertex.Y = colPos.Y + ((float)(hitboxSize.X) * (float)Math.Sin(rotation) + (float)(-hitboxSize.Y) * (float)Math.Cos(rotation));
+                blVertex.X = colPos.X + ((float)(-hitboxSize.X) * (float)Math.Cos(rotation) - (float)(hitboxSize.Y) * (float)Math.Sin(rotation));
+                blVertex.Y = colPos.Y + ((float)(-hitboxSize.X) * (float)Math.Sin(rotation) + (float)(hitboxSize.Y) * (float)Math.Cos(rotation));
+                brVertex.X = colPos.X + ((float)(hitboxSize.X) * (float)Math.Cos(rotation) - (float)(hitboxSize.Y) * (float)Math.Sin(rotation));
+                brVertex.Y = colPos.Y + ((float)(hitboxSize.X) * (float)Math.Sin(rotation) + (float)(hitboxSize.Y) * (float)Math.Cos(rotation));
             }
         }
         /// <summary>
@@ -248,5 +258,6 @@ namespace STG
         {
             return (this.tlVertex.X > MainGame.PlayingArea.X - removeBuffer && this.tlVertex.Y > MainGame.PlayingArea.Y - removeBuffer && this.brVertex.X < MainGame.PlayingArea.X + MainGame.PlayingArea.Width + removeBuffer && this.brVertex.Y < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height + removeBuffer);
         }
+        #endregion
     }
 }
