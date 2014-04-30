@@ -122,13 +122,14 @@ namespace STG
         public override void Update()
         {
             KeyboardState keyboard = Keyboard.GetState();
-            Option tempOption;
+            Option tempOption1, tempOption2, tempOption3;
+            bool startFocus = false;
 
             switch (playerNum)
             {
                 case PlayerNum.One:
                     if (keyboard.IsKeyDown(Keys.O) && keyboard.IsKeyUp(Keys.P) && power > 0)
-                        power -= 0.01f;
+                        power -= 0.0083f;
                     if (keyboard.IsKeyDown(Keys.P) && keyboard.IsKeyUp(Keys.O) && power < 3)
                         power += 0.01f;
                     if (keyboard.IsKeyDown(Keys.I))
@@ -142,29 +143,46 @@ namespace STG
                         while (options.Count > 0)
                             MainGame.ObjectManager.Remove(options.Pop());
                     }
-                    if ((power >= 1) && options.Count != 2)
+                    if ((power >= 1 && power < 2) && options.Count != 2)
                     {
                         if (options.Count < 2)
                         {
-                            tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
-                            options.Push(tempOption);
-                            MainGame.ObjectManager.Add(tempOption);
-                            //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
-                                tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                startFocus = true;
                             }
 
-                            tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
-                            options.Push(tempOption);
-                            MainGame.ObjectManager.Add(tempOption);
+                            else
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
+
+                            options.Push(tempOption1);
+                            MainGame.ObjectManager.Add(tempOption1);
                             //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption1.relativePosition.X = tempOption1.RelativePosition.X * 3 / 4;
+                                tempOption1.relativePosition.Y = tempOption1.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
-                                tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2((30 * 3 / 4), (0 - boundingBox.Height / 2)));
+                                startFocus = true;
                             }
+
+                            else
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
+
+                            options.Push(tempOption1);
+                            MainGame.ObjectManager.Add(tempOption1);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption1.relativePosition.X = tempOption1.RelativePosition.X * 3 / 4;
+                                tempOption1.relativePosition.Y = tempOption1.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+                            
 
                         }
                         else while (options.Count > 2)
@@ -172,54 +190,212 @@ namespace STG
 
                         
                     }
-                    if ((power >= 2) && options.Count != 4)
+                    if ((power >= 2 && power < 3) && options.Count != 4)
                     {
-                        if (options.Count < 4)
+                        if (options.Count < 2)
                         {
-                            tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10));
-                            options.Push(tempOption);
-                            MainGame.ObjectManager.Add(tempOption);
-                            //start them in focus mode if player is in focus
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
-                                tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                startFocus = true;
                             }
 
-                            tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10));
-                            options.Push(tempOption);
-                            MainGame.ObjectManager.Add(tempOption);
+                            else
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
+
+                            options.Push(tempOption1);
+                            MainGame.ObjectManager.Add(tempOption1);
                             //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption1.relativePosition.X = tempOption1.RelativePosition.X * 3 / 4;
+                                tempOption1.relativePosition.Y = tempOption1.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
                             if (inFocus == true)
                             {
-                                tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
-                                tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+
+                            else
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
+
+                            options.Push(tempOption1);
+                            MainGame.ObjectManager.Add(tempOption1);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption1.relativePosition.X = tempOption1.RelativePosition.X * 3 / 4;
+                                tempOption1.relativePosition.Y = tempOption1.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
+                        }
+                        else while (options.Count > 2)
+                                MainGame.ObjectManager.Remove(options.Pop());
+
+                        ////////////////////////////////////////////
+
+                        if (options.Count < 4)
+                        {
+                            if(inFocus == true)
+                            {
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+                            else
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10));
+
+                            options.Push(tempOption2);
+                            MainGame.ObjectManager.Add(tempOption2);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption2.relativePosition.X = tempOption2.RelativePosition.X * 3 / 4;
+                                tempOption2.relativePosition.Y = tempOption2.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
+                            if(inFocus == true)
+                            {
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+                            else
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10));
+
+                            options.Push(tempOption2);
+                            MainGame.ObjectManager.Add(tempOption2);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption2.relativePosition.X = tempOption2.RelativePosition.X * 3 / 4;
+                                tempOption2.relativePosition.Y = tempOption2.RelativePosition.Y - boundingBox.Height / 2;
                             }
 
                         }
                         else while (options.Count > 4)
                                 MainGame.ObjectManager.Remove(options.Pop());
+                        //////////////////////////////////////////////////////////
                     }
                     if (power >= 3 && options.Count != 6)
                     {
-                        tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70, 20));
-                        options.Push(tempOption);
-                        MainGame.ObjectManager.Add(tempOption);
-                        //start them in focus mode if player is in focus
+                        if (options.Count < 2)
+                        {
+                            if (inFocus == true)
+                            {
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+
+                            else
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
+
+                            options.Push(tempOption1);
+                            MainGame.ObjectManager.Add(tempOption1);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption1.relativePosition.X = tempOption1.RelativePosition.X * 3 / 4;
+                                tempOption1.relativePosition.Y = tempOption1.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
+                            if (inFocus == true)
+                            {
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+
+                            else
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
+
+                            options.Push(tempOption1);
+                            MainGame.ObjectManager.Add(tempOption1);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption1.relativePosition.X = tempOption1.RelativePosition.X * 3 / 4;
+                                tempOption1.relativePosition.Y = tempOption1.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
+                        }
+                        else while (options.Count > 2)
+                                MainGame.ObjectManager.Remove(options.Pop());
+
+                        ////////////////////////////////////////////
+
+                        if (options.Count < 4)
+                        {
+                            if (inFocus == true)
+                            {
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+                            else
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10));
+
+                            options.Push(tempOption2);
+                            MainGame.ObjectManager.Add(tempOption2);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption2.relativePosition.X = tempOption2.RelativePosition.X * 3 / 4;
+                                tempOption2.relativePosition.Y = tempOption2.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
+                            if (inFocus == true)
+                            {
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                startFocus = true;
+                            }
+                            else
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10));
+
+                            options.Push(tempOption2);
+                            MainGame.ObjectManager.Add(tempOption2);
+                            //start them in focus mode if player is in focus
+                            if (inFocus == true && startFocus == false)
+                            {
+                                tempOption2.relativePosition.X = tempOption2.RelativePosition.X * 3 / 4;
+                                tempOption2.relativePosition.Y = tempOption2.RelativePosition.Y - boundingBox.Height / 2;
+                            }
+
+                        }
+                        else while (options.Count > 4)
+                                MainGame.ObjectManager.Remove(options.Pop());
+                        //////////////////////////////////////////////////////////
+
                         if (inFocus == true)
                         {
-                            tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
-                            tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70 * 3 / 4, 20 - boundingBox.Height / 2));
+                            startFocus = true;
+                        }
+                        else
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70, 20));
+
+                        options.Push(tempOption3);
+                        MainGame.ObjectManager.Add(tempOption3);
+                        //start them in focus mode if player is in focus
+                        if (inFocus == true && startFocus == false)
+                        {
+                            tempOption3.relativePosition.X = tempOption3.RelativePosition.X * 3 / 4;
+                            tempOption3.relativePosition.Y = tempOption3.RelativePosition.Y - boundingBox.Height / 2;
                         }
 
-                        tempOption = new Option(this, MainGame.SpriteDict["option"], new Vector2(70, 20));
-                        options.Push(tempOption);
-                        MainGame.ObjectManager.Add(tempOption);
-                        //start them in focus mode if player is in focus
+
                         if (inFocus == true)
                         {
-                            tempOption.relativePosition.X = tempOption.RelativePosition.X * 3 / 4;
-                            tempOption.relativePosition.Y = tempOption.RelativePosition.Y - boundingBox.Height / 2;
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(70 * 3 / 4, 20 - boundingBox.Height / 2));
+                            startFocus = true;
+                        }
+                        else
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(70, 20));
+                        options.Push(tempOption3);
+                        MainGame.ObjectManager.Add(tempOption3);
+                        //start them in focus mode if player is in focus
+                        if (inFocus == true && startFocus == false)
+                        {
+                            tempOption3.relativePosition.X = tempOption3.RelativePosition.X * 3 / 4;
+                            tempOption3.relativePosition.Y = tempOption3.RelativePosition.Y - boundingBox.Height / 2;
                         }
 
                     }
