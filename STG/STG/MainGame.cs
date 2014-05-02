@@ -149,6 +149,8 @@ namespace STG
             SpriteDict["SmallItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\SmallItem"));
             ObjectManager.Add(new FullPowerItem(new Vector2(200, 20 + (SpriteDict["FullItem"].Height / 2)), 0)); //I adjusted starting position to fit in playing area
 
+            //Item Spawner
+            ObjectManager.Add(new ItemSpawner());
             // TODO: use this.Content to load your game content here
         }
 
