@@ -24,6 +24,7 @@ namespace STG
         public float PowerLevel { get { return powerLevel; } }
 
         int radius = 100;
+        bool inRadius = false;
         
         //float angle;
 
@@ -58,15 +59,18 @@ namespace STG
             else if( vel < maxVel)
                 vel += vel * .02f;
 
-            if (this.DistanceToTarget(MainGame.player1.Position) < radius)
+            if (this.DistanceToTarget(MainGame.player1.Position) < radius || inRadius == true)
             {
                 if (ClosestDirection(MainGame.player1) == Direction.clockwise)
-                    angle += AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 3.5f;
+                    angle += AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
                 if (ClosestDirection(MainGame.player1) == Direction.counterclockwise)
-                    angle -= AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 3.5f;
+                    angle -= AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
+                vel += 0.1f;
 
                 this.pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
                 this.pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
+
+                inRadius = true;
             }
             else
                 this.pos.Y += vel;
