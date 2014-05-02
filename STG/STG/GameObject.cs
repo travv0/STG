@@ -43,7 +43,14 @@ namespace STG
         /// </summary>
         protected float rotation;
 
+        /// <summary>
+        /// The direction the object needs to turn
+        /// </summary>
+        protected enum Direction { clockwise, counterclockwise };
+
         public Color color = Color.White;
+
+        protected float angle;
 
         /// <summary>
         /// Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
@@ -193,6 +200,36 @@ namespace STG
         {
             collisionColumn = (int)Math.Floor(collisionPosition.X / Collision.getCellWidth());
             collisionRow = (int)Math.Floor(collisionPosition.Y / Collision.getCellHeight());
+        }
+
+        protected Direction ClosestDirection(GameObject obj)
+        {
+            float tempAtT = NormalizeAngle(AngleToTarget(obj.Position) - angle);
+            if (tempAtT > 180)
+                return Direction.counterclockwise;
+            else
+                return Direction.clockwise;
+        }
+
+        protected float AngleDifference(GameObject obj)
+        {
+            if (AngleToTarget(obj.Position) - angle > 180)
+                return (360 - AngleToTarget(obj.Position) - angle);
+            else
+                return Math.Abs(AngleToTarget(obj.Position) - angle);
+        }
+
+        protected float NormalizeAngle(float angle)
+        {
+            while (angle < 0 || angle > 360)
+            {
+                if (angle < 0)
+                    angle += 360;
+                if (angle > 360)
+                    angle -= 360;
+            }
+
+            return angle;
         }
     }
 }

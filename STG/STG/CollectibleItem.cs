@@ -22,6 +22,11 @@ namespace STG
         /// Accessor for power level of item.
         /// </summary>
         public float PowerLevel { get { return powerLevel; } }
+
+        int radius = 100;
+        
+        //float angle;
+
         /// <summary>
         /// Creates a new collectible item object.
         /// </summary>
@@ -36,10 +41,12 @@ namespace STG
             this.vel = vel;
             this.powerLevel = powerLevel;
             objType = 'C';
+            this.angle = 90;
         }
         public CollectibleItem()
         {
-            objType = 'C';            
+            objType = 'C';
+            this.angle = 90;       
         }
         /// <summary>
         /// Updates the Collectible Item.
@@ -51,7 +58,19 @@ namespace STG
             else if( vel < maxVel)
                 vel += vel * .02f;
 
-            this.pos.Y += vel;
+            if (this.DistanceToTarget(MainGame.player1.Position) < radius)
+            {
+                if (ClosestDirection(MainGame.player1) == Direction.clockwise)
+                    angle += AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 3.5f;
+                if (ClosestDirection(MainGame.player1) == Direction.counterclockwise)
+                    angle -= AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 3.5f;
+
+                this.pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
+                this.pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
+            }
+            else
+                this.pos.Y += vel;
+
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
 
             if(boundingBox.Y > MainGame.WindowHeight + 100)

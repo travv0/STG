@@ -16,8 +16,8 @@ namespace STG
     /// </summary>
     public class Bullet:GameObject
     {
-        enum Direction { clockwise, counterclockwise };
-        float vel, angle, curve, drawAngle = 0; //velocity of bullet
+        //enum Direction { clockwise, counterclockwise };
+        float vel, curve, drawAngle = 0; //velocity of bullet
         int angleTime, curveTime, velTime;
         float angleChange, curveChange, velChange;
         bool homing;
@@ -212,7 +212,7 @@ namespace STG
         /// </summary>
         public GameObject Parent { get { return parent; } }
 
-        private Direction ClosestDirection(GameObject obj)
+        /*private Direction ClosestDirection(GameObject obj)
         {
             float tempAtT = NormalizeAngle(AngleToTarget(obj.Position) - angle);
             if (tempAtT > 180)
@@ -240,6 +240,6 @@ namespace STG
             }
 
             return angle;
-        }
+        }*/
     }
 }
