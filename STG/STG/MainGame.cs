@@ -39,6 +39,9 @@ namespace STG
         Texture2D quitButton;
         Rectangle quitRect;
 
+        Song gameBGSong;
+        bool gameSongStart = false;
+
         private static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
@@ -107,6 +110,8 @@ namespace STG
             titleViewportRect = new Rectangle(0, 0,
                 graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height);
+
+            gameBGSong = Content.Load<Song>("Music and SFX\\fire");
 
             startRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (startButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height / 3, startButton.Width, startButton.Height);
 
@@ -196,7 +201,14 @@ namespace STG
                 case GameStates.Playing:
                     //call all objects' update function
                     ObjectManager.Update();
-                    
+
+                    if (!gameSongStart)
+                    {
+                        MediaPlayer.Play(gameBGSong);
+                        gameSongStart = true;
+                    }
+
+
                     FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             
                     if (FPS <= 60)
