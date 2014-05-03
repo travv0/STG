@@ -530,6 +530,9 @@ namespace STG
                     break;
             }
 
+            if (keyboard.IsKeyDown(Keys.B))
+                angle = angle;
+
             base.Update();
         }
 

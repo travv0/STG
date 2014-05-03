@@ -61,11 +61,15 @@ namespace STG
 
             if (this.DistanceToTarget(MainGame.player1.Position) < radius || inRadius == true)
             {
+                angle = NormalizeAngle(angle);
+
                 if (ClosestDirection(MainGame.player1) == Direction.clockwise)
                     angle += AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
                 if (ClosestDirection(MainGame.player1) == Direction.counterclockwise)
-                    angle -= AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
+                    angle -= Math.Abs(AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f);
                 vel += 0.1f;
+
+                
 
                 this.pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
                 this.pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
