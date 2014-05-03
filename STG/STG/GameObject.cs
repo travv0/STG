@@ -204,7 +204,7 @@ namespace STG
 
         protected Direction ClosestDirection(GameObject obj)
         {
-            float tempAtT = NormalizeAngle(AngleToTarget(obj.Position) - angle);
+            float tempAtT = NormalizeAngle(NormalizeAngle(AngleToTarget(obj.Position)) - NormalizeAngle(angle));
             if (tempAtT > 180)
                 return Direction.counterclockwise;
             else
