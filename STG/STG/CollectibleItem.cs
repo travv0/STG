@@ -66,7 +66,7 @@ namespace STG
                 if (ClosestDirection(MainGame.player1) == Direction.clockwise)
                     angle += AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
                 if (ClosestDirection(MainGame.player1) == Direction.counterclockwise)
-                    angle -= Math.Abs(AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f);
+                    angle -= AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
                 vel += 0.1f;
 
                 

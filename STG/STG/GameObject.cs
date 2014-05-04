@@ -214,7 +214,7 @@ namespace STG
         protected float AngleDifference(GameObject obj)
         {
             if (AngleToTarget(obj.Position) - angle > 180)
-                return (360 - AngleToTarget(obj.Position) - angle);
+                return (360 - (AngleToTarget(obj.Position) - angle));
             else
                 return Math.Abs(AngleToTarget(obj.Position) - angle);
         }
