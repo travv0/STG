@@ -30,14 +30,15 @@ namespace STG
         /// The bounding box of the sprite.  This is the rectangle that the sprite will be drawn in.
         /// </summary>
         protected Rectangle boundingBox;
-
-        protected int collisionColumn, collisionRow;
+        protected Vector2 hitboxSize;
+        protected int[] collisionColumns = new int[4], collisionRows = new int[4];
         protected char objType;
         /// <summary>
         /// The sprite for this game object.
         /// </summary>
         protected Sprite sprite;
 
+        protected float sWidth, sHeight;
         /// <summary>
         /// The angle that the sprite will be drawn at.
         /// </summary>
@@ -52,6 +53,11 @@ namespace STG
 
         protected float angle;
 
+        /// Vertice positions of all corners based on collision position and rotation of the object as calculated in calculateVertices
+        /// 
+        /// </summary>
+        protected Vector2 tlVertex, trVertex, blVertex, brVertex; 
+
         /// <summary>
         /// Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
         /// </summary>
@@ -65,6 +71,7 @@ namespace STG
         /// </summary>
         virtual protected void Initialize()
         {
+            rotation = 0;
             colPos.X = Position.X - 20;
             colPos.Y = Position.Y - 20;
         }
@@ -79,8 +86,8 @@ namespace STG
             boundingBox.Y = (int)pos.Y;
             colPos.X = Position.X - 20;
             colPos.Y = Position.Y - 20;
+            calculateVertices();
             calculateCollisionGridCell();
-            
         }
 
         /// <summary>
@@ -94,7 +101,12 @@ namespace STG
             if (sprite != null)
             {
                 sprite.Update();
+
                 sprite.Draw(spriteBatch, boundingBox, color, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.WindowHeight));
+                for (int i = 0; i < 4; i++)
+                {
+                    MainGame.SpriteDict["hitbox"].Draw(spriteBatch, new Rectangle((int)this.getVertices()[i].X + 20, (int)this.getVertices()[i].Y + 20, 2, 2), Color.White);
+                }
             }
 
             spriteBatch.End();
@@ -123,22 +135,36 @@ namespace STG
         /// </summary>
         public Sprite getSprite { get { return sprite; } }
 
-       
+        /// <summary>
+        /// puts all vertices of an object into a list and returns it
+        /// will be used for collision purposes
+        /// </summary>
+        /// <returns></returns>
+        public List<Vector2> getVertices()
+        {
+            calculateVertices();
+            List<Vector2> vertices = new List<Vector2>();
+            vertices.Add(tlVertex);
+            vertices.Add(trVertex);
+            vertices.Add(blVertex);
+            vertices.Add(brVertex);
+            return vertices;
+        }
 
         /// <summary>
         /// Returns the collision column for collision grid.
         /// </summary>
-        public int getCollisionColumn()
+        public int[] getCollisionColumn()
         {
-            return collisionColumn;
+            return collisionColumns;
         }
 
         /// <summary>
         /// Returns the collision row for collision grid.
         /// </summary>
-        public int getCollisionRow()
+        public int[] getCollisionRow()
         {
-            return collisionRow;
+            return collisionRows;
         }
 
         /// <summary>
@@ -198,8 +224,48 @@ namespace STG
         /// </summary>
         private void calculateCollisionGridCell()
         {
-            collisionColumn = (int)Math.Floor(collisionPosition.X / Collision.getCellWidth());
-            collisionRow = (int)Math.Floor(collisionPosition.Y / Collision.getCellHeight());
+            collisionColumns[0] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
+            collisionRows[0] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[1] = (int)Math.Floor(trVertex.X / Collision.getCellWidth());
+            collisionRows[1] = (int)Math.Floor(trVertex.Y / Collision.getCellHeight());
+            collisionColumns[2] = (int)Math.Floor(blVertex.X / Collision.getCellWidth());
+            collisionRows[2] = (int)Math.Floor(blVertex.Y / Collision.getCellHeight());
+            collisionColumns[3] = (int)Math.Floor(brVertex.X / Collision.getCellWidth());
+            collisionRows[3] = (int)Math.Floor(brVertex.Y / Collision.getCellHeight());
+        }
+        #region Gamelogic
+        private void calculateVertices()
+        {
+            if (sprite != null)
+            {
+                if (objectType == 'P')
+                {
+                    hitboxSize.X = 2;
+                    hitboxSize.Y = 2;
+                }
+                else
+                {
+                    hitboxSize.X = boundingBox.Width / 4;
+                    hitboxSize.Y = boundingBox.Height / 4;
+                }
+                tlVertex.X = colPos.X + ((float)(-hitboxSize.X) * (float)Math.Cos(rotation) - (float)(-hitboxSize.Y) * (float)Math.Sin(rotation));
+                tlVertex.Y = colPos.Y + ((float)(-hitboxSize.X) * (float)Math.Sin(rotation) + (float)(-hitboxSize.Y) * (float)Math.Cos(rotation));
+                trVertex.X = colPos.X + ((float)(hitboxSize.X) * (float)Math.Cos(rotation) - (float)(-hitboxSize.Y) * (float)Math.Sin(rotation));
+                trVertex.Y = colPos.Y + ((float)(hitboxSize.X) * (float)Math.Sin(rotation) + (float)(-hitboxSize.Y) * (float)Math.Cos(rotation));
+                blVertex.X = colPos.X + ((float)(-hitboxSize.X) * (float)Math.Cos(rotation) - (float)(hitboxSize.Y) * (float)Math.Sin(rotation));
+                blVertex.Y = colPos.Y + ((float)(-hitboxSize.X) * (float)Math.Sin(rotation) + (float)(hitboxSize.Y) * (float)Math.Cos(rotation));
+                brVertex.X = colPos.X + ((float)(hitboxSize.X) * (float)Math.Cos(rotation) - (float)(hitboxSize.Y) * (float)Math.Sin(rotation));
+                brVertex.Y = colPos.Y + ((float)(hitboxSize.X) * (float)Math.Sin(rotation) + (float)(hitboxSize.Y) * (float)Math.Cos(rotation));
+            }
+        }
+        /// <summary>
+        /// checks if the object is inside the playing area at all
+        /// remove buffer is how far outside (int pixels) the playing area you want to check if the object is in
+        /// </summary>
+        /// <returns></returns>
+        public bool insidePlayingArea(int removeBuffer)
+        {
+            return (this.tlVertex.X > MainGame.PlayingArea.X - removeBuffer && this.tlVertex.Y > MainGame.PlayingArea.Y - removeBuffer && this.brVertex.X < MainGame.PlayingArea.X + MainGame.PlayingArea.Width + removeBuffer && this.brVertex.Y < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height + removeBuffer);
         }
 
         protected Direction ClosestDirection(GameObject obj)
@@ -231,5 +297,6 @@ namespace STG
 
             return angle;
         }
+        #endregion
     }
 }

@@ -16,6 +16,8 @@ namespace STG
     /// </summary>
     public class GameObjectManager
     {
+        public int dead = 0;
+        public bool canDraw = true;
         List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from objectList
@@ -48,6 +50,15 @@ namespace STG
         /// </summary>
         public void Update()
         {
+            #region hitboxtesting
+            ///used for testing if hitboxes are sufficient
+            if (dead != 0)
+                dead++;
+            if (dead == 10)
+                canDraw = true;
+            ///
+            #endregion
+
             foreach (GameObject o in objectList)
                 o.Update();
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
@@ -59,18 +70,28 @@ namespace STG
             {
                 if (o.getSprite != null)
                 {
-                    if (!(o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
-                    o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
-                    o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                    collisionGrid.addToCollisionGrid(o);
+                    /*if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()) && o != objectList[1])
                     {
-                        collisionGrid.addToGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
+                        removeList.Add(o);
+                    }*/
+                    if (o.objectType == 'B')
+                    {
+                        if (collisionGrid.collides(o.getVertices(), objectList[0].getVertices()))
+                        {
+                            //collisionGrid.removeFromCollisionGrid(objectList[0]);
+                            //removeList.Add(objectList[0]);
+                            dead = 1;
+                            canDraw = false;
+                        }
                     }
-                    if (o.objectType == 'C' && (o.Position.X + o.getSprite.Width / 2 > (MainGame.PlayingArea.X + MainGame.PlayingArea.Width) ||
-                    o.Position.X - o.getSprite.Width / 2 < MainGame.PlayingArea.X || o.Position.Y + o.getSprite.Height / 2 > MainGame.PlayingArea.Y + MainGame.PlayingArea.Height ||
-                    o.Position.Y - o.getSprite.Height / 2 < MainGame.PlayingArea.Y))
+                    if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
                     {
-                        collisionGrid.removeFromGrid(o.getCollisionColumn(), o.getCollisionRow(), o);
-                        Remove(o);
+                        collisionGrid.removeFromCollisionGrid(o);
+                        if ((o.objectType == 'C' || o.objectType == 'B') && !(o.insidePlayingArea(500)))
+                        {
+                            removeList.Add(o);
+                        }
                     }
                 }
             }
@@ -89,8 +110,14 @@ namespace STG
             {
                 return obj1.Position.Y.CompareTo(obj2.Position.Y);
             });*/
-            foreach (GameObject o in objectList)
-                o.Draw(spriteBatch);
+            if (canDraw == true)
+                foreach (GameObject o in objectList)
+                    o.Draw(spriteBatch);
+            else
+                for (int i = 1; i < objectList.Count(); i++)
+                {
+                    objectList[i].Draw(spriteBatch);
+                }
         }
 
         /// <summary>
