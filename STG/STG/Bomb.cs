@@ -29,17 +29,26 @@ namespace STG
 
         public override void Update()
         {
-            if (bombRad < 1500)
+            if (bombRad < 1000)
             {
                 this.boundingBox.Width += 5;
                 this.boundingBox.Height += 5;
                 bombRad++;
                 colorNum++;
                 this.color = colors[colorNum % 7];
+                if (MainGame.bombSoundInstance.State == SoundState.Stopped)
+                {
+                    MainGame.bombSoundInstance.Volume = 0.75f;
+                    MainGame.bombSoundInstance.Play();
+                }
+                else
+                    MainGame.bombSoundInstance.Resume();
+
             }
             if ((this.boundingBox.Width > (MainGame.WindowWidth*2))&&(this.boundingBox.Height > (MainGame.WindowHeight*2)))
             {
                 MainGame.ObjectManager.Remove(this);
+                MainGame.bombSoundInstance.Stop();
                 base.Update();
             }
             base.Update();
