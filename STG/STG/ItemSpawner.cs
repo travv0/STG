@@ -16,7 +16,6 @@ namespace STG
     /// </summary>
     class ItemSpawner:GameObject
     {
-        protected CollectibleItem item;
         protected int time;
         protected int smallIntervalTime;
         protected int largeIntervalTime;

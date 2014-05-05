@@ -21,7 +21,7 @@ namespace STG
 
         //FPS stuff
         SpriteFont FPSfont;
-        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped, powerLevel;
+        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
         enum GameStates { TitleScreen, Playing };
@@ -38,6 +38,13 @@ namespace STG
         Rectangle startRect;
         Texture2D quitButton;
         Rectangle quitRect;
+
+        Song gameBGSong;
+        bool gameSongStart = false;
+
+        public static SoundEffect bombSound;
+        public static SoundEffectInstance bombSoundInstance;
+
 
         private static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
@@ -111,6 +118,12 @@ namespace STG
             startRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (startButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height / 3, startButton.Width, startButton.Height);
 
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
+
+            gameBGSong = Content.Load<Song>("Music and Sound\\fire");
+
+            bombSound = Content.Load<SoundEffect>("Music and Sound\\bombSound");
+            bombSoundInstance = bombSound.CreateInstance();
+
 
             FPSfont = Content.Load<SpriteFont>("FPS");
 
@@ -198,7 +211,13 @@ namespace STG
                 case GameStates.Playing:
                     //call all objects' update function
                     ObjectManager.Update();
-                    
+
+                    if (!gameSongStart)
+                    {
+                        MediaPlayer.Play(gameBGSong);
+                        gameSongStart = true;
+                    }
+
                     FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             
                     if (FPS <= 60)
