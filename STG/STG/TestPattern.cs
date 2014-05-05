@@ -13,8 +13,6 @@ namespace STG
 {
     class TestPattern:BulletPattern
     {
-        float angle = 0;
-
         List<Tuple<Bullet.Action, float, int, int, bool>> actionList = new List<Tuple<Bullet.Action, float, int, int, bool>>();
 
         public TestPattern(GameObject parent)
