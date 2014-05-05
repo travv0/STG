@@ -39,7 +39,6 @@ namespace STG
                 if (MainGame.bombSoundInstance.State == SoundState.Stopped)
                 {
                     MainGame.bombSoundInstance.Volume = 0.75f;
-                    MainGame.bombSoundInstance.IsLooped = true;
                     MainGame.bombSoundInstance.Play();
                 }
                 else
