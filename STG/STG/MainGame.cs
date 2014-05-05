@@ -42,6 +42,9 @@ namespace STG
         Song gameBGSong;
         bool gameSongStart = false;
 
+        public static SoundEffect bombSound;
+        public static SoundEffectInstance bombSoundInstance;
+
         private static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
@@ -112,6 +115,9 @@ namespace STG
                 graphics.GraphicsDevice.Viewport.Height);
 
             gameBGSong = Content.Load<Song>("Music and SFX\\fire");
+
+            bombSound = Content.Load<SoundEffect>("Music and SFX\\bombSound");
+            bombSoundInstance = bombSound.CreateInstance();
 
             startRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (startButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height / 3, startButton.Width, startButton.Height);
 

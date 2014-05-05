@@ -313,6 +313,7 @@ namespace STG
                         MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
                         MainGame.ObjectManager.Add(new BombCenter(MainGame.SpriteDict["bombInt"], new Vector2(Position.X, Position.Y), 5));
                         optionCooldown = 200;
+                        
                     }
                     if (keyboard.IsKeyDown(Keys.NumPad1) && optionCooldown == 0)
                     {
