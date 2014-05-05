@@ -43,6 +43,12 @@ namespace STG
         /// </summary>
         protected float rotation;
 
+        /// <summary>
+        /// The sound effect, if any, associated with the object.
+        /// </summary>
+        protected SoundEffect sound;
+        protected SoundEffectInstance soundInst;
+
         public Color color = Color.White;
 
         /// <summary>
