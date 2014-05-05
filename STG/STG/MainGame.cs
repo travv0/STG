@@ -21,7 +21,7 @@ namespace STG
 
         //FPS stuff
         SpriteFont FPSfont;
-        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped, powerLevel;
+        float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
         enum GameStates { TitleScreen, Playing };
