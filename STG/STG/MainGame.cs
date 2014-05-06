@@ -39,6 +39,8 @@ namespace STG
         Texture2D quitButton;
         Rectangle quitRect;
 
+        Song titleSong;
+        bool titleSongStart = false;
         Song gameBGSong;
         bool gameSongStart = false;
 
@@ -119,6 +121,7 @@ namespace STG
 
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
+            titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
             gameBGSong = Content.Load<Song>("Music and Sound\\FireAndFlame");
 
             bombSound = Content.Load<SoundEffect>("Music and Sound\\bombSound");
@@ -188,6 +191,11 @@ namespace STG
                 // title screen section 
                 case GameStates.TitleScreen:
 
+                    if (!titleSongStart)
+                    {
+                        MediaPlayer.Play(titleSong);
+                        titleSongStart = true;
+                    }
                     MouseState mouse = Mouse.GetState();
                     KeyboardState keyboard = Keyboard.GetState();
 
@@ -199,6 +207,7 @@ namespace STG
                     if((keyboard.IsKeyDown(Keys.Enter)) && (gameState == GameStates.TitleScreen))
                     {
                         gameState = GameStates.Playing;
+                        MediaPlayer.Stop();
                         this.IsMouseVisible = false;
                     }
                     if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
