@@ -59,11 +59,12 @@ namespace STG
                 canDraw = true;
             ///
             #endregion
-            GameObject playerOne = objectList[0], playerTwo = objectList[1];
+            
             foreach (GameObject o in objectList)
                 o.Update();
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
                 objectList.Add(o);
+            GameObject playerOne = objectList[0], playerTwo = objectList[1];
             addList.Clear(); //clears the temp list
 
             //Updates for collision grid
