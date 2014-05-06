@@ -93,8 +93,9 @@ namespace STG
             int[] row = o.getCollisionRow();
             for (int i = 0; i < 4; i++)
             {
-                foreach (GameObject obj in collisionGrid[row[i], column[i]])
-                    objectsThatCouldCollide.Add(obj);
+                if(row[i] != -1 && column[i] != -1)//in case some of her verticies aren't on the collision grid
+                    foreach (GameObject obj in collisionGrid[row[i], column[i]])
+                        objectsThatCouldCollide.Add(obj);
             }
             return objectsThatCouldCollide;
         }

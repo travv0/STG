@@ -232,6 +232,13 @@ namespace STG
             collisionRows[2] = (int)Math.Floor(blVertex.Y / Collision.getCellHeight());
             collisionColumns[3] = (int)Math.Floor(brVertex.X / Collision.getCellWidth());
             collisionRows[3] = (int)Math.Floor(brVertex.Y / Collision.getCellHeight());
+            for (int i = 0; i < 4; i++)
+            {
+                if (collisionColumns[i] < 0)
+                    collisionColumns[i] = -1;  ///this will hopefully fix the out of bounds error
+                if (collisionRows[i] < 0)
+                    collisionRows[i] = -1;
+            }
         }
         #region Gamelogic
         private void calculateVertices()
