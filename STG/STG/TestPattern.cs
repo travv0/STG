@@ -27,13 +27,14 @@ namespace STG
         }
 
         public override void Update()
-        {/*
+        {
             if (time % 100 == 0)
             {
                 actionList.Clear();
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
 
                 for (int i = 0; i < 360; i += 10)
                 {
@@ -44,6 +45,7 @@ namespace STG
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
 
                 for (int i = 5; i < 365; i += 10)
                 {
@@ -56,6 +58,7 @@ namespace STG
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
 
                 for (int i = 2; i < 362; i += 10)
                 {
@@ -66,6 +69,7 @@ namespace STG
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
 
                 for (int i = 7; i < 367; i += 10)
                 {
@@ -73,7 +77,7 @@ namespace STG
                 }
             }
 
-            if (time % 40 == 0)
+            /*if (time % 40 == 0)
             {
                 actionList.Clear();
 
@@ -90,8 +94,8 @@ namespace STG
                     MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 5, i, 0, parent, actionList));
                 }
             }
-            */
-            actionList.Clear();
+           
+            /*actionList.Clear();
             actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.curve, 0, 600, 5, false));
 
             if (time % 10 == 0)
@@ -102,7 +106,7 @@ namespace STG
                 MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 270, -.5f, parent, actionList));
             }
 
-            angle = angle + 3.5f;
+            angle = angle + 3.5f;*/
             
             base.Update();
         }

@@ -16,7 +16,6 @@ namespace STG
     /// </summary>
     public class Bullet:GameObject
     {
-        //enum Direction { clockwise, counterclockwise };
         float vel, curve, drawAngle = 0; //velocity of bullet
         int angleTime, curveTime, velTime;
         float angleChange, curveChange, velChange;
@@ -40,7 +39,8 @@ namespace STG
             /// <summary>
             /// Used to modify the curve of the bullet.
             /// </summary>
-            curve
+            curve,
+            aimed
         };
         List<Tuple<Action, float, int, int, bool>> actionList = new List<Tuple<Action, float, int, int, bool>>(); //list of actions for bullet to perform during its lifetime. first item in tuple is the action and second is the amount to adjust
                                                                                             //third item is the time into the bullet's life to perform this action, fourth is how long to finish this action, fifth is whether the change is relative
@@ -189,6 +189,11 @@ namespace STG
                             else
                                 curve = actionList[0].Item2;
                         }
+                        break;
+                    case Action.aimed:
+                        angle = AngleToTarget(MainGame.player1.Position);
+                        curveChange = 0;
+                        angleChange = 0;
                         break;
                 }
                 actionList.RemoveAt(0);
