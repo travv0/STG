@@ -408,10 +408,23 @@ namespace STG
                         if (inFocus == false)
                             foreach (Option option in options)
                             {
-                                option.relativePosition.X = option.RelativePosition.X * 3 / 4;
-                                option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
+                                if (pos.X + option.relativePosition.X != option.focusPosition.X)
+                                {
+                                    if (pos.X + option.relativePosition.X > pos.X)
+                                        option.relativePosition.X = option.focusPosition.X / 
+                                    if (pos.X + option.relativePosition.X < pos.X)
+                                        option.relativePosition.X += .1f;
+                                }
+                                if (pos.Y + option.relativePosition.Y != option.focusPosition.Y)
+                                {
+                                    option.relativePosition.Y -= .1f;
+                                }
+                                if(pos.X + option.relativePosition.X == option.focusPosition.X)
+                                    inFocus = true;
+                                //option.relativePosition.X = option.RelativePosition.X * 3 / 4;
+                                //option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
                             }
-                        inFocus = true;
+                        
                     }
                     else if (keyboard.IsKeyUp(Keys.Enter))
                     {

@@ -15,6 +15,7 @@ namespace STG
     {
         Player parent;
         public Vector2 relativePosition;
+        public Vector2 focusPosition;
 
         public Option(Player parent, Sprite sprite, Vector2 relativePosition)
         {
@@ -25,6 +26,8 @@ namespace STG
             pos.Y = parent.Position.Y + relativePosition.Y;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             objType = 'O';
+            focusPosition.X = parent.Position.X + (relativePosition.X * 3 / 4);
+            focusPosition.Y = parent.Position.Y + (relativePosition.Y - boundingBox.Height / 2);
         }
 
         public override void Update()
