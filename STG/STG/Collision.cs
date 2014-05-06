@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
-    //BE SURE TO FIX SO THAT IT WORKS IN MULTIPLE CELLS
     class Collision
     {
         const int ROWS = 5, COLUMNS = 5;
@@ -82,6 +81,22 @@ namespace STG
                     }
                 }
             }
+        }
+
+        /// gets the list of all objects and checks if they are in the same collision grid square as each player then 
+        /// returns a list of all the objects near it. These will then be looped through and checked for collision
+        /// pass it the object you are checking if things are near to
+        public HashSet<GameObject> getObjectsNearPlayer(GameObject o)
+        {
+            HashSet<GameObject> objectsThatCouldCollide = new HashSet<GameObject>();
+            int[] column = o.getCollisionColumn();
+            int[] row = o.getCollisionRow();
+            for (int i = 0; i < 4; i++)
+            {
+                foreach (GameObject obj in collisionGrid[row[i], column[i]])
+                    objectsThatCouldCollide.Add(obj);
+            }
+            return objectsThatCouldCollide;
         }
 
         /// <summary>

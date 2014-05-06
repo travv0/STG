@@ -22,6 +22,7 @@ namespace STG
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from objectList
         Collision collisionGrid = new Collision(); //makes the collision instance
+        HashSet<GameObject> objNearPlayerOne, objNearPlayerTwo;
         /// <summary>
         /// Initializes a new GameObjectManager with an empty list of GameObjects.
         /// </summary>
@@ -58,7 +59,7 @@ namespace STG
                 canDraw = true;
             ///
             #endregion
-
+            GameObject playerOne = objectList[0], playerTwo = objectList[1];
             foreach (GameObject o in objectList)
                 o.Update();
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
@@ -75,16 +76,9 @@ namespace STG
                     {
                         removeList.Add(o);
                     }*/
-                    if (o.objectType == 'B')
-                    {
-                        if (collisionGrid.collides(o.getVertices(), objectList[0].getVertices()))
-                        {
-                            //collisionGrid.removeFromCollisionGrid(objectList[0]);
-                            //removeList.Add(objectList[0]);
-                            dead = 1;
-                            canDraw = false;
-                        }
-                    }
+                    objNearPlayerOne = collisionGrid.getObjectsNearPlayer(playerOne);
+                    objNearPlayerTwo = collisionGrid.getObjectsNearPlayer(playerTwo);
+
                     if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
                     {
                         collisionGrid.removeFromCollisionGrid(o);
@@ -92,6 +86,39 @@ namespace STG
                         {
                             removeList.Add(o);
                         }
+                    }
+                }
+            }
+            foreach (GameObject o in objNearPlayerOne)
+            {
+                if (o.objectType == 'B')
+                {
+                    if (collisionGrid.collides(o.getVertices(), objectList[0].getVertices()))
+                    {
+                        //collisionGrid.removeFromCollisionGrid(objectList[0]);
+                        //removeList.Add(objectList[0]);
+                        dead = 1;
+                        canDraw = false;
+                    }
+                }
+            }
+            foreach (GameObject o in objNearPlayerOne)
+            {
+                if (o.objectType == 'c')
+                {
+                    if (collisionGrid.collides(o.getVertices(), objectList[0].getVertices()))
+                    {
+                        //collisionGrid.removeFromCollisionGrid(objectList[0]);
+                        
+
+                        ////
+
+                        ///Add power to player
+
+                        ////
+                        removeList.Add(o);
+                        dead = 1;
+                        canDraw = false;
                     }
                 }
             }
