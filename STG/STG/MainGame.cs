@@ -119,7 +119,7 @@ namespace STG
 
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
-            gameBGSong = Content.Load<Song>("Music and Sound\\fire");
+            //gameBGSong = Content.Load<Song>("Music and Sound\\fire");
 
             bombSound = Content.Load<SoundEffect>("Music and Sound\\bombSound");
             bombSoundInstance = bombSound.CreateInstance();
@@ -214,7 +214,7 @@ namespace STG
 
                     if (!gameSongStart)
                     {
-                        MediaPlayer.Play(gameBGSong);
+                        //MediaPlayer.Play(gameBGSong);
                         gameSongStart = true;
                     }
 
