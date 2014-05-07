@@ -113,7 +113,7 @@ namespace STG
                 {
                     if (o.objectType == 'C')
                     {
-                        if (collisionGrid.collides(o.getVertices(), playerTwo.getVertices()))
+                        if (collisionGrid.collides(o.getVertices(), playerOne.getVertices()))
                         {
                             ////
 
