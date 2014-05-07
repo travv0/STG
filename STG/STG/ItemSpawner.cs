@@ -58,13 +58,13 @@ namespace STG
             if (smallSpawn == true)
             {
                 smallSpawn = false;
-                smallInterval = smallRand.Next(1200, 3600);
+                smallInterval = smallRand.Next(10, 30);//1200, 3600
                 smallIntervalTime = 0;
             }
             if (largeSpawn == true)
             {
                 largeSpawn = false;
-                largeInterval = largeRand.Next(3600, 8000);
+                largeInterval = largeRand.Next(30, 80);//3600,8000
                 largeIntervalTime = 0;
             }
 

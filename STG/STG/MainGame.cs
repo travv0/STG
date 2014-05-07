@@ -159,8 +159,8 @@ namespace STG
             SpriteDict["bombInt"] = new Sprite(Content.Load<Texture2D>("bombInt"));
 
             //Item textures
-            SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\FullItem"));
-            SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\LargeItem"));
+            SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\fullPower"));
+            SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\largePower"));
             SpriteDict["SmallItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\SmallItem"));
             ObjectManager.Add(new FullPowerItem(new Vector2(200, 20 + (SpriteDict["FullItem"].Height / 2)), 0)); //I adjusted starting position to fit in playing area
 
