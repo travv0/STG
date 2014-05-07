@@ -132,6 +132,13 @@ namespace STG
                 MainGame.ObjectManager.Remove(hitBullet);
             }
 
+            GameObject hitPower = Collides('C');
+            if (hitPower != null)
+            {
+                MainGame.ObjectManager.Remove(hitPower);
+                power += 1;
+            }
+
             switch (playerNum)
             {
                 case PlayerNum.One:
