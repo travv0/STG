@@ -26,6 +26,7 @@ namespace STG
         int radius = 100;
         bool inRadius = false;
         
+        
         //float angle;
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace STG
             this.powerLevel = powerLevel;
             objType = 'C';
             this.angle = 90;
+            this.rotation = 0;
         }
         public CollectibleItem()
         {
@@ -54,6 +56,10 @@ namespace STG
         /// </summary>
         public override void Update()
         {
+            if(rotation < 2 * Math.PI)
+                rotation++;
+            else
+                rotation = 0;
             if (vel == 0)
                 vel += .3f;
             else if( vel < maxVel)
