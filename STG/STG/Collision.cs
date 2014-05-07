@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
-    class Collision
+    public class Collision
     {
         const int ROWS = 5, COLUMNS = 5;
         static int CELLWIDTH = (MainGame.PlayingArea.Width + 100) / COLUMNS, CELLHEIGHT = (MainGame.PlayingArea.Height + 100) / ROWS;//constants for the size of the collision grid as well as the cell dimensions

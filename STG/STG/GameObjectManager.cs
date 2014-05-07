@@ -21,7 +21,7 @@ namespace STG
         List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from objectList
-        Collision collisionGrid = new Collision(); //makes the collision instance
+        static Collision collisionGrid = new Collision(); //makes the collision instance
         HashSet<GameObject> objNearPlayerOne, objNearPlayerTwo;
         GameObject playerOne, playerTwo;
         /// <summary>
@@ -73,7 +73,7 @@ namespace STG
                     }*/
                     
 
-                    if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
+                    /*if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
                     {
                         collisionGrid.removeFromCollisionGrid(o);
                         if ((o.objectType == 'C' || o.objectType == 'B') && !(o.insidePlayingArea(500)))
@@ -85,17 +85,17 @@ namespace STG
                     {
                         objNearPlayerOne = collisionGrid.getObjectsNearPlayer(playerOne);
                         objNearPlayerTwo = collisionGrid.getObjectsNearPlayer(playerTwo);
-                    }
+                    }*/
                 }
             }
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
                 objectList.Add(o);
-            playerOne = objectList[0];
-            playerTwo = objectList[1];
+            /*playerOne = objectList[0];
+            playerTwo = objectList[1];*/
             addList.Clear(); //clears the temp list
 
 
-            if (objNearPlayerOne != null && objNearPlayerTwo != null)
+            /*if (objNearPlayerOne != null && objNearPlayerTwo != null)
             {
                 foreach (GameObject o in objNearPlayerOne)
                 {
@@ -126,7 +126,7 @@ namespace STG
                         }
                     }
                 }
-            }
+            }*/
             foreach (GameObject o in removeList) //now that we're done looping through objectList, we can remove objects from it
                 objectList.Remove(o);
             removeList.Clear();
@@ -169,5 +169,7 @@ namespace STG
         /// Returns the number of objects in the object manager.
         /// </summary>
         public int Count { get { return objectList.Count; } }
+
+        public static Collision CollisionGrid { get { return collisionGrid; } }
     }
 }
