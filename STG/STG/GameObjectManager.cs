@@ -71,11 +71,7 @@ namespace STG
                     {
                         removeList.Add(o);
                     }*/
-                    if (objectList.Any())
-                    {
-                        objNearPlayerOne = collisionGrid.getObjectsNearPlayer(playerOne);
-                        objNearPlayerTwo = collisionGrid.getObjectsNearPlayer(playerTwo);
-                    }
+                    
 
                     if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
                     {
@@ -84,6 +80,11 @@ namespace STG
                         {
                             removeList.Add(o);
                         }
+                    }
+                    if (objectList.Any())
+                    {
+                        objNearPlayerOne = collisionGrid.getObjectsNearPlayer(playerOne);
+                        objNearPlayerTwo = collisionGrid.getObjectsNearPlayer(playerTwo);
                     }
                 }
             }

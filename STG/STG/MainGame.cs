@@ -143,7 +143,8 @@ namespace STG
             //player 2 stuff
             SpriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
             SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
-            player2 = new Player(SpriteDict["sunGirl"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
+            SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
+            player2 = new Player(SpriteDict["moonGirl"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
             ObjectManager.Add(player2);
 
             //bullet textures
@@ -151,6 +152,7 @@ namespace STG
             SpriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
             SpriteDict["prettyArrowBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\prettyArrowBullet"));
             SpriteDict["suns"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\suns"));
+            SpriteDict["moons"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\moons"));
             //hitbox texture
             SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
