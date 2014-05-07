@@ -114,8 +114,8 @@ namespace STG
         /// <summary>
         /// Uses separating axis theorem to determine if there is a collision
         /// </summary>
-        /// <param name="o1"></param>
-        /// <param name="o2"></param>
+        /// <param name="o1">verticies of an object</param>
+        /// <param name="o2">main playing area</param>
         /// <returns></returns>
         public Boolean collides(List<Vector2> o1, Rectangle o2)
         {
@@ -235,97 +235,98 @@ namespace STG
             axis1.Y = o1[1].Y - o1[0].Y;
             axis2.X = o1[1].X - o1[3].X;
             axis2.Y = o1[1].Y - o1[3].Y;
-            axis3.X = o1[0].X - o1[2].X;
-            axis3.Y = o1[0].Y - o1[2].Y;
-            axis4.X = o1[0].X - o1[1].X;
-            axis4.Y = o1[0].Y - o1[1].Y;
+            axis3.X = o2[0].X - o2[2].X;
+            axis3.Y = o2[0].Y - o2[2].Y;
+            axis4.X = o2[0].X - o2[1].X;
+            axis4.Y = o2[0].Y - o2[1].Y;
 
             //checking if overlap on axis1
-            float scalarUR = (axis1.X * 2) * ((o1[1].X * axis1.X + o1[1].Y * axis1.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y)) + (axis1.Y * 2) * ((o1[1].X * axis1.X + o1[1].Y * axis1.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y));
-            float scalarUL = (axis1.X * 2) * ((o1[0].X * axis1.X + o1[0].Y * axis1.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis1.Y * 2) * ((o1[0].X * axis1.X + o1[0].Y * axis1.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
-            float scalarBR = (axis1.X * 2) * ((o1[3].X * axis1.X + o1[3].Y * axis1.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis1.Y * 2) * ((o1[3].X * axis1.X + o1[3].Y * axis1.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
-            float scalarBL = (axis1.X * 2) * ((o1[2].X * axis1.X + o1[2].Y * axis1.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis1.Y * 2) * ((o1[2].X * axis1.X + o1[2].Y * axis1.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
+            //changed division to axis points squared instead of vertice points squared hopefully it will fix it
+            float scalarUR = (axis1.X * 2) * ((o1[1].X * axis1.X + o1[1].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o1[1].X * axis1.X + o1[1].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
+            float scalarUL = (axis1.X * 2) * ((o1[0].X * axis1.X + o1[0].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o1[0].X * axis1.X + o1[0].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
+            float scalarBR = (axis1.X * 2) * ((o1[3].X * axis1.X + o1[3].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o1[3].X * axis1.X + o1[3].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
+            float scalarBL = (axis1.X * 2) * ((o1[2].X * axis1.X + o1[2].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o1[2].X * axis1.X + o1[2].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
             float maxA, minA, maxB, minB;
             float[] scalars = { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
-            scalarUR = (axis1.X * 2) * ((o2[1].X * axis1.X + o2[1].Y * axis1.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y)) + (axis1.Y * 2) * ((o2[1].X * axis1.X + o2[1].Y * axis1.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y));
-            scalarUL = (axis1.X * 2) * ((o2[0].X * axis1.X + o2[0].Y * axis1.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y)) + (axis1.Y * 2) * ((o2[0].X * axis1.X + o2[0].Y * axis1.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y));
-            scalarBR = (axis1.X * 2) * ((o2[3].X * axis1.X + o2[3].Y * axis1.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y)) + (axis1.Y * 2) * ((o2[3].X * axis1.X + o2[3].Y * axis1.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y));
-            scalarBL = (axis1.X * 2) * ((o2[2].X * axis1.X + o2[2].Y * axis1.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y)) + (axis1.Y * 2) * ((o2[2].X * axis1.X + o2[2].Y * axis1.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y));
+            scalarUR = (axis1.X * 2) * ((o2[1].X * axis1.X + o2[1].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o2[1].X * axis1.X + o2[1].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
+            scalarUL = (axis1.X * 2) * ((o2[0].X * axis1.X + o2[0].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o2[0].X * axis1.X + o2[0].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
+            scalarBR = (axis1.X * 2) * ((o2[3].X * axis1.X + o2[3].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o2[3].X * axis1.X + o2[3].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
+            scalarBL = (axis1.X * 2) * ((o2[2].X * axis1.X + o2[2].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y)) + (axis1.Y * 2) * ((o2[2].X * axis1.X + o2[2].Y * axis1.Y) / (axis1.X * axis1.X + axis1.Y * axis1.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
-            if (!(minB <= minA && maxB >= minA))
+            if (!(minB <= maxA && maxB >= minA))
                 return false;
             //end checking for overlap on axis1;
 
             //checking if overlap on axis2
-            scalarUR = (axis2.X * 2) * ((o1[1].X * axis2.X + o1[1].Y * axis2.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y)) + (axis2.Y * 2) * ((o1[1].X * axis2.X + o1[1].Y * axis2.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y));
-            scalarUL = (axis2.X * 2) * ((o1[0].X * axis2.X + o1[0].Y * axis2.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis2.Y * 2) * ((o1[0].X * axis2.X + o1[0].Y * axis2.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
-            scalarBR = (axis2.X * 2) * ((o1[3].X * axis2.X + o1[3].Y * axis2.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis2.Y * 2) * ((o1[3].X * axis2.X + o1[3].Y * axis2.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
-            scalarBL = (axis2.X * 2) * ((o1[2].X * axis2.X + o1[2].Y * axis2.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis2.Y * 2) * ((o1[2].X * axis2.X + o1[2].Y * axis2.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
+            scalarUR = (axis2.X * 2) * ((o1[1].X * axis2.X + o1[1].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o1[1].X * axis2.X + o1[1].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
+            scalarUL = (axis2.X * 2) * ((o1[0].X * axis2.X + o1[0].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o1[0].X * axis2.X + o1[0].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
+            scalarBR = (axis2.X * 2) * ((o1[3].X * axis2.X + o1[3].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o1[3].X * axis2.X + o1[3].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
+            scalarBL = (axis2.X * 2) * ((o1[2].X * axis2.X + o1[2].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o1[2].X * axis2.X + o1[2].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
-            scalarUR = (axis2.X * 2) * ((o2[1].X * axis2.X + o2[1].Y * axis2.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y)) + (axis2.Y * 2) * ((o2[1].X * axis2.X + o2[1].Y * axis2.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y));
-            scalarUL = (axis2.X * 2) * ((o2[0].X * axis2.X + o2[0].Y * axis2.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y)) + (axis2.Y * 2) * ((o2[0].X * axis2.X + o2[0].Y * axis2.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y));
-            scalarBR = (axis2.X * 2) * ((o2[3].X * axis2.X + o2[3].Y * axis2.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y)) + (axis2.Y * 2) * ((o2[3].X * axis2.X + o2[3].Y * axis2.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y));
-            scalarBL = (axis2.X * 2) * ((o2[2].X * axis2.X + o2[2].Y * axis2.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y)) + (axis2.Y * 2) * ((o2[2].X * axis2.X + o2[2].Y * axis2.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y));
+            scalarUR = (axis2.X * 2) * ((o2[1].X * axis2.X + o2[1].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o2[1].X * axis2.X + o2[1].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
+            scalarUL = (axis2.X * 2) * ((o2[0].X * axis2.X + o2[0].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o2[0].X * axis2.X + o2[0].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
+            scalarBR = (axis2.X * 2) * ((o2[3].X * axis2.X + o2[3].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o2[3].X * axis2.X + o2[3].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
+            scalarBL = (axis2.X * 2) * ((o2[2].X * axis2.X + o2[2].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y)) + (axis2.Y * 2) * ((o2[2].X * axis2.X + o2[2].Y * axis2.Y) / (axis2.X * axis2.X + axis2.Y * axis2.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
-            if (!(minB <= minA && maxB >= minA))
+            if (!(minB <= maxA && maxB >= minA))
                 return false;
             //end checking for overlap on axis2;
 
             //checking if overlap on axis3
-            scalarUR = (axis3.X * 2) * ((o1[1].X * axis3.X + o1[1].Y * axis3.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y)) + (axis3.Y * 2) * ((o1[1].X * axis3.X + o1[1].Y * axis3.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y));
-            scalarUL = (axis3.X * 2) * ((o1[0].X * axis3.X + o1[0].Y * axis3.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis3.Y * 2) * ((o1[0].X * axis3.X + o1[0].Y * axis3.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
-            scalarBR = (axis3.X * 2) * ((o1[3].X * axis3.X + o1[3].Y * axis3.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis3.Y * 2) * ((o1[3].X * axis3.X + o1[3].Y * axis3.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
-            scalarBL = (axis3.X * 2) * ((o1[2].X * axis3.X + o1[2].Y * axis3.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis3.Y * 2) * ((o1[2].X * axis3.X + o1[2].Y * axis3.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
+            scalarUR = (axis3.X * 2) * ((o1[1].X * axis3.X + o1[1].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o1[1].X * axis3.X + o1[1].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
+            scalarUL = (axis3.X * 2) * ((o1[0].X * axis3.X + o1[0].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o1[0].X * axis3.X + o1[0].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
+            scalarBR = (axis3.X * 2) * ((o1[3].X * axis3.X + o1[3].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o1[3].X * axis3.X + o1[3].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
+            scalarBL = (axis3.X * 2) * ((o1[2].X * axis3.X + o1[2].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o1[2].X * axis3.X + o1[2].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
-            scalarUR = (axis3.X * 2) * ((o2[1].X * axis3.X + o2[1].Y * axis3.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y)) + (axis3.Y * 2) * ((o2[1].X * axis3.X + o2[1].Y * axis3.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y));
-            scalarUL = (axis3.X * 2) * ((o2[0].X * axis3.X + o2[0].Y * axis3.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y)) + (axis3.Y * 2) * ((o2[0].X * axis3.X + o2[0].Y * axis3.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y));
-            scalarBR = (axis3.X * 2) * ((o2[3].X * axis3.X + o2[3].Y * axis3.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y)) + (axis3.Y * 2) * ((o2[3].X * axis3.X + o2[3].Y * axis3.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y));
-            scalarBL = (axis3.X * 2) * ((o2[2].X * axis3.X + o2[2].Y * axis3.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y)) + (axis3.Y * 2) * ((o2[2].X * axis3.X + o2[2].Y * axis3.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y));
+            scalarUR = (axis3.X * 2) * ((o2[1].X * axis3.X + o2[1].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o2[1].X * axis3.X + o2[1].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
+            scalarUL = (axis3.X * 2) * ((o2[0].X * axis3.X + o2[0].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o2[0].X * axis3.X + o2[0].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
+            scalarBR = (axis3.X * 2) * ((o2[3].X * axis3.X + o2[3].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o2[3].X * axis3.X + o2[3].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
+            scalarBL = (axis3.X * 2) * ((o2[2].X * axis3.X + o2[2].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y)) + (axis3.Y * 2) * ((o2[2].X * axis3.X + o2[2].Y * axis3.Y) / (axis3.X * axis3.X + axis3.Y * axis3.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
-            if (!(minB <= minA && maxB >= minA))
+            if (!(minB <= maxA && maxB >= minA))
                 return false;
             //end checking for overlap on axis3;
 
             //checking if overlap on axis4
-            scalarUR = (axis4.X * 2) * ((o1[1].X * axis4.X + o1[1].Y * axis4.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y)) + (axis4.Y * 2) * ((o1[1].X * axis4.X + o1[1].Y * axis4.Y) / (o1[1].X * o1[1].X + o1[1].Y * o1[1].Y));
-            scalarUL = (axis4.X * 2) * ((o1[0].X * axis4.X + o1[0].Y * axis4.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis4.Y * 2) * ((o1[0].X * axis4.X + o1[0].Y * axis4.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
-            scalarBR = (axis4.X * 2) * ((o1[3].X * axis4.X + o1[3].Y * axis4.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis4.Y * 2) * ((o1[3].X * axis4.X + o1[3].Y * axis4.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
-            scalarBL = (axis4.X * 2) * ((o1[2].X * axis4.X + o1[2].Y * axis4.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis4.Y * 2) * ((o1[2].X * axis4.X + o1[2].Y * axis4.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
+            scalarUR = (axis4.X * 2) * ((o1[1].X * axis4.X + o1[1].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o1[1].X * axis4.X + o1[1].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
+            scalarUL = (axis4.X * 2) * ((o1[0].X * axis4.X + o1[0].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o1[0].X * axis4.X + o1[0].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
+            scalarBR = (axis4.X * 2) * ((o1[3].X * axis4.X + o1[3].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o1[3].X * axis4.X + o1[3].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
+            scalarBL = (axis4.X * 2) * ((o1[2].X * axis4.X + o1[2].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o1[2].X * axis4.X + o1[2].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
-            scalarUR = (axis4.X * 2) * ((o2[1].X * axis4.X + o2[1].Y * axis4.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y)) + (axis4.Y * 2) * ((o2[1].X * axis4.X + o2[1].Y * axis4.Y) / (o2[1].X * o2[1].X + o2[1].Y * o2[1].Y));
-            scalarUL = (axis4.X * 2) * ((o2[0].X * axis4.X + o2[0].Y * axis4.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y)) + (axis4.Y * 2) * ((o2[0].X * axis4.X + o2[0].Y * axis4.Y) / (o2[0].X * o2[0].X + o2[0].Y * o2[0].Y));
-            scalarBR = (axis4.X * 2) * ((o2[3].X * axis4.X + o2[3].Y * axis4.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y)) + (axis4.Y * 2) * ((o2[3].X * axis4.X + o2[3].Y * axis4.Y) / (o2[3].X * o2[3].X + o2[3].Y * o2[3].Y));
-            scalarBL = (axis4.X * 2) * ((o2[2].X * axis4.X + o2[2].Y * axis4.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y)) + (axis4.Y * 2) * ((o2[2].X * axis4.X + o2[2].Y * axis4.Y) / (o2[2].X * o2[2].X + o2[2].Y * o2[2].Y));
+            scalarUR = (axis4.X * 2) * ((o2[1].X * axis4.X + o2[1].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o2[1].X * axis4.X + o2[1].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
+            scalarUL = (axis4.X * 2) * ((o2[0].X * axis4.X + o2[0].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o2[0].X * axis4.X + o2[0].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
+            scalarBR = (axis4.X * 2) * ((o2[3].X * axis4.X + o2[3].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o2[3].X * axis4.X + o2[3].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
+            scalarBL = (axis4.X * 2) * ((o2[2].X * axis4.X + o2[2].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y)) + (axis4.Y * 2) * ((o2[2].X * axis4.X + o2[2].Y * axis4.Y) / (axis4.X * axis4.X + axis4.Y * axis4.Y));
             scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
             Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
-            if (!(minB <= minA && maxB >= minA))
+            if (!(minB <= maxA && maxB >= minA))
                 return false;
             //end checking for overlap on axis4;
             else
