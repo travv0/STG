@@ -223,7 +223,7 @@ namespace STG
 
                     if (!gameSongStart)
                     {
-                        //MediaPlayer.Play(gameBGSong);
+                        MediaPlayer.Play(gameBGSong);
                         gameSongStart = true;
                     }
 
