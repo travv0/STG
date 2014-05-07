@@ -192,6 +192,7 @@ namespace STG
             return (float)Math.Sqrt(Math.Pow((float)pos.X - targetPos.X, 2) + Math.Pow((float)pos.Y - targetPos.Y, 2));
 
         }
+
         /// <summary>
         /// Calculates where in the collision grid the cell is currently
         /// collision positions are shifted 20 pixels from actual position to accomadate for the play area being moved away from the origin
@@ -211,12 +212,29 @@ namespace STG
                 return Direction.clockwise;
         }
 
+        protected Direction ClosestDirection(Vector2 position)
+        {
+            float tempAtT = NormalizeAngle(NormalizeAngle(AngleToTarget(position)) - NormalizeAngle(angle));
+            if (tempAtT > 180)
+                return Direction.counterclockwise;
+            else
+                return Direction.clockwise;
+        }
+
         protected float AngleDifference(GameObject obj)
         {
             if (AngleToTarget(obj.Position) - angle > 180)
                 return (360 - (AngleToTarget(obj.Position) - angle));
             else
                 return Math.Abs(AngleToTarget(obj.Position) - angle);
+        }
+
+        protected float AngleDifference(Vector2 position)
+        {
+            if (AngleToTarget(position) - angle > 180)
+                return (360 - (AngleToTarget(position) - angle));
+            else
+                return Math.Abs(AngleToTarget(position) - angle);
         }
 
         protected float NormalizeAngle(float angle)

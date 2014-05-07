@@ -149,12 +149,12 @@ namespace STG
                         {
                             if (inFocus == true)
                             {
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
 
                             else
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0), false);
 
                             options.Push(tempOption1);
                             MainGame.ObjectManager.Add(tempOption1);
@@ -167,12 +167,12 @@ namespace STG
 
                             if (inFocus == true)
                             {
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2((30 * 3 / 4), (0 - boundingBox.Height / 2)));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2((30 * 3 / 4), (0 - boundingBox.Height / 2)), true);
                                 startFocus = true;
                             }
 
                             else
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0), false);
 
                             options.Push(tempOption1);
                             MainGame.ObjectManager.Add(tempOption1);
@@ -196,12 +196,12 @@ namespace STG
                         {
                             if (inFocus == true)
                             {
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
 
                             else
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0), false);
 
                             options.Push(tempOption1);
                             MainGame.ObjectManager.Add(tempOption1);
@@ -214,12 +214,12 @@ namespace STG
 
                             if (inFocus == true)
                             {
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30 * 3 / 4, 0 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
 
                             else
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0), false);
 
                             options.Push(tempOption1);
                             MainGame.ObjectManager.Add(tempOption1);
@@ -240,11 +240,11 @@ namespace STG
                         {
                             if(inFocus == true)
                             {
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50 * 3 / 4, 10 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
                             else
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10), false);
 
                             options.Push(tempOption2);
                             MainGame.ObjectManager.Add(tempOption2);
@@ -257,11 +257,11 @@ namespace STG
 
                             if(inFocus == true)
                             {
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50 * 3 / 4, 10 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
                             else
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10), false);
 
                             options.Push(tempOption2);
                             MainGame.ObjectManager.Add(tempOption2);
@@ -283,12 +283,12 @@ namespace STG
                         {
                             if (inFocus == true)
                             {
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30 * 3 / 4, 0 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
 
                             else
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-30, 0), false);
 
                             options.Push(tempOption1);
                             MainGame.ObjectManager.Add(tempOption1);
@@ -301,12 +301,12 @@ namespace STG
 
                             if (inFocus == true)
                             {
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30 * 3 / 4, 0 - boundingBox.Height / 2));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30 * 3 / 4, 0 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
 
                             else
-                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0));
+                                tempOption1 = new Option(this, MainGame.SpriteDict["option"], new Vector2(30, 0), false);
 
                             options.Push(tempOption1);
                             MainGame.ObjectManager.Add(tempOption1);
@@ -327,11 +327,11 @@ namespace STG
                         {
                             if (inFocus == true)
                             {
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50 * 3 / 4, 10 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
                             else
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-50, 10), false);
 
                             options.Push(tempOption2);
                             MainGame.ObjectManager.Add(tempOption2);
@@ -344,11 +344,11 @@ namespace STG
 
                             if (inFocus == true)
                             {
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50 * 3 / 4, 10 - boundingBox.Height / 2));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50 * 3 / 4, 10 - boundingBox.Height / 2), true);
                                 startFocus = true;
                             }
                             else
-                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10));
+                                tempOption2 = new Option(this, MainGame.SpriteDict["option"], new Vector2(50, 10), false);
 
                             options.Push(tempOption2);
                             MainGame.ObjectManager.Add(tempOption2);
@@ -366,11 +366,11 @@ namespace STG
 
                         if (inFocus == true)
                         {
-                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70 * 3 / 4, 20 - boundingBox.Height / 2));
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70 * 3 / 4, 20 - boundingBox.Height / 2), true);
                             startFocus = true;
                         }
                         else
-                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70, 20));
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(-70, 20), false);
 
                         options.Push(tempOption3);
                         MainGame.ObjectManager.Add(tempOption3);
@@ -384,11 +384,11 @@ namespace STG
 
                         if (inFocus == true)
                         {
-                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(70 * 3 / 4, 20 - boundingBox.Height / 2));
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(70 * 3 / 4, 20 - boundingBox.Height / 2), true);
                             startFocus = true;
                         }
                         else
-                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(70, 20));
+                            tempOption3 = new Option(this, MainGame.SpriteDict["option"], new Vector2(70, 20), false);
                         options.Push(tempOption3);
                         MainGame.ObjectManager.Add(tempOption3);
                         //start them in focus mode if player is in focus
@@ -408,21 +408,29 @@ namespace STG
                         if (inFocus == false)
                             foreach (Option option in options)
                             {
-                                if (pos.X + option.relativePosition.X != option.focusPosition.X)
+
+                                
+                                if (pos.X + option.relativePosition.X > pos.X)
                                 {
-                                    if (pos.X + option.relativePosition.X > pos.X)
-                                        option.relativePosition.X = option.focusPosition.X / 
-                                    if (pos.X + option.relativePosition.X < pos.X)
-                                        option.relativePosition.X += .1f;
+                                    if (pos.X + option.relativePosition.X > option.focusPosition.X)   
+                                        option.relativePosition.X -= option.focusPosition.X / 600;
+
                                 }
-                                if (pos.Y + option.relativePosition.Y != option.focusPosition.Y)
+                                if (pos.X + option.relativePosition.X < pos.X)
                                 {
-                                    option.relativePosition.Y -= .1f;
+                                    if (pos.X + option.relativePosition.X < option.focusPosition.X)
+
+                                        option.relativePosition.X += option.focusPosition.X / 600;
                                 }
-                                if(pos.X + option.relativePosition.X == option.focusPosition.X)
+                                if (pos.Y + option.relativePosition.Y < option.focusPosition.Y)
+                                {
+                                    option.relativePosition.Y -= option.focusPosition.Y / 600;
+                                }
+                                else
                                     inFocus = true;
                                 //option.relativePosition.X = option.RelativePosition.X * 3 / 4;
                                 //option.relativePosition.Y = option.RelativePosition.Y - boundingBox.Height / 2;
+                                 
                             }
                         
                     }
@@ -433,8 +441,8 @@ namespace STG
                         if (inFocus == true)
                             foreach (Option option in options)
                             {
-                                option.relativePosition.X = option.RelativePosition.X * 4 / 3;
-                                option.relativePosition.Y = option.RelativePosition.Y + boundingBox.Height / 2;
+                                option.focusPosition.Y = pos.X + option.RelativePosition.X * 4 / 3;
+                                option.focusPosition.Y = pos.Y + option.RelativePosition.Y + boundingBox.Height / 2;
                             }
                         inFocus = false;
                     }
