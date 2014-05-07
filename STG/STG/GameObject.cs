@@ -305,5 +305,21 @@ namespace STG
             return angle;
         }
         #endregion
+
+        protected GameObject Collides(char objType)
+        {
+            HashSet<GameObject> objectsToCheck = GameObjectManager.CollisionGrid.getObjectsNearPlayer(this);
+
+            foreach (GameObject o in objectsToCheck)
+            {
+                if (o.objectType == objType)
+                {
+                    if (GameObjectManager.CollisionGrid.collides(this.getVertices(), o.getVertices()))
+                        return o;
+                }
+            }
+
+            return null;
+        }
     }
 }

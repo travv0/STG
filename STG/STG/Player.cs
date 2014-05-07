@@ -125,6 +125,13 @@ namespace STG
             Option tempOption1, tempOption2, tempOption3;
             bool startFocus = false;
 
+            GameObject hitBullet = Collides('B');
+            if (hitBullet != null)
+            {
+                this.sprite = MainGame.SpriteDict["hitbox"];
+                MainGame.ObjectManager.Remove(hitBullet);
+            }
+
             switch (playerNum)
             {
                 case PlayerNum.One:
