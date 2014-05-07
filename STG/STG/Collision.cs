@@ -69,16 +69,9 @@ namespace STG
         public void removeFromCollisionGrid(GameObject o){
             if (!this.collides(o.getVertices(), MainGame.PlayingArea))
             {
-                for (int i = 0; i < ROWS; i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    for (int j = 0; j < COLUMNS; j++)
-                    {
-                        for (int k = 0; k < 4; k++)
-                        {
-                            if (collisionGrid[i, j].Contains(o) && (o.getCollisionColumn()[k] != j || o.getCollisionRow()[k] != i))
-                                collisionGrid[i, j].Remove(o);
-                        }
-                    }
+                    collisionGrid[o.getCollisionRow()[i], o.getCollisionColumn()[i]].Remove(o);
                 }
             }
         }
