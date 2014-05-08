@@ -218,8 +218,8 @@ namespace STG
 
                     if (!gameSongStart)
                     {
-                        MediaPlayer.Play(gameBGSong);
-                        //gameSongStart = true;
+                        //MediaPlayer.Play(gameBGSong);
+                        gameSongStart = true;
                     }
 
                     FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;

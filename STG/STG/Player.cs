@@ -124,21 +124,22 @@ namespace STG
             KeyboardState keyboard = Keyboard.GetState();
             Option tempOption1, tempOption2, tempOption3;
             bool startFocus = false;
-
-            GameObject hitBullet = Collides('B');
-            if (hitBullet != null)
+            if (playerNum == PlayerNum.One)
             {
-                this.sprite = MainGame.SpriteDict["hitbox"];
-                MainGame.ObjectManager.Remove(hitBullet);
-            }
+                GameObject hitBullet = Collides('B');
+                if (hitBullet != null)
+                {
+                    this.sprite = MainGame.SpriteDict["hitbox"];
+                    MainGame.ObjectManager.Remove(hitBullet);
+                }
 
-            GameObject hitPower = Collides('C');
-            if (hitPower != null)
-            {
-                MainGame.ObjectManager.Remove(hitPower);
-                power += 1;
+                GameObject hitPower = Collides('C');
+                if (hitPower != null)
+                {
+                    MainGame.ObjectManager.Remove(hitPower);
+                    power += 1;
+                }
             }
-
             switch (playerNum)
             {
                 case PlayerNum.One:

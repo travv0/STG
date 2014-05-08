@@ -14,7 +14,7 @@ namespace STG
 {
     public class Collision
     {
-        const int ROWS = 5, COLUMNS = 5;
+        const int ROWS = 10, COLUMNS = 10;
         static int CELLWIDTH = (MainGame.PlayingArea.Width + 100) / COLUMNS, CELLHEIGHT = (MainGame.PlayingArea.Height + 100) / ROWS;//constants for the size of the collision grid as well as the cell dimensions
         public HashSet<GameObject>[,] collisionGrid = new HashSet<GameObject>[ROWS, COLUMNS];//list of the gameobjects in each square of the collision grid
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to the collision grid
@@ -57,13 +57,13 @@ namespace STG
         public void addToCollisionGrid(GameObject o){
             if (o.insidePlayingArea(0))
             {
-                if(MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[0].X, (int)o.getVertices()[0].Y)))
+                if (o.getCollisionColumn()[0] != -1 && o.getCollisionRow()[0] != -1 && o.getCollisionColumn()[0] < ROWS && o.getCollisionRow()[0] < COLUMNS -1)
                     this.addToGrid(o.getCollisionColumn()[0], o.getCollisionRow()[0], o);
-                if (MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[1].X, (int)o.getVertices()[1].Y)))
+                if (o.getCollisionColumn()[1] != -1 && o.getCollisionRow()[1] != -1 && o.getCollisionColumn()[1] < ROWS && o.getCollisionRow()[1] < COLUMNS - 1)
                     this.addToGrid(o.getCollisionColumn()[1], o.getCollisionRow()[1], o);
-                if (MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[2].X, (int)o.getVertices()[2].Y)))
+                if (o.getCollisionColumn()[2] != -1 && o.getCollisionRow()[2] != -1 && o.getCollisionColumn()[2] < ROWS && o.getCollisionRow()[2] < COLUMNS - 1)
                     this.addToGrid(o.getCollisionColumn()[2], o.getCollisionRow()[2], o);
-                if (MainGame.PlayingArea.Contains(new Point((int)o.getVertices()[3].X, (int)o.getVertices()[3].Y)))
+                if (o.getCollisionColumn()[3] != -1 && o.getCollisionRow()[3] != -1 && o.getCollisionColumn()[3] < ROWS && o.getCollisionRow()[3] < COLUMNS - 1)
                     this.addToGrid(o.getCollisionColumn()[3], o.getCollisionRow()[3], o);
             }
         }

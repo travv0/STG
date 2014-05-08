@@ -224,14 +224,14 @@ namespace STG
         /// </summary>
         private void calculateCollisionGridCell()
         {
-            collisionColumns[0] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
-            collisionRows[0] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
-            collisionColumns[1] = (int)Math.Floor(trVertex.X / Collision.getCellWidth());
-            collisionRows[1] = (int)Math.Floor(trVertex.Y / Collision.getCellHeight());
-            collisionColumns[2] = (int)Math.Floor(blVertex.X / Collision.getCellWidth());
-            collisionRows[2] = (int)Math.Floor(blVertex.Y / Collision.getCellHeight());
-            collisionColumns[3] = (int)Math.Floor(brVertex.X / Collision.getCellWidth());
-            collisionRows[3] = (int)Math.Floor(brVertex.Y / Collision.getCellHeight());
+            collisionColumns[0] = (int)Math.Ceiling(tlVertex.X / Collision.getCellWidth());
+            collisionRows[0] = (int)Math.Ceiling(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[1] = (int)Math.Ceiling(trVertex.X / Collision.getCellWidth());
+            collisionRows[1] = (int)Math.Ceiling(trVertex.Y / Collision.getCellHeight());
+            collisionColumns[2] = (int)Math.Ceiling(blVertex.X / Collision.getCellWidth());
+            collisionRows[2] = (int)Math.Ceiling(blVertex.Y / Collision.getCellHeight());
+            collisionColumns[3] = (int)Math.Ceiling(brVertex.X / Collision.getCellWidth());
+            collisionRows[3] = (int)Math.Ceiling(brVertex.Y / Collision.getCellHeight());
             for (int i = 0; i < 4; i++)
             {
                 if (collisionColumns[i] < 0)
@@ -314,6 +314,7 @@ namespace STG
             {
                 if (o.objectType == objType)
                 {
+                    o.color = Color.Red;
                     if (GameObjectManager.CollisionGrid.collides(this.getVertices(), o.getVertices()))
                         return o;
                 }
