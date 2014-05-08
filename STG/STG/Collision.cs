@@ -130,11 +130,8 @@ namespace STG
             float scalarBR = (axis1.X * 2) * ((o1[3].X * axis1.X + o1[3].Y * axis1.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis1.Y * 2) * ((o1[3].X * axis1.X + o1[3].Y * axis1.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
             float scalarBL = (axis1.X * 2) * ((o1[2].X * axis1.X + o1[2].Y * axis1.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis1.Y * 2) * ((o1[2].X * axis1.X + o1[2].Y * axis1.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
             float maxA, minA, maxB, minB;
-            OrderedBag<float> scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            float[] scalars = {scalarUR, scalarUL, scalarBR, scalarBL};
+            Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
@@ -142,11 +139,8 @@ namespace STG
             scalarUL = (axis1.X * 2) * ((o2.X * axis1.X + o2.Y * axis1.Y) / (o2.X * o2.X + o2.Y * o2.Y)) + (axis1.Y * 2) * ((o2.X * axis1.X + o2.Y * axis1.Y) / (o2.X * o2.X + o2.Y * o2.Y));
             scalarBR = (axis1.X * 2) * (((o2.X + o2.Width) * axis1.X + o1[3].Y * axis1.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis1.Y * 2) * (((o2.X + o2.Width) * axis1.X + (o2.Y + o2.Height) * axis1.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
             scalarBL = (axis1.X * 2) * ((o2.X * axis1.X + (o2.Y + o2.Height) * axis1.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis1.Y * 2) * ((o2.X * axis1.X + (o2.Y + o2.Height) * axis1.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[]{scalarUR, scalarUL, scalarBR, scalarBL};
+            Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
             if (!(minB <= minA && maxB >= minA))
@@ -158,11 +152,8 @@ namespace STG
             scalarUL = (axis2.X * 2) * ((o1[0].X * axis2.X + o1[0].Y * axis2.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis2.Y * 2) * ((o1[0].X * axis2.X + o1[0].Y * axis2.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
             scalarBR = (axis2.X * 2) * ((o1[3].X * axis2.X + o1[3].Y * axis2.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis2.Y * 2) * ((o1[3].X * axis2.X + o1[3].Y * axis2.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
             scalarBL = (axis2.X * 2) * ((o1[2].X * axis2.X + o1[2].Y * axis2.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis2.Y * 2) * ((o1[2].X * axis2.X + o1[2].Y * axis2.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
+            Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
@@ -170,11 +161,8 @@ namespace STG
             scalarUL = (axis2.X * 2) * ((o2.X * axis2.X + o2.Y * axis2.Y) / (o2.X * o2.X + o2.Y * o2.Y)) + (axis2.Y * 2) * ((o2.X * axis2.X + o2.Y * axis2.Y) / (o2.X * o2.X + o2.Y * o2.Y));
             scalarBR = (axis2.X * 2) * (((o2.X + o2.Width) * axis2.X + o1[3].Y * axis2.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis2.Y * 2) * (((o2.X + o2.Width) * axis2.X + (o2.Y + o2.Height) * axis2.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
             scalarBL = (axis2.X * 2) * ((o2.X * axis2.X + (o2.Y + o2.Height) * axis2.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis2.Y * 2) * ((o2.X * axis2.X + (o2.Y + o2.Height) * axis2.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
+            Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
             if (!(minB <= minA && maxB >= minA))
@@ -186,11 +174,8 @@ namespace STG
             scalarUL = (axis3.X * 2) * ((o1[0].X * axis3.X + o1[0].Y * axis3.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis3.Y * 2) * ((o1[0].X * axis3.X + o1[0].Y * axis3.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
             scalarBR = (axis3.X * 2) * ((o1[3].X * axis3.X + o1[3].Y * axis3.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis3.Y * 2) * ((o1[3].X * axis3.X + o1[3].Y * axis3.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
             scalarBL = (axis3.X * 2) * ((o1[2].X * axis3.X + o1[2].Y * axis3.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis3.Y * 2) * ((o1[2].X * axis3.X + o1[2].Y * axis3.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
+            Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
@@ -198,11 +183,8 @@ namespace STG
             scalarUL = (axis3.X * 2) * ((o2.X * axis3.X + o2.Y * axis3.Y) / (o2.X * o2.X + o2.Y * o2.Y)) + (axis3.Y * 2) * ((o2.X * axis3.X + o2.Y * axis3.Y) / (o2.X * o2.X + o2.Y * o2.Y));
             scalarBR = (axis3.X * 2) * (((o2.X + o2.Width) * axis3.X + o1[3].Y * axis3.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis3.Y * 2) * (((o2.X + o2.Width) * axis3.X + (o2.Y + o2.Height) * axis3.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
             scalarBL = (axis3.X * 2) * ((o2.X * axis3.X + (o2.Y + o2.Height) * axis3.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis3.Y * 2) * ((o2.X * axis3.X + (o2.Y + o2.Height) * axis3.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
+            Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
             if (!(minB <= minA && maxB >= minA))
@@ -214,11 +196,8 @@ namespace STG
             scalarUL = (axis4.X * 2) * ((o1[0].X * axis4.X + o1[0].Y * axis4.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y)) + (axis4.Y * 2) * ((o1[0].X * axis4.X + o1[0].Y * axis4.Y) / (o1[0].X * o1[0].X + o1[0].Y * o1[0].Y));
             scalarBR = (axis4.X * 2) * ((o1[3].X * axis4.X + o1[3].Y * axis4.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y)) + (axis4.Y * 2) * ((o1[3].X * axis4.X + o1[3].Y * axis4.Y) / (o1[3].X * o1[3].X + o1[3].Y * o1[3].Y));
             scalarBL = (axis4.X * 2) * ((o1[2].X * axis4.X + o1[2].Y * axis4.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y)) + (axis4.Y * 2) * ((o1[2].X * axis4.X + o1[2].Y * axis4.Y) / (o1[2].X * o1[2].X + o1[2].Y * o1[2].Y));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
+            Array.Sort(scalars);
             minA = scalars[0];
             maxA = scalars[3];
 
@@ -226,11 +205,8 @@ namespace STG
             scalarUL = (axis4.X * 2) * ((o2.X * axis4.X + o2.Y * axis4.Y) / (o2.X * o2.X + o2.Y * o2.Y)) + (axis4.Y * 2) * ((o2.X * axis4.X + o2.Y * axis4.Y) / (o2.X * o2.X + o2.Y * o2.Y));
             scalarBR = (axis4.X * 2) * (((o2.X + o2.Width) * axis4.X + o1[3].Y * axis4.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis4.Y * 2) * (((o2.X + o2.Width) * axis4.X + (o2.Y + o2.Height) * axis4.Y) / ((o2.X + o2.Width) * (o2.X + o2.Width) + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
             scalarBL = (axis4.X * 2) * ((o2.X * axis4.X + (o2.Y + o2.Height) * axis4.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height))) + (axis4.Y * 2) * ((o2.X * axis4.X + (o2.Y + o2.Height) * axis4.Y) / (o2.X * o2.X + (o2.Y + o2.Height) * (o2.Y + o2.Height)));
-            scalars = new OrderedBag<float>();
-            scalars.Add(scalarUR);
-            scalars.Add(scalarUL);
-            scalars.Add(scalarBR);
-            scalars.Add(scalarBL);
+            scalars = new float[] { scalarUR, scalarUL, scalarBR, scalarBL };
+            Array.Sort(scalars);
             minB = scalars[0];
             maxB = scalars[3];
             if (!(minB <= minA && maxB >= minA))
