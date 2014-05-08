@@ -39,6 +39,8 @@ namespace STG
         Texture2D quitButton;
         Rectangle quitRect;
 
+        Song titleSong;
+        bool titleSongStart = false;
         Song gameBGSong;
         bool gameSongStart = false;
 
@@ -119,7 +121,8 @@ namespace STG
 
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
-            gameBGSong = Content.Load<Song>("Music and Sound\\fire");
+            titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
+            gameBGSong = Content.Load<Song>("Music and Sound\\FireAndFlame");
 
             bombSound = Content.Load<SoundEffect>("Music and Sound\\bombSound");
             bombSoundInstance = bombSound.CreateInstance();
@@ -142,17 +145,13 @@ namespace STG
 
             //player 2 stuff
             SpriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
-            SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
-            SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
-            player2 = new Player(SpriteDict["moonGirl"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
+            player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
             ObjectManager.Add(player2);
 
             //bullet textures
             SpriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
             SpriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
             SpriteDict["prettyArrowBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\prettyArrowBullet"));
-            SpriteDict["suns"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\suns"));
-            SpriteDict["moons"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\moons"));
             //hitbox texture
             SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
@@ -161,9 +160,9 @@ namespace STG
             SpriteDict["bombInt"] = new Sprite(Content.Load<Texture2D>("bombInt"));
 
             //Item textures
-            SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\fullPower"));
-            SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\largePower"));
-            SpriteDict["SmallItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\smallPower"));
+            SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\FullItem"));
+            SpriteDict["LargeItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\LargeItem"));
+            SpriteDict["SmallItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\SmallItem"));
             ObjectManager.Add(new FullPowerItem(new Vector2(200, 20 + (SpriteDict["FullItem"].Height / 2)), 0)); //I adjusted starting position to fit in playing area
 
             //Item Spawner
@@ -192,6 +191,11 @@ namespace STG
                 // title screen section 
                 case GameStates.TitleScreen:
 
+                    if (!titleSongStart)
+                    {
+                        MediaPlayer.Play(titleSong);
+                        titleSongStart = true;
+                    }
                     MouseState mouse = Mouse.GetState();
                     KeyboardState keyboard = Keyboard.GetState();
 
@@ -203,6 +207,7 @@ namespace STG
                     if((keyboard.IsKeyDown(Keys.Enter)) && (gameState == GameStates.TitleScreen))
                     {
                         gameState = GameStates.Playing;
+                        MediaPlayer.Stop();
                         this.IsMouseVisible = false;
                     }
                     if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
@@ -219,7 +224,7 @@ namespace STG
                     if (!gameSongStart)
                     {
                         MediaPlayer.Play(gameBGSong);
-                        //gameSongStart = true;
+                        gameSongStart = true;
                     }
 
                     FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
