@@ -66,26 +66,8 @@ namespace STG
                 o.Update();
                 if (o.getSprite != null)//Updates for collision grid
                 {
+                    //collisionGrid.removeFromCollisionGrid(o);
                     collisionGrid.addToCollisionGrid(o);
-                    /*if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()) && o != objectList[1])
-                    {
-                        removeList.Add(o);
-                    }*/
-                    
-
-                    /*if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
-                    {
-                        collisionGrid.removeFromCollisionGrid(o);
-                        if ((o.objectType == 'C' || o.objectType == 'B') && !(o.insidePlayingArea(500)))
-                        {
-                            removeList.Add(o);
-                        }
-                    }
-                    if (objectList.Any())
-                    {
-                        objNearPlayerOne = collisionGrid.getObjectsNearPlayer(playerOne);
-                        objNearPlayerTwo = collisionGrid.getObjectsNearPlayer(playerTwo);
-                    }*/
                 }
             }
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
