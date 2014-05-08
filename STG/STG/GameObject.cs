@@ -314,6 +314,7 @@ namespace STG
             {
                 if (o.objectType == objType)
                 {
+                    o.color = Color.Red;
                     if (GameObjectManager.CollisionGrid.collides(this.getVertices(), o.getVertices()))
                         return o;
                 }
