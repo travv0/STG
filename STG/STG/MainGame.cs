@@ -129,7 +129,7 @@ namespace STG
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
             scrollBack = new ScrollingBackground();
-            scrollTexture = Content.Load<Texture2D>("cloudsGameBackGround");
+            scrollTexture = Content.Load<Texture2D>("KHclouds");
             scrollBack.Load(GraphicsDevice, scrollTexture);
 
             titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
@@ -237,7 +237,7 @@ namespace STG
                 case GameStates.Playing:
                     //call all objects' update function
                     ObjectManager.Update();
-                    scrollBack.Update(elapsed * 75);
+                    scrollBack.Update(elapsed * 3000);
 
                     if (!gameSongStart)
                     {
