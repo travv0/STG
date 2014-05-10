@@ -49,6 +49,10 @@ namespace STG
 
         public static SoundEffect bombSound;
         public static SoundEffectInstance bombSoundInstance;
+        public static SoundEffect gameWinSound;
+        public static SoundEffectInstance gameWinSoundInstance;
+        public static SoundEffect gameOverSound;
+        public static SoundEffectInstance gameOverSoundInstance;
 
 
         private static GameObjectManager objectManager = new GameObjectManager();
@@ -134,6 +138,11 @@ namespace STG
             bombSound = Content.Load<SoundEffect>("Music and Sound\\bombSound");
             bombSoundInstance = bombSound.CreateInstance();
 
+            gameWinSound = Content.Load<SoundEffect>("Music and Sound\\smb_stage_clear");
+            gameWinSoundInstance = gameWinSound.CreateInstance();
+
+            gameOverSound = Content.Load<SoundEffect>("Music and Sound\\smb_gameover");
+            gameOverSoundInstance = gameOverSound.CreateInstance();
 
             FPSfont = Content.Load<SpriteFont>("FPS");
 
