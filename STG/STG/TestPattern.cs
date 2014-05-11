@@ -99,7 +99,7 @@ namespace STG
                // MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle, -.5f, parent, actionList));
                // MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 90, -.5f, parent, actionList));
                // MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 180, -.5f, parent, actionList));
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["moons"], new Vector2(Position.X, Position.Y), 3, angle - 270, -.5f, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 270, -.5f, parent, actionList));
             }
 
             angle = angle + 3.5f;
