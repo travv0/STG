@@ -144,7 +144,7 @@ namespace STG
             SpriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
             SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
             SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
-            player2 = new Player(SpriteDict["moonGirl"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
+            player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
             ObjectManager.Add(player2);
 
             //bullet textures
