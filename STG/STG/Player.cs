@@ -133,6 +133,11 @@ namespace STG
                 {
                     this.sprite = MainGame.SpriteDict["hitbox"];
                     MainGame.ObjectManager.Remove(hitBullet);
+                    lives--;
+                    if (lives <= 0)
+                    {
+                        MainGame.ObjectManager.Remove(this);
+                    }
                 }
 
                 GameObject hitPower = Collides('C');
@@ -142,6 +147,24 @@ namespace STG
                     power += 1;
                 }
             }
+
+            if (playerNum == PlayerNum.Two)
+            {
+                GameObject hitBullet = Collides('B');
+                if (hitBullet != null)
+                {
+                    //this.sprite = MainGame.SpriteDict["hitbox"];
+                    MainGame.ObjectManager.Remove(hitBullet);
+                    health--;
+                    if(health == 0)
+                        lives--;
+                    if (lives <= 0)
+                    {
+                        MainGame.ObjectManager.Remove(this);
+                    }
+                }
+            }
+
             switch (playerNum)
             {
                 case PlayerNum.One:
