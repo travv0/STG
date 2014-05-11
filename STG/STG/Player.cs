@@ -42,6 +42,8 @@ namespace STG
         const float SPEED = 7; //player's speed
         float speed = SPEED; //change to player's x and y value (smaller if moving diagonal)
         bool againstWall = false;
+        int health;
+        int lives;
 
         /// <summary>
         /// A playable character.
@@ -578,5 +580,27 @@ namespace STG
         /// Returns the player's power.
         /// </summary>
         public float Power { get { return power; } }
+
+        /// <summary>
+        /// Returns the player's health.
+        /// </summary>
+        public int Health { get { return health; } }
+
+        /// <summary>
+        /// Returns the player's lives.
+        /// </summary>
+        public int Lives { get { return lives; } }
+
+        /// <summary>
+        /// Sets the player's health.
+        /// </summary>
+        /// <param name="health"></param>
+        public void setHealth(int health) { this.health = health; }
+        
+        /// <summary>
+        /// Sets the player's lives.
+        /// </summary>
+        /// <param name="lives"></param>
+        public void setLives(int lives) { this.lives = lives; }
     }
 }
