@@ -91,6 +91,10 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
+    <Reference Include="PowerCollections, Version=1.0.2141.24679, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PowerCollections\PowerCollections.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
@@ -132,6 +136,9 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="PowerCollections\License.txt" />
+    <Content Include="PowerCollections\PowerCollections.dll" />
+    <Content Include="PowerCollections\PowerCollections.XML" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\STGContent\STGContent.contentproj">
