@@ -44,7 +44,7 @@ namespace STG
         bool againstWall = false;
         int health;
         int lives;
-        bool invincible = false;
+        public bool invincible = false;
         public int invincibilityTimer = 0;
 
         /// <summary>

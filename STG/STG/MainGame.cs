@@ -57,7 +57,7 @@ namespace STG
         public static SoundEffectInstance bombSoundInstance;
 
 
-        private static GameObjectManager objectManager = new GameObjectManager();
+        public static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
         /// <summary>
