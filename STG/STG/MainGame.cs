@@ -202,7 +202,7 @@ namespace STG
             //player 2 stuff
             SpriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
             player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
-            player2.setHealth(100);
+            player2.setHealth(1000);
             player2.setLives(1);
             ObjectManager.Add(player2);
 

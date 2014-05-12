@@ -170,6 +170,7 @@ namespace STG
                     if(power < 3)
                         power += ((CollectibleItem)hitPower).powerLevel;
 
+                    ((CollectibleItem)hitPower).boundingBox = new Rectangle(0, 0, 0, 0);
                     MainGame.ObjectManager.Remove(hitPower);
                     ((CollectibleItem)hitPower).boundingBox = new Rectangle(0, 0, 0, 0);
                 }

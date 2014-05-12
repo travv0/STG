@@ -24,8 +24,8 @@ namespace STG
         static private Random smallRand = new Random();
         static private Random largeRand = new Random();
         static private Random position = new Random();
-        protected int smallInterval = smallRand.Next(50, 300);
-        protected int largeInterval = largeRand.Next(300, 800);
+        protected int smallInterval = smallRand.Next(30, 70);
+        protected int largeInterval = largeRand.Next(80, 130);
         private bool smallSpawn = false;
         private bool largeSpawn = false;
 

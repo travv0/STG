@@ -57,6 +57,14 @@ namespace STG
                     {
                         MainGame.objectManager.Remove(this);
                         ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            if (i < 3)
+                                MainGame.ObjectManager.Add(new LargePowerItem(new Vector2((pos.X - 18 + i), pos.Y), 0));
+                            else
+                                MainGame.ObjectManager.Add(new SmallPowerItem(new Vector2((pos.X - 18 + i), pos.Y), 0));
+                        }
+
                     }
                 }
 
