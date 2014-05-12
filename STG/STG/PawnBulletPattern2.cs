@@ -33,7 +33,7 @@ namespace STG
 
         public override void Update()
         {
-            MainGame.ObjectManager.Add(new Bullet(sprite, new Vector2(Position.X, Position.Y), 2, i, 0, parent, actionList));
+            MainGame.ObjectManager.Add(new Bullet(sprite, new Vector2(Position.X, Position.Y), 4, i, 0, parent, actionList));
 
             i += 30;
 
