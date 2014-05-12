@@ -474,13 +474,13 @@ namespace STG
 
                 scrollBack.Draw(spriteBatch);
 
-                spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.Black);
-                spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.Black);
-                spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.Black);
-                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.Black);
+                //spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.Black);
+                //spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.Black);
+                //spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.Black);
                 
-                spriteBatch.DrawString(FPSfont, "Player Lives: " + player1.Lives, new Vector2(16, 96), Color.Black);
-                spriteBatch.DrawString(FPSfont, "Timer: " + player1.invincibilityTimer, new Vector2(16, 112), Color.Black);
+                
+                //spriteBatch.DrawString(FPSfont, "Player Lives: " + player1.Lives, new Vector2(16, 96), Color.Black);
+                //2spriteBatch.DrawString(FPSfont, "Timer: " + player1.invincibilityTimer, new Vector2(16, 112), Color.Black);
                 
 
 
@@ -496,6 +496,7 @@ namespace STG
                 spriteBatch.DrawString(FPSfont, "Player 1", new Vector2(WindowWidth - 200, WindowHeight / 2 - 60), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Lives: ", new Vector2(WindowWidth - 225, WindowHeight / 2 - 30), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Bomb: ", new Vector2(WindowWidth - 225, WindowHeight / 2), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(WindowWidth - 225, WindowHeight / 2 + 25), Color.Black);
                 
 
                 spriteBatch.DrawString(FPSfont, "Player 2", new Vector2(WindowWidth - 200, WindowHeight / 2 - 200), Color.Black);
