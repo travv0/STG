@@ -73,6 +73,10 @@ namespace STG
         /// </summary>
         public static Player player2;
 
+        public static Pawn Luna;
+
+        public static Pawn Sol;
+
         /// <summary>
         /// Initializes the game.
         /// </summary>
@@ -171,6 +175,13 @@ namespace STG
             //option texture
             SpriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
 
+            //bullet textures
+            SpriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
+            SpriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
+            SpriteDict["prettyArrowBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\prettyArrowBullet"));
+            SpriteDict["suns"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\suns"));
+            SpriteDict["moons"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\moons"));
+
             //player 1 stuff
 
             SpriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 4, 5);
@@ -182,19 +193,22 @@ namespace STG
 
             //player 2 stuff
             SpriteDict["peanutBallerina"] = new Sprite(Content.Load<Texture2D>("boss sprites\\peanutBallerina"));
-            SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
-            SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
             player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
             player2.setHealth(100);
             player2.setLives(1);
             ObjectManager.Add(player2);
 
-            //bullet textures
-            SpriteDict["umbrellaBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\umbrellaBullet"));
-            SpriteDict["duckyBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\duckyBullet"));
-            SpriteDict["prettyArrowBullet"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\prettyArrowBullet"));
-            SpriteDict["suns"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\suns"));
-            SpriteDict["moons"] = new Sprite(Content.Load<Texture2D>("bullet sprites\\moons"));
+            //Luna Stuff
+            SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
+            Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(300, 50), SpriteDict["moons"], 666);
+            ObjectManager.Add(Luna);
+
+            //Sol Stuff
+            SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
+            Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(50, 50), SpriteDict["suns"], 999);
+            ObjectManager.Add(Sol);
+
+            
             //hitbox texture
             SpriteDict["hitbox"] = new Sprite(Content.Load<Texture2D>("hitbox"));
 
@@ -210,8 +224,7 @@ namespace STG
             //Item Spawner
             ObjectManager.Add(new ItemSpawner());
 
-            ObjectManager.Add(new Pawn(SpriteDict["sunGirl"], new Vector2(50, 50), SpriteDict["suns"], 999));
-            ObjectManager.Add(new Pawn(SpriteDict["moonGirl"], new Vector2(300, 50), SpriteDict["moons"], 666));
+            
 
             // TODO: use this.Content to load your game content here
         }

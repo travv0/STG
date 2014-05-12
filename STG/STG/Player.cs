@@ -172,7 +172,7 @@ namespace STG
                 GameObject hitBullet = Collides('B');
                 if (hitBullet != null)
                 {
-                    if (this != ((Bullet)hitBullet).Parent)
+                    if (this != ((Bullet)hitBullet).Parent && ((Bullet)hitBullet).Parent != MainGame.Sol && ((Bullet)hitBullet).Parent != MainGame.Luna)
                     {
                         //this.sprite = MainGame.SpriteDict["hitbox"];
                         MainGame.ObjectManager.Remove(hitBullet);
