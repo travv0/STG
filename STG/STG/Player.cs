@@ -46,6 +46,7 @@ namespace STG
         int lives;
         public bool invincible = false;
         public int invincibilityTimer = 0;
+        Vector2 startingPos;
 
         /// <summary>
         /// A playable character.
@@ -61,6 +62,7 @@ namespace STG
             this.pos = pos;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
+            startingPos = pos;
         }
 
         /// <summary>
@@ -92,6 +94,7 @@ namespace STG
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
             objType = 'P';
+            startingPos = pos;
         }
         
         /// <summary>
@@ -135,7 +138,6 @@ namespace STG
                 {
                     if (this != ((Bullet)hitBullet).Parent)
                     {
-                        this.sprite = MainGame.SpriteDict["hitbox"];
                         MainGame.ObjectManager.Remove(hitBullet);
                         lives--;
                         invincible = true;
@@ -146,6 +148,7 @@ namespace STG
                             MediaPlayer.Stop();
                             MainGame.gameState = MainGame.GameStates.GameOver;
                         }
+                        this.pos = startingPos;
                     }
                     
                 }
@@ -602,16 +605,20 @@ namespace STG
         /// <param name="spriteBatch">The spritebatch to be used for drawing.</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
 
-            //if (inFocus)
-            //{
+            if (invincibilityTimer % 2 == 0)
+            {
+                base.Draw(spriteBatch);
+
+                //if (inFocus)
+                //{
                 spriteBatch.Begin();
 
                 MainGame.SpriteDict["hitbox"].Draw(spriteBatch, new Rectangle((int)pos.X - 2, (int)pos.Y - 2, 4, 4), Color.White);
 
                 spriteBatch.End();
-            //}
+                //}
+            }
         }
 
         /// <summary>
