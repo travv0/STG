@@ -391,7 +391,7 @@ namespace STG
                 case GameStates.GameWin:
                     keyboard = Keyboard.GetState();
                     mouse = Mouse.GetState();
-                    this.IsMouseVisible = false;
+                    this.IsMouseVisible = true;
 
                     if (keyboard.IsKeyDown(Keys.Enter))
                     {
@@ -408,7 +408,7 @@ namespace STG
                 case GameStates.GameOver:
                     keyboard = Keyboard.GetState();
                     mouse = Mouse.GetState();
-                    this.IsMouseVisible = false;
+                    this.IsMouseVisible = true;
 
                     if (keyboard.IsKeyDown(Keys.Enter))
                     {
