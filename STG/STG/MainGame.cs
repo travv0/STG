@@ -63,6 +63,9 @@ namespace STG
         public static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
+        int solTime = 0;
+        int lunaTime = 0;
+
         /// <summary>
         /// Player one.
         /// </summary>
@@ -290,6 +293,28 @@ namespace STG
                     ObjectManager.Update();
                     scrollBack.Update(elapsed * 75);
 
+                    if (objectManager.Find(Sol) == null)
+                    {
+                        solTime++;
+                        if (solTime == 480)
+                        {
+                            solTime = 0;
+                            Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(50, -50), SpriteDict["suns"], 999);
+                            ObjectManager.Add(Sol);
+                        }
+                    }
+
+                    if (objectManager.Find(Luna) == null)
+                    {
+                        lunaTime++;
+                        if (lunaTime == 480)
+                        {
+                            lunaTime = 0;
+                            Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(-300, 50), SpriteDict["moons"], 666);
+                            ObjectManager.Add(Luna);
+                        }
+                    }
+
                     if (!gameSongStart)
                     {
                         MediaPlayer.Play(gameBGSong);
@@ -457,7 +482,7 @@ namespace STG
 
                 //Draw the backgroundTexture sized to the width
                 //and height of the screen.
-                spriteBatch.Draw(gameOverPage, gameOverPageRect,
+                spriteBatch.Draw(creditPage, creditPageRect,
                     Color.White);
 
                 spriteBatch.End();
