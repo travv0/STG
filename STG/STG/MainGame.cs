@@ -39,6 +39,12 @@ namespace STG
         Texture2D quitButton;
         Rectangle quitRect;
 
+        Texture2D creditPage;
+        Rectangle creditPageRect;
+
+        Texture2D instructionPage;
+        Rectangle instructionPageRect;
+
         private ScrollingBackground scrollBack;
         Texture2D scrollTexture;
 
@@ -123,6 +129,18 @@ namespace STG
             startRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (startButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height / 3, startButton.Width, startButton.Height);
 
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
+
+            creditPage = Content.Load<Texture2D>("credits");
+
+            creditPageRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
+
+            instructionPage = Content.Load<Texture2D>("Instruction Page");
+
+            instructionPageRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
 
             scrollBack = new ScrollingBackground();
             scrollTexture = Content.Load<Texture2D>("clouds");
@@ -222,6 +240,14 @@ namespace STG
                         MediaPlayer.Stop();
                         this.IsMouseVisible = false;
                     }
+                    if ((keyboard.IsKeyDown(Keys.D1)) && (gameState == GameStates.TitleScreen))
+                    {
+                        gameState = GameStates.InstructionPage;
+                    }
+                    if ((keyboard.IsKeyDown(Keys.D2)) && (gameState == GameStates.TitleScreen))
+                    {
+                        gameState = GameStates.CreditPage;
+                    }
                     if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
                     {
                         this.Exit();
@@ -258,9 +284,23 @@ namespace STG
 
                 case GameStates.CreditPage:
 
+                    KeyboardState keyboard2 = Keyboard.GetState();
+
+                    if ((keyboard2.IsKeyDown(Keys.Escape)) && (gameState == GameStates.CreditPage))
+                    {
+                        gameState = GameStates.TitleScreen;
+                    }
+
                     break;
 
                 case GameStates.InstructionPage:
+
+                    KeyboardState keyboard3 = Keyboard.GetState();
+
+                    if ((keyboard3.IsKeyDown(Keys.Escape)) && (gameState == GameStates.InstructionPage))
+                    {
+                        gameState = GameStates.TitleScreen;
+                    }
 
                     break;
 
@@ -327,6 +367,40 @@ namespace STG
                 spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
 
                 spriteBatch.End();
+            }
+
+            if (gameState == GameStates.CreditPage)
+            {
+                spriteBatch.Begin();
+
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(creditPage, creditPageRect,
+                    Color.White);
+
+                spriteBatch.End();
+            }
+
+            if (gameState == GameStates.InstructionPage)
+            {
+                spriteBatch.Begin();
+
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(instructionPage, instructionPageRect,
+                    Color.White);
+
+                spriteBatch.End();
+            }
+
+            if (gameState == GameStates.GameOver)
+            {
+
+            }
+
+            if (gameState == GameStates.GameWin)
+            {
+
             }
             // TODO: Add your drawing code here
 
