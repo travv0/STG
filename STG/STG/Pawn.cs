@@ -20,6 +20,7 @@ namespace STG
         bool moving = false;
         Random rand, randShoot;
         int recharge = 0;
+        int health;
         public Pawn(Sprite sprite, Vector2 pos, Sprite bulletSprite, int seed)
         {
             rand = new Random(Environment.TickCount + seed);
@@ -29,6 +30,7 @@ namespace STG
             this.bulletSprite = bulletSprite;
             boundingBox = new Rectangle(0, 0, sprite.Width, sprite.Height);
             Initialize();
+            health = 20;
         }
 
         protected override void Initialize()
@@ -43,6 +45,19 @@ namespace STG
         {
 
             int chance; //integer used to see if pawn should move or not
+
+            GameObject hitBullet = Collides('B');
+            if (hitBullet != null)
+            {
+                if (((Bullet)hitBullet).Parent != MainGame.player2 && ((Bullet)hitBullet).Parent != MainGame.Sol && ((Bullet)hitBullet).Parent != MainGame.Luna)
+                {
+                    MainGame.objectManager.Remove(hitBullet);
+                    health--;
+                    if (health == 0)
+                        MainGame.objectManager.Remove(this);
+                }
+
+            }
 
             recharge++;
 
