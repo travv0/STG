@@ -45,8 +45,11 @@ namespace STG
         Texture2D instructionPage;
         Rectangle instructionPageRect;
 
-        Texture2D gameOverPage;
-        Rectangle gameOverPageRect;
+        Texture2D player1Win;
+        Rectangle player1WinRect;
+
+        Texture2D player2Win;
+        Rectangle player2WinRect;
 
         private ScrollingBackground scrollBack;
         Texture2D scrollTexture;
@@ -165,9 +168,15 @@ namespace STG
                 graphics.GraphicsDevice.Viewport.Height);
 
 
-            gameOverPage = Content.Load<Texture2D>("shittyGameOverScreen");
+            player1Win = Content.Load<Texture2D>("Player1Win");
 
-            gameOverPageRect = new Rectangle(0, 0,
+            player1WinRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
+
+            player2Win = Content.Load<Texture2D>("Player2Win");
+
+            player2WinRect = new Rectangle(0, 0,
                 graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height);
 
@@ -381,8 +390,15 @@ namespace STG
 
                 case GameStates.GameWin:
                     keyboard = Keyboard.GetState();
+                    mouse = Mouse.GetState();
+                    this.IsMouseVisible = false;
 
                     if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
+
+                    if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
                     {
                         this.Exit();
                     }
@@ -391,8 +407,15 @@ namespace STG
 
                 case GameStates.GameOver:
                     keyboard = Keyboard.GetState();
+                    mouse = Mouse.GetState();
+                    this.IsMouseVisible = false;
 
                     if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
+
+                    if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
                     {
                         this.Exit();
                     }
@@ -484,26 +507,30 @@ namespace STG
                 spriteBatch.End();
             }
 
-            if (gameState == GameStates.GameOver)
-            {
-                spriteBatch.Begin();
-
-                //Draw the backgroundTexture sized to the width
-                //and height of the screen.
-                spriteBatch.Draw(gameOverPage, gameOverPageRect,
-                    Color.White);
-
-                spriteBatch.End();
-            }
-
             if (gameState == GameStates.GameWin)
             {
                 spriteBatch.Begin();
 
                 //Draw the backgroundTexture sized to the width
                 //and height of the screen.
-                spriteBatch.Draw(creditPage, creditPageRect,
+                spriteBatch.Draw(player1Win, player1WinRect,
                     Color.White);
+
+                spriteBatch.Draw(quitButton, quitRect, Color.CornflowerBlue);
+
+                spriteBatch.End();
+            }
+
+            if (gameState == GameStates.GameOver)
+            {
+                spriteBatch.Begin();
+
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(player2Win, player2WinRect,
+                    Color.White);
+
+                spriteBatch.Draw(quitButton, quitRect, Color.CornflowerBlue);
 
                 spriteBatch.End();
             }
