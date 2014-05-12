@@ -24,7 +24,7 @@ namespace STG
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
-        enum GameStates { TitleScreen, Playing };
+        enum GameStates { TitleScreen, Playing, GameOver, GameWin };
         GameStates gameState = GameStates.TitleScreen;
 
         private static int windowWidth;
@@ -253,6 +253,14 @@ namespace STG
                         drawFPS = FPS;
                         drawDropped = droppedPercent;
                     }
+
+                    break;
+
+                case GameStates.GameWin:
+                    
+                    break;
+
+                case GameStates.GameOver:
 
                     break;
             }
