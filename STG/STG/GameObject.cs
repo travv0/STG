@@ -74,6 +74,9 @@ namespace STG
             rotation = 0;
             colPos.X = Position.X - 20;
             colPos.Y = Position.Y - 20;
+            if(Keyboard.GetState().IsKeyDown(Keys.G))
+                rotation = 0;
+            calculateVertices();
         }
 
         /// <summary>

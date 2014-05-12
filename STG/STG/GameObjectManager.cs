@@ -17,6 +17,7 @@ namespace STG
     public class GameObjectManager
     {
         public int dead = 0;
+        int z = 0;
         public bool canDraw = true;
         List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
@@ -63,11 +64,18 @@ namespace STG
 
             foreach (GameObject o in objectList)
             {
+                z++;
+                if(z % 10 == 0)
+                    o.color = Color.White;
                 o.Update();
                 if (o.getSprite != null)//Updates for collision grid
-                {
+                {   
+                    
                     collisionGrid.removeFromCollisionGrid(o);
-                    collisionGrid.addToCollisionGrid(o);
+                    if (o.insidePlayingArea(0))
+                    {
+                        collisionGrid.addToCollisionGrid(o);
+                    }
                 }
             }
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
