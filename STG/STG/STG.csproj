@@ -118,6 +118,7 @@
     <Compile Include="CollectibleItem.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="BossPatternMedium.cs" />
+    <Compile Include="BossPatternHard.cs" />
     <Compile Include="PawnBulletPattern3.cs" />
     <Compile Include="PawnBulletPattern2.cs" />
     <Compile Include="FullPowerItem.cs" />
