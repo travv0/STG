@@ -551,6 +551,13 @@ namespace STG
                     if (keyboard.IsKeyDown(Keys.Space) && mainCooldown == 0)
                     {
                         MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 20, 270, 0, this, null));
+                        if (MainGame.shootSoundInstance.State == SoundState.Stopped)
+                        {
+                            MainGame.shootSoundInstance.Volume = 0.25f;
+                            MainGame.shootSoundInstance.Play();
+                        }
+                        else
+                            MainGame.shootSoundInstance.Resume();
                         mainCooldown = 5;
                     }
                     if (keyboard.IsKeyDown(Keys.B) && optionCooldown == 0)

@@ -56,6 +56,8 @@ namespace STG
         Song gameBGSong;
         bool gameSongStart = false;
 
+        public static SoundEffect shootSound;
+        public static SoundEffectInstance shootSoundInstance;
         public static SoundEffect bombSound;
         public static SoundEffectInstance bombSoundInstance;
 
@@ -162,6 +164,9 @@ namespace STG
 
             titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
             gameBGSong = Content.Load<Song>("Music and Sound\\FireAndFlame");
+
+            shootSound = Content.Load<SoundEffect>("Music and Sound\\ssw");
+            shootSoundInstance = shootSound.CreateInstance();
 
             bombSound = Content.Load<SoundEffect>("Music and Sound\\bombSound");
             bombSoundInstance = bombSound.CreateInstance();
