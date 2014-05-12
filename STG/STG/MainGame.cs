@@ -305,6 +305,9 @@ namespace STG
                 spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Boss Health: " + player2.Health, new Vector2(16, 80), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Player Lives: " + player1.Lives, new Vector2(16, 96), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Timer: " + player1.invincibilityTimer, new Vector2(16, 112), Color.Black);
+
 
                 spriteBatch.End();
 
