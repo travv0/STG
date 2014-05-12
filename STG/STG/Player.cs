@@ -560,7 +560,7 @@ namespace STG
                             MainGame.shootSoundInstance.Resume();
                         mainCooldown = 5;
                     }
-                    if (keyboard.IsKeyDown(Keys.B) && optionCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.LeftAlt) && optionCooldown == 0)
                     {
                         MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
                         optionCooldown = 200;
