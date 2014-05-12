@@ -578,7 +578,7 @@ namespace STG
                     if (keyboard.IsKeyDown(Keys.LeftAlt) && optionCooldown == 0 && bombs > 0)
                     {
                         MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
-                        optionCooldown = 200;
+                        optionCooldown = 120;
                         bombs--;
                     }
                     if (keyboard.IsKeyDown(Keys.Space) && optionCooldown == 0)
