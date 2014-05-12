@@ -19,7 +19,7 @@ namespace STG
         public int dead = 0;
         int z = 0;
         public bool canDraw = true;
-        List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
+        public List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from objectList
         static Collision collisionGrid = new Collision(); //makes the collision instance
@@ -153,6 +153,15 @@ namespace STG
             {
                 return (type == obj.GetType());
             });
+        }
+
+        public void DeleteAll(char objType)
+        {
+            foreach (GameObject o in objectList)
+            {
+                if (o.objectType == objType)
+                    this.Remove(o);
+            }
         }
 
         /// <summary>
