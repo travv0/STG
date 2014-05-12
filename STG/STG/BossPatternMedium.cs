@@ -52,6 +52,12 @@ namespace STG
             }
 
             angle = angle + 3.5f;*/
+
+            if (time > 450)
+            {
+                MainGame.player2.shooting = false;
+                MainGame.objectManager.Remove(this);
+            }
             
             base.Update();
         }
