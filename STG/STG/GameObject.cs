@@ -29,7 +29,7 @@ namespace STG
         /// <summary>
         /// The bounding box of the sprite.  This is the rectangle that the sprite will be drawn in.
         /// </summary>
-        protected Rectangle boundingBox;
+        public Rectangle boundingBox;
         protected Vector2 hitboxSize;
         protected int[] collisionColumns = new int[4], collisionRows = new int[4];
         protected char objType;

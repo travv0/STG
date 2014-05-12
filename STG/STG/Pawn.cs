@@ -54,7 +54,10 @@ namespace STG
                     MainGame.objectManager.Remove(hitBullet);
                     health--;
                     if (health == 0)
+                    {
                         MainGame.objectManager.Remove(this);
+                        ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
+                    }
                 }
 
             }

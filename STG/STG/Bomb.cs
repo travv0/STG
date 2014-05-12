@@ -43,7 +43,10 @@ namespace STG
                 this.color = colors[colorNum % 7];
 
                 if (bombRad == 65)
+                {
                     MainGame.ObjectManager.DeleteAll('B');
+                    MainGame.ObjectManager.moveAllBoxes('B');
+                }
 
                 if (MainGame.bombSoundInstance.State == SoundState.Stopped)
                 {
