@@ -604,7 +604,7 @@ namespace STG
                     {
                         if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
                             pos.X -= speed;
-                        if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 2)
+                        if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 4)
                             pos.Y += speed;
                         if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                             pos.X += speed;
