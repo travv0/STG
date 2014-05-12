@@ -52,6 +52,12 @@ namespace STG
                 MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, AngleToTarget(MainGame.player1.Position) + 20, 0, parent, actionList));
                 MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, AngleToTarget(MainGame.player1.Position) - 20, 0, parent, actionList));
             }
+
+            if (time > 450)
+            {
+                MainGame.player2.shooting = false;
+                MainGame.objectManager.Remove(this);
+            }
             
             base.Update();
         }

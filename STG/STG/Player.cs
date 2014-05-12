@@ -35,6 +35,8 @@ namespace STG
         float power = 0f;
         float maxRotation = .2f; //max number of degrees for player to turn when moving left and right
 
+        public bool shooting = false;
+
         int mainCooldown = 0; //frames until another bullet can be fired
         int optionCooldown = 0; //frames until another option bullet can be fired
         Stack<Option> options = new Stack<Option>();
@@ -592,30 +594,36 @@ namespace STG
 
                 case PlayerNum.Two:
                     //movement
-                    if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
-                        pos.X -= speed;
-                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 2)
-                        pos.Y += speed;
-                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
-                        pos.X += speed;
-                    if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
-                        pos.Y -= speed;
+                    if (shooting == false)
+                    {
+                        if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
+                            pos.X -= speed;
+                        if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 2)
+                            pos.Y += speed;
+                        if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
+                            pos.X += speed;
+                        if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
+                            pos.Y -= speed;
+                    }
 
                     //shootin
-                    if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0 && shooting == false)
                     {
                         MainGame.ObjectManager.Add(new BossPatternEasy(this));
                         mainCooldown = 50;
+                        shooting = true;
                     }
-                    if (keyboard.IsKeyDown(Keys.NumPad2) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.NumPad2) && mainCooldown == 0 && shooting == false)
                     {
                         MainGame.ObjectManager.Add(new BossPatternMedium(this));
                         mainCooldown = 50;
+                        shooting = true;
                     }
-                    if (keyboard.IsKeyDown(Keys.NumPad3) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.NumPad3) && mainCooldown == 0 && shooting == false)
                     {
                         MainGame.ObjectManager.Add(new BossPatternHard(this));
                         mainCooldown = 50;
+                        shooting = true;
                     }
                     if (mainCooldown > 0)
                         mainCooldown--;
