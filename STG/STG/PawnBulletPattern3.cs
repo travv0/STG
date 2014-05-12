@@ -11,11 +11,15 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
-    public class PawnBulletPattern : BulletPattern
+    public class PawnBulletPattern3 : BulletPattern
     {
         List<Tuple<Bullet.Action, float, int, int, bool>> actionList = new List<Tuple<Bullet.Action, float, int, int, bool>>();
 
-        public PawnBulletPattern(GameObject parent, Sprite bulletSprite)
+        int i = 0;
+
+        bool reverse = false;
+
+        public PawnBulletPattern3(GameObject parent, Sprite bulletSprite)
         {
             this.parent = parent;
             this.pos = parent.Position;
@@ -29,13 +33,18 @@ namespace STG
 
         public override void Update()
         {
-            for (int i = 0; i < 360; i += 20)
+            if (i % 5 == 0)
             {
-                MainGame.ObjectManager.Add(new Bullet(sprite, new Vector2(Position.X, Position.Y), 2, i, 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(sprite, new Vector2(Position.X, Position.Y), 5, AngleToTarget(MainGame.player1.Position), 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(sprite, new Vector2(Position.X, Position.Y), 5, AngleToTarget(MainGame.player1.Position) + 20, 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(sprite, new Vector2(Position.X, Position.Y), 5, AngleToTarget(MainGame.player1.Position) - 20, 0, parent, actionList));
             }
 
-            MainGame.ObjectManager.Remove(this);
-            
+            i++;
+
+            if (i > 100)
+                MainGame.ObjectManager.Remove(this);
+
             base.Update();
         }
     }
