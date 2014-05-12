@@ -607,19 +607,19 @@ namespace STG
                     }
 
                     //shootin
-                    if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0 && shooting == false)
+                    if (keyboard.IsKeyDown(Keys.D8) && mainCooldown == 0 && shooting == false)
                     {
                         MainGame.ObjectManager.Add(new BossPatternEasy(this));
                         mainCooldown = 50;
                         shooting = true;
                     }
-                    if (keyboard.IsKeyDown(Keys.NumPad2) && mainCooldown == 0 && shooting == false)
+                    if (keyboard.IsKeyDown(Keys.D9) && mainCooldown == 0 && shooting == false)
                     {
                         MainGame.ObjectManager.Add(new BossPatternMedium(this));
                         mainCooldown = 50;
                         shooting = true;
                     }
-                    if (keyboard.IsKeyDown(Keys.NumPad3) && mainCooldown == 0 && shooting == false)
+                    if (keyboard.IsKeyDown(Keys.D0) && mainCooldown == 0 && shooting == false)
                     {
                         MainGame.ObjectManager.Add(new BossPatternHard(this));
                         mainCooldown = 50;
