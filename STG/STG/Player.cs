@@ -536,7 +536,7 @@ namespace STG
                     //shootin
                     if (keyboard.IsKeyDown(Keys.G) && mainCooldown == 0)
                     {
-                        MainGame.ObjectManager.Add(new BossPatternMedium(this));
+                        MainGame.ObjectManager.Add(new BossPatternHard(this));
                         mainCooldown = 50;
                     }
                     if (mainCooldown > 0)
