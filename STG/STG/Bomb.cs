@@ -31,6 +31,7 @@ namespace STG
         public override void Update()
         {
             GameObject hitBullet = Collides('B');
+            MainGame.player1.invincible = true;
 
             if (bombRad < 1000)
             {
