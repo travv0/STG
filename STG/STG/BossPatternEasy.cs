@@ -30,14 +30,14 @@ namespace STG
 
         public override void Update()
         {
-            if (time % 50 == 0)
+            if (time % 25 == 0)
             {
                 actionList.Clear();
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
 
-                for (int i = 0; i < 360; i += 30)
+                for (int i = 0; i < 360; i += 15)
                 {
                     MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i + offset, 0, parent, actionList));
                 }
@@ -47,7 +47,7 @@ namespace STG
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
 
-                for (int i = 30; i < 390; i += 30)
+                for (int i = 30; i < 390; i += 15)
                 {
                     MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i + offset, 0, parent, actionList));
                 }
