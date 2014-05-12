@@ -105,10 +105,10 @@ namespace STG
                 sprite.Update();
 
                 sprite.Draw(spriteBatch, boundingBox, color, rotation, new Vector2((float)sprite.Width / 2, (float)sprite.Height / 2), 0, 1 - (pos.Y / MainGame.WindowHeight));
-                for (int i = 0; i < 4; i++)
+                /*for (int i = 0; i < 4; i++)
                 {
                     MainGame.SpriteDict["hitbox"].Draw(spriteBatch, new Rectangle((int)this.getVertices()[i].X + 20, (int)this.getVertices()[i].Y + 20, 2, 2), Color.White);
-                }
+                }*/
             }
 
             spriteBatch.End();

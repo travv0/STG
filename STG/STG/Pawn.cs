@@ -30,7 +30,7 @@ namespace STG
             this.bulletSprite = bulletSprite;
             boundingBox = new Rectangle(0, 0, sprite.Width, sprite.Height);
             Initialize();
-            health = 20;
+            health = 100;
         }
 
         protected override void Initialize()
