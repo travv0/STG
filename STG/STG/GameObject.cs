@@ -224,14 +224,21 @@ namespace STG
         /// </summary>
         private void calculateCollisionGridCell()
         {
-            collisionColumns[0] = (int)Math.Floor(tlVertex.X / Collision.getCellWidth());
-            collisionRows[0] = (int)Math.Floor(tlVertex.Y / Collision.getCellHeight());
-            collisionColumns[1] = (int)Math.Floor(trVertex.X / Collision.getCellWidth());
-            collisionRows[1] = (int)Math.Floor(trVertex.Y / Collision.getCellHeight());
-            collisionColumns[2] = (int)Math.Floor(blVertex.X / Collision.getCellWidth());
-            collisionRows[2] = (int)Math.Floor(blVertex.Y / Collision.getCellHeight());
-            collisionColumns[3] = (int)Math.Floor(brVertex.X / Collision.getCellWidth());
-            collisionRows[3] = (int)Math.Floor(brVertex.Y / Collision.getCellHeight());
+            collisionColumns[0] = (int)Math.Ceiling(tlVertex.X / Collision.getCellWidth());
+            collisionRows[0] = (int)Math.Ceiling(tlVertex.Y / Collision.getCellHeight());
+            collisionColumns[1] = (int)Math.Ceiling(trVertex.X / Collision.getCellWidth());
+            collisionRows[1] = (int)Math.Ceiling(trVertex.Y / Collision.getCellHeight());
+            collisionColumns[2] = (int)Math.Ceiling(blVertex.X / Collision.getCellWidth());
+            collisionRows[2] = (int)Math.Ceiling(blVertex.Y / Collision.getCellHeight());
+            collisionColumns[3] = (int)Math.Ceiling(brVertex.X / Collision.getCellWidth());
+            collisionRows[3] = (int)Math.Ceiling(brVertex.Y / Collision.getCellHeight());
+            for (int i = 0; i < 4; i++)
+            {
+                if (collisionColumns[i] < 0)
+                    collisionColumns[i] = -1;  ///this will hopefully fix the out of bounds error
+                if (collisionRows[i] < 0)
+                    collisionRows[i] = -1;
+            }
         }
         #region Gamelogic
         private void calculateVertices()
@@ -298,5 +305,22 @@ namespace STG
             return angle;
         }
         #endregion
+
+        protected GameObject Collides(char objType)
+        {
+            HashSet<GameObject> objectsToCheck = GameObjectManager.CollisionGrid.getObjectsNearPlayer(this);
+
+            foreach (GameObject o in objectsToCheck)
+            {
+                if (o.objectType == objType)
+                {
+                    o.color = Color.Red;
+                    if (GameObjectManager.CollisionGrid.collides(this.getVertices(), o.getVertices()))
+                        return o;
+                }
+            }
+
+            return null;
+        }
     }
 }

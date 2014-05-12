@@ -21,7 +21,9 @@ namespace STG
         List<GameObject> objectList = new List<GameObject>(); //list of all objects in the game
         List<GameObject> addList = new List<GameObject>(); //list to store objects until they can be added to objectList
         List<GameObject> removeList = new List<GameObject>(); //list to store objects until they can be removed from objectList
-        Collision collisionGrid = new Collision(); //makes the collision instance
+        static Collision collisionGrid = new Collision(); //makes the collision instance
+        HashSet<GameObject> objNearPlayerOne, objNearPlayerTwo;
+        GameObject playerOne, playerTwo;
         /// <summary>
         /// Initializes a new GameObjectManager with an empty list of GameObjects.
         /// </summary>
@@ -60,24 +62,28 @@ namespace STG
             #endregion
 
             foreach (GameObject o in objectList)
+            {
                 o.Update();
+                if (o.getSprite != null)//Updates for collision grid
+                {
+                    collisionGrid.removeFromCollisionGrid(o);
+                    collisionGrid.addToCollisionGrid(o);
+                }
+            }
             foreach (GameObject o in addList) //now that we're done looping through objectList, we can add new objects to it
                 objectList.Add(o);
+            /*playerOne = objectList[0];
+            playerTwo = objectList[1];*/
             addList.Clear(); //clears the temp list
 
-            //Updates for collision grid
-            foreach (GameObject o in objectList)
+
+            /*if (objNearPlayerOne != null && objNearPlayerTwo != null)
             {
-                if (o.getSprite != null)
+                foreach (GameObject o in objNearPlayerOne)
                 {
-                    collisionGrid.addToCollisionGrid(o);
-                    /*if (o.objectType == 'P' && collisionGrid.collides(o.getVertices(), objectList[1].getVertices()) && o != objectList[1])
-                    {
-                        removeList.Add(o);
-                    }*/
                     if (o.objectType == 'B')
                     {
-                        if (collisionGrid.collides(o.getVertices(), objectList[0].getVertices()))
+                        if (collisionGrid.collides(o.getVertices(), playerOne.getVertices()))
                         {
                             //collisionGrid.removeFromCollisionGrid(objectList[0]);
                             //removeList.Add(objectList[0]);
@@ -85,16 +91,24 @@ namespace STG
                             canDraw = false;
                         }
                     }
-                    if ((o.objectType == 'C' || o.objectType == 'B') && !(collisionGrid.collides(o.getVertices(), MainGame.PlayingArea)))
+                }
+                foreach (GameObject o in objNearPlayerOne)
+                {
+                    if (o.objectType == 'C')
                     {
-                        collisionGrid.removeFromCollisionGrid(o);
-                        if ((o.objectType == 'C' || o.objectType == 'B') && !(o.insidePlayingArea(500)))
+                        if (collisionGrid.collides(o.getVertices(), playerOne.getVertices()))
                         {
+                            ////
+
+                            ///Add power to player
+
+                            ////
+                            collisionGrid.removeFromCollisionGrid(o);
                             removeList.Add(o);
                         }
                     }
                 }
-            }
+            }*/
             foreach (GameObject o in removeList) //now that we're done looping through objectList, we can remove objects from it
                 objectList.Remove(o);
             removeList.Clear();
@@ -137,5 +151,7 @@ namespace STG
         /// Returns the number of objects in the object manager.
         /// </summary>
         public int Count { get { return objectList.Count; } }
+
+        public static Collision CollisionGrid { get { return collisionGrid; } }
     }
 }
