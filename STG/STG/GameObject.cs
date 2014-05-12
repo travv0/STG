@@ -247,12 +247,7 @@ namespace STG
         {
             if (sprite != null)
             {
-                if (objectType == 'P')
-                {
-                    hitboxSize.X = 2;
-                    hitboxSize.Y = 2;
-                }
-                else
+                if (objectType != 'P')
                 {
                     hitboxSize.X = boundingBox.Width / 4;
                     hitboxSize.Y = boundingBox.Height / 4;

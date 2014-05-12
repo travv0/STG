@@ -119,7 +119,7 @@ namespace STG
         {
             foreach (Option option in options)
                 MainGame.ObjectManager.Add(option);
-
+            objType = 'P';
             base.Initialize();
         }
 
@@ -133,6 +133,8 @@ namespace STG
             bool startFocus = false;
             if (playerNum == PlayerNum.One)
             {
+                hitboxSize.X = 2;
+                hitboxSize.Y = 2;
                 GameObject hitBullet = Collides('B');
                 if (hitBullet != null && invincible == false)
                 {
@@ -177,6 +179,8 @@ namespace STG
 
             if (playerNum == PlayerNum.Two)
             {
+                hitboxSize.X = boundingBox.Width / 4;
+                hitboxSize.Y = boundingBox.Height / 4;
                 GameObject hitBullet = Collides('B');
                 if (hitBullet != null)
                 {
