@@ -15,6 +15,8 @@ namespace STG
     {
         List<Tuple<Bullet.Action, float, int, int, bool>> actionList = new List<Tuple<Bullet.Action, float, int, int, bool>>();
 
+        int offset = 0;
+
         public TestPattern(GameObject parent)
         {
             this.parent = parent;
@@ -28,53 +30,29 @@ namespace STG
 
         public override void Update()
         {
-            if (time % 100 == 0)
+            if (time % 50 == 0)
             {
                 actionList.Clear();
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
 
-                for (int i = 0; i < 360; i += 10)
+                for (int i = 0; i < 360; i += 30)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i + offset, 0, parent, actionList));
                 }
 
                 actionList.Clear();
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
 
-                for (int i = 5; i < 365; i += 10)
+                for (int i = 30; i < 390; i += 30)
                 {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
-                }
-            }
-            if (time % 100 - 50 == 0)
-            {
-                actionList.Clear();
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
-
-                for (int i = 2; i < 362; i += 10)
-                {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
+                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i + offset, 0, parent, actionList));
                 }
 
-                actionList.Clear();
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 80, 0, false));
-
-                for (int i = 7; i < 367; i += 10)
-                {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i, 0, parent, actionList));
-                }
+                offset+=10;
             }
 
             /*if (time % 40 == 0)

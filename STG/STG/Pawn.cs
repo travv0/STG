@@ -70,7 +70,7 @@ namespace STG
 
             chance = randShoot.Next(500);
 
-            if (chance > 498 && recharge >= 300)
+            if (chance > 498 && recharge >= 300 || recharge >= 600)
             {
                 chance = rand.Next(3);
                 switch (chance)
@@ -85,9 +85,9 @@ namespace STG
                         MainGame.ObjectManager.Add(new PawnBulletPattern3(this, bulletSprite));
                         break;
                 }
-
                 recharge = 0;
             }
+
 
  	        base.Update();
         }
