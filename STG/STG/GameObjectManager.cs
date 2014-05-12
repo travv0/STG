@@ -147,6 +147,15 @@ namespace STG
             });
         }
 
+        public void DeleteAll(char objType)
+        {
+            foreach (GameObject o in objectList)
+            {
+                if (o.objectType == objType)
+                    this.Remove(o);
+            }
+        }
+
         /// <summary>
         /// Returns the number of objects in the object manager.
         /// </summary>
