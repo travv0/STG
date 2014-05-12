@@ -46,6 +46,7 @@ namespace STG
         bool againstWall = false;
         int health;
         int lives;
+        int bombs;
         public bool invincible = false;
         public int invincibilityTimer = 0;
         Vector2 startingPos;
@@ -65,6 +66,7 @@ namespace STG
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
             startingPos = pos;
+            bombs = 3;
         }
 
         /// <summary>
@@ -144,6 +146,7 @@ namespace STG
                     {
                         MainGame.ObjectManager.Remove(hitBullet);
                         lives--;
+                        bombs = 3;
                         invincible = true;                        
                         MainGame.ObjectManager.DeleteAll('B');
                         MainGame.ObjectManager.moveAllBoxes('B');
@@ -570,10 +573,11 @@ namespace STG
                             MainGame.shootSoundInstance.Resume();
                         mainCooldown = 5;
                     }
-                    if (keyboard.IsKeyDown(Keys.LeftAlt) && optionCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.LeftAlt) && optionCooldown == 0 && bombs > 0)
                     {
                         MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
                         optionCooldown = 200;
+                        bombs--;
                     }
                     if (keyboard.IsKeyDown(Keys.Space) && optionCooldown == 0)
                     {
@@ -677,6 +681,8 @@ namespace STG
         /// </summary>
         public int Lives { get { return lives; } }
 
+        public int Bombs { get { return bombs; } }
+
         /// <summary>
         /// Sets the player's health.
         /// </summary>
@@ -688,5 +694,7 @@ namespace STG
         /// </summary>
         /// <param name="lives"></param>
         public void setLives(int lives) { this.lives = lives; }
+
+
     }
 }
