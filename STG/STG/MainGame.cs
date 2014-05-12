@@ -24,8 +24,8 @@ namespace STG
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
-        enum GameStates { TitleScreen, Playing, GameOver, GameWin, CreditPage, InstructionPage };
-        GameStates gameState = GameStates.TitleScreen;
+        public enum GameStates { TitleScreen, Playing, GameOver, GameWin, CreditPage, InstructionPage };
+        public static GameStates gameState = GameStates.TitleScreen;
 
         private static int windowWidth;
         private static int windowHeight;
@@ -45,6 +45,9 @@ namespace STG
         Texture2D instructionPage;
         Rectangle instructionPageRect;
 
+        Texture2D gameOverPage;
+        Rectangle gameOverPageRect;
+
         private ScrollingBackground scrollBack;
         Texture2D scrollTexture;
 
@@ -57,7 +60,7 @@ namespace STG
         public static SoundEffectInstance bombSoundInstance;
 
 
-        private static GameObjectManager objectManager = new GameObjectManager();
+        public static GameObjectManager objectManager = new GameObjectManager();
         private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 
         /// <summary>
@@ -142,6 +145,13 @@ namespace STG
                 graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height);
 
+
+            gameOverPage = Content.Load<Texture2D>("shittyGameOverScreen");
+
+            gameOverPageRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
+
             scrollBack = new ScrollingBackground();
             scrollTexture = Content.Load<Texture2D>("clouds");
             scrollBack.Load(GraphicsDevice, scrollTexture);
@@ -166,6 +176,8 @@ namespace STG
             SpriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 4, 5);
 
             player1 = new Player(SpriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(playingArea.X + playingArea.Width / 2, playingArea.Y + playingArea.Height - ((float)SpriteDict["CloudGirlAnimation"].Height * 1.5f)), 5, 5);
+            player1.setHealth(1);
+            player1.setLives(3);
             ObjectManager.Add(player1);
 
             //player 2 stuff
@@ -173,6 +185,8 @@ namespace STG
             SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
             SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
             player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
+            player2.setHealth(100);
+            player2.setLives(1);
             ObjectManager.Add(player2);
 
             //bullet textures
@@ -186,7 +200,6 @@ namespace STG
 
             //Bomb Texture
             SpriteDict["bombRad"] = new Sprite(Content.Load<Texture2D>("bombRad"));
-            SpriteDict["bombInt"] = new Sprite(Content.Load<Texture2D>("bombInt"));
 
             //Item textures
             SpriteDict["FullItem"] = new Sprite(Content.Load<Texture2D>("Item sprites\\fullPower"));
@@ -309,10 +322,22 @@ namespace STG
                     break;
 
                 case GameStates.GameWin:
+                    keyboard = Keyboard.GetState();
+
+                    if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
                     
                     break;
 
                 case GameStates.GameOver:
+                    keyboard = Keyboard.GetState();
+
+                    if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
 
                     break;
             }
@@ -356,10 +381,14 @@ namespace STG
 
                 scrollBack.Draw(spriteBatch);
 
-                spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
-                spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
-                spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
-                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.White);
+                spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Boss Health: " + player2.Health, new Vector2(16, 80), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Player Lives: " + player1.Lives, new Vector2(16, 96), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Timer: " + player1.invincibilityTimer, new Vector2(16, 112), Color.Black);
+
 
                 spriteBatch.End();
 
@@ -399,12 +428,26 @@ namespace STG
 
             if (gameState == GameStates.GameOver)
             {
+                spriteBatch.Begin();
 
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(gameOverPage, gameOverPageRect,
+                    Color.White);
+
+                spriteBatch.End();
             }
 
             if (gameState == GameStates.GameWin)
             {
+                spriteBatch.Begin();
 
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(gameOverPage, gameOverPageRect,
+                    Color.White);
+
+                spriteBatch.End();
             }
             // TODO: Add your drawing code here
 
