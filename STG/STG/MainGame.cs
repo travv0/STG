@@ -197,7 +197,7 @@ namespace STG
             FPSfont = Content.Load<SpriteFont>("FPS");
 
             //background stuff
-            SpriteDict["HUD"] = new Sprite(Content.Load<Texture2D>("HUD"));
+            SpriteDict["HUD"] = new Sprite(Content.Load<Texture2D>("HUD2"));
 
             //option texture
             SpriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
