@@ -38,7 +38,6 @@ namespace STG
         /// </summary>
         protected Sprite sprite;
 
-        protected float sWidth, sHeight;
         /// <summary>
         /// The angle that the sprite will be drawn at.
         /// </summary>
