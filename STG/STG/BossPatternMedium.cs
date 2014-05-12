@@ -16,6 +16,8 @@ namespace STG
         List<Tuple<Bullet.Action, float, int, int, bool>> actionList = new List<Tuple<Bullet.Action, float, int, int, bool>>();
 
         Random rand = new Random();
+        Random rand2 = new Random(23432);
+        Random rand4 = new Random(543576);
         Random rand3 = new Random(54654);
         bool set = false;
 
@@ -33,25 +35,17 @@ namespace STG
         public override void Update()
         {
             actionList.Clear();
-            if (rand3.Next(5) == 0)
+            if (rand4.Next(5) == 0)
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 60, 0, false));
             else
                 actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 1.5f, 0, 60, false));
 
             if (time % 2 == 0)
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, (float)rand.NextDouble() * 360, 0, parent, actionList));
-            /*actionList.Clear();
-            actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.curve, 0, 600, 5, false));
-
-            if (time % 10 == 0)
             {
-               // MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle, -.5f, parent, actionList));
-               // MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 90, -.5f, parent, actionList));
-               // MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 180, -.5f, parent, actionList));
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, angle - 270, -.5f, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, (float)rand.NextDouble() * 360, 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, (float)rand2.NextDouble() * 360, 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, (float)rand3.NextDouble() * 360, 0, parent, actionList));
             }
-
-            angle = angle + 3.5f;*/
 
             if (time > 450)
             {
