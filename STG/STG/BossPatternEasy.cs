@@ -11,13 +11,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace STG
 {
-    class TestPattern:BulletPattern
+    class BossPatternEasy:BulletPattern
     {
         List<Tuple<Bullet.Action, float, int, int, bool>> actionList = new List<Tuple<Bullet.Action, float, int, int, bool>>();
 
         int offset = 0;
 
-        public TestPattern(GameObject parent)
+        public BossPatternEasy(GameObject parent)
         {
             this.parent = parent;
             this.pos = parent.Position;

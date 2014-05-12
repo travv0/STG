@@ -15,7 +15,9 @@ namespace STG
     {
         List<Tuple<Bullet.Action, float, int, int, bool>> actionList = new List<Tuple<Bullet.Action, float, int, int, bool>>();
 
-        int offset = 0;
+        Random rand = new Random();
+        Random rand3 = new Random(54654);
+        bool set = false;
 
         public BossPatternMedium(GameObject parent)
         {
@@ -30,49 +32,14 @@ namespace STG
 
         public override void Update()
         {
-            if (time % 50 == 0)
-            {
-                actionList.Clear();
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, 80, 50, 50, true));
+            actionList.Clear();
+            if (rand3.Next(5) == 0)
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 60, 0, false));
+            else
+                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 1.5f, 0, 60, false));
 
-                for (int i = 0; i < 360; i += 30)
-                {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i + offset, 0, parent, actionList));
-                }
-
-                actionList.Clear();
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 0, 10, 5, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.speed, 2, 50, 10, false));
-                actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.angle, -80, 50, 50, true));
-
-                for (int i = 30; i < 390; i += 30)
-                {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, i + offset, 0, parent, actionList));
-                }
-
-                offset+=10;
-            }
-
-            /*if (time % 40 == 0)
-            {
-                actionList.Clear();
-
-                for (int i = 0; i < 360; i += 10)
-                {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 5, i, 0, parent, actionList));
-                }
-            }
-
-            if (time % 40 - 20 == 0)
-            {
-                for (int i = 5; i < 365; i += 10)
-                {
-                    MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 5, i, 0, parent, actionList));
-                }
-            }
-           
+            if (time % 2 == 0)
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 3, (float)rand.NextDouble() * 360, 0, parent, actionList));
             /*actionList.Clear();
             actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.curve, 0, 600, 5, false));
 
