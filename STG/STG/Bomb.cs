@@ -35,27 +35,14 @@ namespace STG
             if (bombRad < 1000)
             {
                 
-                this.boundingBox.Width += 5;
-                this.boundingBox.Height += 5;
+                this.boundingBox.Width += 50;
+                this.boundingBox.Height += 50;
                 bombRad++;
                 colorNum++;
                 this.color = colors[colorNum % 7];
 
-                List<Vector2> box = this.getVertices();
-                
-                foreach (GameObject o in MainGame.ObjectManager)
-                {
-                    if (hitBullet != null)
-                    {
-                        if (this != ((Bullet)hitBullet).Parent)
-                        {
-                            if (box == hitBullet.getVertices())
-                            {
-                                MainGame.ObjectManager.Remove(hitBullet);
-                            }
-                        }
-                    }
-                }
+                if (bombRad == 65)
+                    MainGame.ObjectManager.DeleteAll('B');
 
                 if (MainGame.bombSoundInstance.State == SoundState.Stopped)
                 {
