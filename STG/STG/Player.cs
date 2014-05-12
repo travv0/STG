@@ -662,15 +662,15 @@ namespace STG
             {
                 base.Draw(spriteBatch);
 
-                //if (inFocus)
-                //{
+                if (inFocus)
+                {
                 spriteBatch.Begin();
 
                 if(playerNum == PlayerNum.One)
                     MainGame.SpriteDict["hitbox"].Draw(spriteBatch, new Rectangle((int)pos.X - 2, (int)pos.Y - 2, 4, 4), Color.White);
 
                 spriteBatch.End();
-                //}
+                }
             }
         }
 
