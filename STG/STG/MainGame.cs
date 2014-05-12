@@ -278,6 +278,8 @@ namespace STG
             {
                 // title screen section 
                 case GameStates.TitleScreen:
+                    mouse = Mouse.GetState();
+                    this.IsMouseVisible = true;
 
                     if (!titleSongStart)
                     {
@@ -314,7 +316,12 @@ namespace STG
                 case GameStates.Playing:
                     if (keyboard.IsKeyDown(Keys.R))
                     {
+                        MainGame.ObjectManager.moveAllBoxes('B');
                         LoadContent();
+                    }
+                    if (keyboard.IsKeyDown(Keys.Escape))
+                    {
+                        gameState = GameStates.TitleScreen;
                     }
 
                     //call all objects' update function
