@@ -22,10 +22,10 @@ namespace STG
         //FPS stuff
         SpriteFont FPSfont;
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
-        int totalFrames = 0;
+        int totalFrames;
 
         public enum GameStates { TitleScreen, Playing, GameOver, GameWin, CreditPage, InstructionPage };
-        public static GameStates gameState = GameStates.TitleScreen;
+        public static GameStates gameState;
 
         private static int windowWidth;
         private static int windowHeight;
@@ -45,16 +45,19 @@ namespace STG
         Texture2D instructionPage;
         Rectangle instructionPageRect;
 
-        Texture2D gameOverPage;
-        Rectangle gameOverPageRect;
+        Texture2D player1Win;
+        Rectangle player1WinRect;
+
+        Texture2D player2Win;
+        Rectangle player2WinRect;
 
         private ScrollingBackground scrollBack;
         Texture2D scrollTexture;
 
         Song titleSong;
-        bool titleSongStart = false;
+        bool titleSongStart;
         Song gameBGSong;
-        bool gameSongStart = false;
+        bool gameSongStart;
 
         public static SoundEffect shootSound;
         public static SoundEffectInstance shootSoundInstance;
@@ -62,8 +65,8 @@ namespace STG
         public static SoundEffectInstance bombSoundInstance;
 
 
-        public static GameObjectManager objectManager = new GameObjectManager();
-        private static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
+        public static GameObjectManager objectManager;
+        private static Dictionary<string, Sprite> spriteDict;
 
         int solTime = 0;
         int lunaTime = 0;
@@ -126,6 +129,16 @@ namespace STG
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            totalFrames = 0;
+
+            gameState = GameStates.TitleScreen;
+
+            spriteDict = new Dictionary<string, Sprite>();
+            objectManager = new GameObjectManager();
+
+            titleSongStart = false;
+            gameSongStart = false;
+
             titleBackgroundTexture =
                     Content.Load<Texture2D>("BG");
 
@@ -155,9 +168,15 @@ namespace STG
                 graphics.GraphicsDevice.Viewport.Height);
 
 
-            gameOverPage = Content.Load<Texture2D>("shittyGameOverScreen");
+            player1Win = Content.Load<Texture2D>("Player1Win");
 
-            gameOverPageRect = new Rectangle(0, 0,
+            player1WinRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
+
+            player2Win = Content.Load<Texture2D>("Player2Win");
+
+            player2WinRect = new Rectangle(0, 0,
                 graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height);
 
@@ -254,6 +273,8 @@ namespace STG
         protected override void Update(GameTime gameTime)
         {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            MouseState mouse = Mouse.GetState();
+            KeyboardState keyboard = Keyboard.GetState();
             switch (gameState)
             {
                 // title screen section 
@@ -264,8 +285,6 @@ namespace STG
                         MediaPlayer.Play(titleSong);
                         titleSongStart = true;
                     }
-                    MouseState mouse = Mouse.GetState();
-                    KeyboardState keyboard = Keyboard.GetState();
 
                     if ((mouse.LeftButton == ButtonState.Pressed) && (startRect.Contains(mouse.X, mouse.Y)))
                     {
@@ -294,6 +313,11 @@ namespace STG
                 // end of title screen section
                 // game play section
                 case GameStates.Playing:
+                    if (keyboard.IsKeyDown(Keys.R))
+                    {
+                        LoadContent();
+                    }
+
                     //call all objects' update function
                     ObjectManager.Update();
                     scrollBack.Update(elapsed * 75);
@@ -366,8 +390,15 @@ namespace STG
 
                 case GameStates.GameWin:
                     keyboard = Keyboard.GetState();
+                    mouse = Mouse.GetState();
+                    this.IsMouseVisible = false;
 
                     if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
+
+                    if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
                     {
                         this.Exit();
                     }
@@ -376,8 +407,15 @@ namespace STG
 
                 case GameStates.GameOver:
                     keyboard = Keyboard.GetState();
+                    mouse = Mouse.GetState();
+                    this.IsMouseVisible = false;
 
                     if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
+
+                    if ((mouse.LeftButton == ButtonState.Pressed) && (quitRect.Contains(mouse.X, mouse.Y)))
                     {
                         this.Exit();
                     }
@@ -469,26 +507,30 @@ namespace STG
                 spriteBatch.End();
             }
 
-            if (gameState == GameStates.GameOver)
-            {
-                spriteBatch.Begin();
-
-                //Draw the backgroundTexture sized to the width
-                //and height of the screen.
-                spriteBatch.Draw(gameOverPage, gameOverPageRect,
-                    Color.White);
-
-                spriteBatch.End();
-            }
-
             if (gameState == GameStates.GameWin)
             {
                 spriteBatch.Begin();
 
                 //Draw the backgroundTexture sized to the width
                 //and height of the screen.
-                spriteBatch.Draw(creditPage, creditPageRect,
+                spriteBatch.Draw(player1Win, player1WinRect,
                     Color.White);
+
+                spriteBatch.Draw(quitButton, quitRect, Color.CornflowerBlue);
+
+                spriteBatch.End();
+            }
+
+            if (gameState == GameStates.GameOver)
+            {
+                spriteBatch.Begin();
+
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(player2Win, player2WinRect,
+                    Color.White);
+
+                spriteBatch.Draw(quitButton, quitRect, Color.CornflowerBlue);
 
                 spriteBatch.End();
             }
