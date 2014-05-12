@@ -594,9 +594,19 @@ namespace STG
                         pos.Y -= speed;
 
                     //shootin
-                    if (keyboard.IsKeyDown(Keys.G) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0)
+                    {
+                        MainGame.ObjectManager.Add(new BossPatternEasy(this));
+                        mainCooldown = 50;
+                    }
+                    if (keyboard.IsKeyDown(Keys.NumPad2) && mainCooldown == 0)
                     {
                         MainGame.ObjectManager.Add(new BossPatternMedium(this));
+                        mainCooldown = 50;
+                    }
+                    if (keyboard.IsKeyDown(Keys.NumPad3) && mainCooldown == 0)
+                    {
+                        MainGame.ObjectManager.Add(new BossPatternHard(this));
                         mainCooldown = 50;
                     }
                     if (mainCooldown > 0)
