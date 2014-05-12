@@ -196,8 +196,12 @@ namespace STG
 
             FPSfont = Content.Load<SpriteFont>("FPS");
 
+
+
             //background stuff
             SpriteDict["HUD"] = new Sprite(Content.Load<Texture2D>("HUD2"));
+            SpriteDict["bomb"] = new Sprite(Content.Load<Texture2D>("Item sprites\\bomb"));
+            SpriteDict["lifeHeart"] = new Sprite(Content.Load<Texture2D>("Item sprites\\lifeHeart"));
 
             //option texture
             SpriteDict["option"] = new Sprite(Content.Load<Texture2D>("option"));
@@ -487,6 +491,7 @@ namespace STG
 
                 spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
 
+                spriteBatch.DrawString(FPSfont, "Player 1", new Vector2(WindowWidth - 200, WindowHeight / 2 - 60), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Lives: ", new Vector2(WindowWidth - 225, WindowHeight / 2 - 30), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Bomb: ", new Vector2(WindowWidth - 225, WindowHeight / 2), Color.Black);
                 
@@ -494,8 +499,41 @@ namespace STG
                 spriteBatch.DrawString(FPSfont, "Player 2", new Vector2(WindowWidth - 200, WindowHeight / 2 - 200), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Boss Health: " + player2.Health, new Vector2(WindowWidth - 225, WindowHeight / 2 - 150), Color.Black);
 
-                if(player1.Bombs == 3)
-                    //sdf
+                if (player1.Bombs == 3)
+                {
+                    spriteDict["bomb"].Draw(spriteBatch, new Rectangle((WindowWidth - 170), (windowHeight / 2) - 5, spriteDict["bomb"].Width, spriteDict["bomb"].Height), Color.White);
+                    spriteDict["bomb"].Draw(spriteBatch, new Rectangle((WindowWidth - 140), (windowHeight / 2) - 5, spriteDict["bomb"].Width, spriteDict["bomb"].Height), Color.White);
+                    spriteDict["bomb"].Draw(spriteBatch, new Rectangle((WindowWidth - 110), (windowHeight / 2) - 5, spriteDict["bomb"].Width, spriteDict["bomb"].Height), Color.White);
+                }
+
+                if (player1.Bombs == 2)
+                {
+                    spriteDict["bomb"].Draw(spriteBatch, new Rectangle((WindowWidth - 170), (windowHeight / 2) - 5, spriteDict["bomb"].Width, spriteDict["bomb"].Height), Color.White);
+                    spriteDict["bomb"].Draw(spriteBatch, new Rectangle((WindowWidth - 140), (windowHeight / 2) - 5, spriteDict["bomb"].Width, spriteDict["bomb"].Height), Color.White);
+                }
+
+                if (player1.Bombs == 1)
+                {
+                    spriteDict["bomb"].Draw(spriteBatch, new Rectangle((WindowWidth - 170), (windowHeight / 2) - 5, spriteDict["bomb"].Width, spriteDict["bomb"].Height), Color.White);
+                }
+
+                if (player1.Lives == 3)
+                {
+                    spriteDict["lifeHeart"].Draw(spriteBatch, new Rectangle((WindowWidth - 170), (windowHeight / 2) - 35, spriteDict["lifeHeart"].Width, spriteDict["lifeHeart"].Height), Color.White);
+                    spriteDict["lifeHeart"].Draw(spriteBatch, new Rectangle((WindowWidth - 140), (windowHeight / 2) - 35, spriteDict["lifeHeart"].Width, spriteDict["lifeHeart"].Height), Color.White);
+                    spriteDict["lifeHeart"].Draw(spriteBatch, new Rectangle((WindowWidth - 110), (windowHeight / 2) - 35, spriteDict["lifeHeart"].Width, spriteDict["lifeHeart"].Height), Color.White);
+                }
+
+                if (player1.Lives == 2)
+                {
+                    spriteDict["lifeHeart"].Draw(spriteBatch, new Rectangle((WindowWidth - 170), (windowHeight / 2) - 35, spriteDict["lifeHeart"].Width, spriteDict["lifeHeart"].Height), Color.White);
+                    spriteDict["lifeHeart"].Draw(spriteBatch, new Rectangle((WindowWidth - 140), (windowHeight / 2) - 35, spriteDict["lifeHeart"].Width, spriteDict["lifeHeart"].Height), Color.White);
+                }
+
+                if (player1.Lives == 1)
+                {
+                    spriteDict["lifeHeart"].Draw(spriteBatch, new Rectangle((WindowWidth - 170), (windowHeight / 2) - 35, spriteDict["lifeHeart"].Width, spriteDict["lifeHeart"].Height), Color.White);
+                }
 
                 spriteBatch.End();
             }
