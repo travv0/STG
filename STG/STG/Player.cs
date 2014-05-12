@@ -61,6 +61,7 @@ namespace STG
             this.pos = pos;
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
             this.playerNum = playerNum;
+            calculateVertices();
         }
 
         /// <summary>
@@ -116,7 +117,8 @@ namespace STG
         {
             foreach (Option option in options)
                 MainGame.ObjectManager.Add(option);
-
+            hitboxSize.X = 4;
+            hitboxSize.Y = 4;
             base.Initialize();
         }
 

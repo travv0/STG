@@ -73,8 +73,11 @@ namespace STG
             rotation = 0;
             colPos.X = Position.X - 20;
             colPos.Y = Position.Y - 20;
-            if(Keyboard.GetState().IsKeyDown(Keys.G))
-                rotation = 0;
+            if (hitboxSize.X == null)
+            {
+                hitboxSize.X = boundingBox.Width / 4;
+                hitboxSize.Y = boundingBox.Height / 4;
+            }
             calculateVertices();
         }
 
@@ -243,20 +246,11 @@ namespace STG
             }
         }
         #region Gamelogic
-        private void calculateVertices()
+        protected void calculateVertices()
         {
             if (sprite != null)
             {
-                if (objectType == 'P')
-                {
-                    hitboxSize.X = 2;
-                    hitboxSize.Y = 2;
-                }
-                else
-                {
-                    hitboxSize.X = boundingBox.Width / 4;
-                    hitboxSize.Y = boundingBox.Height / 4;
-                }
+                   
                 tlVertex.X = colPos.X + ((float)(-hitboxSize.X) * (float)Math.Cos(rotation) - (float)(-hitboxSize.Y) * (float)Math.Sin(rotation));
                 tlVertex.Y = colPos.Y + ((float)(-hitboxSize.X) * (float)Math.Sin(rotation) + (float)(-hitboxSize.Y) * (float)Math.Cos(rotation));
                 trVertex.X = colPos.X + ((float)(hitboxSize.X) * (float)Math.Cos(rotation) - (float)(-hitboxSize.Y) * (float)Math.Sin(rotation));

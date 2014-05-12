@@ -177,7 +177,7 @@ namespace STG
 
             player1 = new Player(SpriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(playingArea.X + playingArea.Width / 2, playingArea.Y + playingArea.Height - ((float)SpriteDict["CloudGirlAnimation"].Height * 1.5f)), 5, 5);
             player1.setHealth(1);
-            player1.setLives(3);
+            player1.setLives(30000000);
             ObjectManager.Add(player1);
 
             //player 2 stuff
