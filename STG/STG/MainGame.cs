@@ -472,10 +472,10 @@ namespace STG
                 spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.Black);
-                spriteBatch.DrawString(FPSfont, "Boss Health: " + player2.Health, new Vector2(16, 80), Color.Black);
+                
                 spriteBatch.DrawString(FPSfont, "Player Lives: " + player1.Lives, new Vector2(16, 96), Color.Black);
                 spriteBatch.DrawString(FPSfont, "Timer: " + player1.invincibilityTimer, new Vector2(16, 112), Color.Black);
-                spriteBatch.DrawString(FPSfont, "Player Bomb: " + player1.Bombs, new Vector2(16, 128), Color.Black);
+                
 
 
                 spriteBatch.End();
@@ -486,6 +486,16 @@ namespace STG
                 spriteBatch.Begin();
 
                 spriteDict["HUD"].Draw(spriteBatch, new Rectangle(0, 0, windowWidth, WindowHeight), Color.White);
+
+                spriteBatch.DrawString(FPSfont, "Lives: ", new Vector2(WindowWidth - 225, WindowHeight / 2 - 30), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Bomb: ", new Vector2(WindowWidth - 225, WindowHeight / 2), Color.Black);
+                
+
+                spriteBatch.DrawString(FPSfont, "Player 2", new Vector2(WindowWidth - 200, WindowHeight / 2 - 200), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Boss Health: " + player2.Health, new Vector2(WindowWidth - 225, WindowHeight / 2 - 150), Color.Black);
+
+                if(player1.Bombs == 3)
+                    //sdf
 
                 spriteBatch.End();
             }
