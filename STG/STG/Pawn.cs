@@ -30,7 +30,7 @@ namespace STG
             this.bulletSprite = bulletSprite;
             boundingBox = new Rectangle(0, 0, sprite.Width, sprite.Height);
             Initialize();
-            health = 50;
+            health = 10;
         }
 
         protected override void Initialize()
@@ -54,7 +54,7 @@ namespace STG
                     MainGame.objectManager.Remove(hitBullet);
                     ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
                     health--;
-                    if (health == 0)
+                    if (health <= 0)
                     {
                         MainGame.objectManager.Remove(this);
                         ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
@@ -97,7 +97,7 @@ namespace STG
 
             chance = randShoot.Next(500);
 
-            if (chance > 498 && recharge >= 300 || recharge >= 600)
+            if (chance > 450 && recharge >= 200 || recharge >= 600)
             {
                 chance = rand.Next(3);
                 switch (chance)
