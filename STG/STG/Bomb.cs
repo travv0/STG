@@ -16,7 +16,8 @@ namespace STG
         float vel;
         int bombRad = 50;
         Color[] colors = new Color[7] { Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet };
-        int colorNum = 0;
+        int colorNum = 0;  
+
 
         public Bomb(Sprite sprite, Vector2 pos, float vel)
         {
@@ -29,13 +30,33 @@ namespace STG
 
         public override void Update()
         {
+            GameObject hitBullet = Collides('B');
+
             if (bombRad < 1000)
             {
+                
                 this.boundingBox.Width += 5;
                 this.boundingBox.Height += 5;
                 bombRad++;
                 colorNum++;
                 this.color = colors[colorNum % 7];
+
+                List<Vector2> box = this.getVertices();
+                
+                foreach (GameObject o in MainGame.ObjectManager)
+                {
+                    if (hitBullet != null)
+                    {
+                        if (this != ((Bullet)hitBullet).Parent)
+                        {
+                            if (box == hitBullet.getVertices())
+                            {
+                                MainGame.ObjectManager.Remove(hitBullet);
+                            }
+                        }
+                    }
+                }
+
                 if (MainGame.bombSoundInstance.State == SoundState.Stopped)
                 {
                     MainGame.bombSoundInstance.Volume = 0.75f;
