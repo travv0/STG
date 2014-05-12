@@ -50,6 +50,7 @@ namespace STG
         public bool invincible = false;
         public int invincibilityTimer = 0;
         Vector2 startingPos;
+        bool bombPressed = false;
 
         /// <summary>
         /// A playable character.
@@ -124,6 +125,7 @@ namespace STG
             foreach (Option option in options)
                 MainGame.ObjectManager.Add(option);
             objType = 'P';
+            
             base.Initialize();
         }
 
@@ -166,7 +168,7 @@ namespace STG
                 else if(invincible == true)
                 {
                     invincibilityTimer++;
-                    if (invincibilityTimer == 120)
+                    if (invincibilityTimer == 360)
                     {
                         invincibilityTimer = 0;
                         invincible = false;
@@ -196,8 +198,11 @@ namespace STG
                         //this.sprite = MainGame.SpriteDict["hitbox"];                        
                         MainGame.ObjectManager.Remove(hitBullet);
                         ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
-                        health--;
-                        if (health == 0)
+                        if (hitBullet.getSprite == MainGame.SpriteDict["duckyBullet"])
+                            health --;
+                        else
+                            health--;
+                        if (health <= 0)
                             lives--;
                         if (lives <= 0)
                         {
@@ -563,7 +568,7 @@ namespace STG
 
 
                     //shootin
-                    if (keyboard.IsKeyDown(Keys.Space) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.Space) && mainCooldown == 0 && invincible == false)
                     {
                         MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 20, 270, 0, this, null));
                         if (MainGame.shootSoundInstance.State == SoundState.Stopped)
@@ -575,13 +580,19 @@ namespace STG
                             MainGame.shootSoundInstance.Resume();
                         mainCooldown = 5;
                     }
-                    if (keyboard.IsKeyDown(Keys.LeftAlt) && optionCooldown == 0 && bombs > 0)
+                    if (keyboard.IsKeyUp(Keys.LeftAlt))
+                        bombPressed = false;
+                    if (keyboard.IsKeyDown(Keys.LeftAlt) && bombs > 0 && bombPressed == false)
                     {
+                        bombPressed = true;
                         MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
-                        optionCooldown = 120;
+                        invincibilityTimer = 0;
+                        MainGame.player2.health -= 10;
+                        MainGame.Luna.health -= 3;
+                        MainGame.Sol.health -= 3;
                         bombs--;
                     }
-                    if (keyboard.IsKeyDown(Keys.Space) && optionCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.Space) && optionCooldown == 0 && invincible == false)
                     {
                         if (inFocus == false)
                             foreach (Option option in options)
