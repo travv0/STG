@@ -126,6 +126,7 @@ namespace STG
         /// </summary>
         protected override void LoadContent()
         {
+            gameSongStart = false;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -185,7 +186,7 @@ namespace STG
             scrollBack.Load(GraphicsDevice, scrollTexture);
 
             titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
-            gameBGSong = Content.Load<Song>("Music and Sound\\FireAndFlame");
+            gameBGSong = Content.Load<Song>("Music and Sound\\2husong");
 
             shootSound = Content.Load<SoundEffect>("Music and Sound\\ssw");
             shootSoundInstance = shootSound.CreateInstance();
@@ -314,11 +315,11 @@ namespace STG
                 // end of title screen section
                 // game play section
                 case GameStates.Playing:
-                    if (keyboard.IsKeyDown(Keys.R))
+                    /*if (keyboard.IsKeyDown(Keys.R))
                     {
                         MainGame.ObjectManager.moveAllBoxes('B');
                         LoadContent();
-                    }
+                    }*/
                     if (keyboard.IsKeyDown(Keys.Escape))
                     {
                         gameState = GameStates.TitleScreen;
@@ -353,6 +354,7 @@ namespace STG
                     if (!gameSongStart)
                     {
                         MediaPlayer.Play(gameBGSong);
+                        MediaPlayer.Volume = .3f;
                         gameSongStart = true;
                     }
 
