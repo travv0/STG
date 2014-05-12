@@ -75,15 +75,16 @@ namespace STG
                     angle -= AngleDifference(MainGame.player1) / DistanceToTarget(MainGame.player1.Position) * Math.Abs(vel) * 2.5f;
                 vel += 0.1f;
 
-                
-
                 this.pos.X += (float)(vel * Math.Cos((double)angle * Math.PI / 180));
                 this.pos.Y += (float)(vel * Math.Sin((double)angle * Math.PI / 180));
 
+
+
                 inRadius = true;
             }
-            else
-                this.pos.Y += vel;
+
+            
+                pos.Y += vel;
 
             this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, sprite.Width, sprite.Height);
 

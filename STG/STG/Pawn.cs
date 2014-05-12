@@ -59,10 +59,12 @@ namespace STG
                         ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
                         for (int i = 0; i < 24; i++)
                         {
+                            rand = new Random();
+                            float randAngle = (float)(rand.NextDouble() * Math.PI * 2);
                             if (i < 3)
-                                MainGame.ObjectManager.Add(new LargePowerItem(new Vector2((pos.X - 18 + i), pos.Y), 0));
+                                MainGame.ObjectManager.Add(new LargePowerItem(new Vector2((pos.X - 50 + i*5), pos.Y), 10, randAngle));
                             else
-                                MainGame.ObjectManager.Add(new SmallPowerItem(new Vector2((pos.X - 18 + i), pos.Y), 0));
+                                MainGame.ObjectManager.Add(new SmallPowerItem(new Vector2((pos.X - 50 + i*5), pos.Y), 10, randAngle));
                         }
 
                     }

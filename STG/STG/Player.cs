@@ -144,6 +144,8 @@ namespace STG
                         MainGame.ObjectManager.DeleteAll('B');
                         MainGame.ObjectManager.moveAllBoxes('B');
                         power--;
+                        if (power < 0)
+                            power = 0;
                         if (lives <= 0)
                         {
                             MainGame.ObjectManager.Remove(this);

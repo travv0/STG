@@ -14,12 +14,13 @@ namespace STG
 {
     class SmallPowerItem:CollectibleItem
     {
-        public SmallPowerItem(Vector2 pos, float vel)
+        public SmallPowerItem(Vector2 pos, float vel, float angle)
         {
             this.sprite = MainGame.SpriteDict["SmallItem"];
             this.pos = pos;
             this.vel = vel;
-            this.powerLevel = .01f;
+            this.powerLevel = .005f;
+            this.angle = angle;
         }
     }
 }

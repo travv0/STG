@@ -42,12 +42,12 @@ namespace STG
 
             if (smallIntervalTime == smallInterval)
             {
-                MainGame.ObjectManager.Add(new SmallPowerItem(new Vector2(position.Next(MainGame.PlayingArea.Width - (MainGame.SpriteDict["SmallItem"].Width / 2)) + (MainGame.SpriteDict["SmallItem"].Width / 2), 50), 0));
+                MainGame.ObjectManager.Add(new SmallPowerItem(new Vector2(position.Next(MainGame.PlayingArea.Width - (MainGame.SpriteDict["SmallItem"].Width / 2)) + (MainGame.SpriteDict["SmallItem"].Width / 2), 50), 0,90));
                 smallSpawn = true;
             }
             if (largeIntervalTime == largeInterval)
             {
-                MainGame.ObjectManager.Add(new LargePowerItem(new Vector2(position.Next(MainGame.PlayingArea.Width - (MainGame.SpriteDict["LargeItem"].Width / 2)) + (MainGame.SpriteDict["LargeItem"].Width / 2), 50), 0));
+                MainGame.ObjectManager.Add(new LargePowerItem(new Vector2(position.Next(MainGame.PlayingArea.Width - (MainGame.SpriteDict["LargeItem"].Width / 2)) + (MainGame.SpriteDict["LargeItem"].Width / 2), 50), 0, 90));
                 largeSpawn = true;
             }
 
