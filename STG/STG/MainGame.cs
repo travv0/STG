@@ -24,8 +24,8 @@ namespace STG
         float FPS, drawFPS, droppedFrames, droppedPercent, drawDropped;
         int totalFrames = 0;
 
-        enum GameStates { TitleScreen, Playing, GameOver, GameWin, CreditPage, InstructionPage };
-        GameStates gameState = GameStates.TitleScreen;
+        public enum GameStates { TitleScreen, Playing, GameOver, GameWin, CreditPage, InstructionPage };
+        public static GameStates gameState = GameStates.TitleScreen;
 
         private static int windowWidth;
         private static int windowHeight;
@@ -44,6 +44,9 @@ namespace STG
 
         Texture2D instructionPage;
         Rectangle instructionPageRect;
+
+        Texture2D gameOverPage;
+        Rectangle gameOverPageRect;
 
         private ScrollingBackground scrollBack;
         Texture2D scrollTexture;
@@ -139,6 +142,13 @@ namespace STG
             instructionPage = Content.Load<Texture2D>("Instruction Page");
 
             instructionPageRect = new Rectangle(0, 0,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height);
+
+
+            gameOverPage = Content.Load<Texture2D>("shittyGameOverScreen");
+
+            gameOverPageRect = new Rectangle(0, 0,
                 graphics.GraphicsDevice.Viewport.Width,
                 graphics.GraphicsDevice.Viewport.Height);
 
@@ -312,10 +322,22 @@ namespace STG
                     break;
 
                 case GameStates.GameWin:
+                    keyboard = Keyboard.GetState();
+
+                    if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
                     
                     break;
 
                 case GameStates.GameOver:
+                    keyboard = Keyboard.GetState();
+
+                    if (keyboard.IsKeyDown(Keys.Enter))
+                    {
+                        this.Exit();
+                    }
 
                     break;
             }
@@ -406,12 +428,26 @@ namespace STG
 
             if (gameState == GameStates.GameOver)
             {
+                spriteBatch.Begin();
 
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(gameOverPage, gameOverPageRect,
+                    Color.White);
+
+                spriteBatch.End();
             }
 
             if (gameState == GameStates.GameWin)
             {
+                spriteBatch.Begin();
 
+                //Draw the backgroundTexture sized to the width
+                //and height of the screen.
+                spriteBatch.Draw(gameOverPage, gameOverPageRect,
+                    Color.White);
+
+                spriteBatch.End();
             }
             // TODO: Add your drawing code here
 
