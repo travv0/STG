@@ -17,7 +17,7 @@ namespace STG
 
         Random rand = new Random();
         Random rand3 = new Random(54654);
-        bool set = false;
+        bool reverse = false;
         int i = 0;
 
         public BossPatternHard(GameObject parent)
@@ -33,13 +33,25 @@ namespace STG
 
         public override void Update()
         {
-
             actionList.Clear();
-            actionList.Add(new Tuple<Bullet.Action, float, int, int, bool>(Bullet.Action.aimed, 0, 0, 0, false));
+            if (i % 2 == 0)
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 7, i * 10, 0, parent, actionList));
+            if (i < 18 && reverse == false)
+                i++;
+            else
+            {
+                reverse = true;
+                i--;
+            }
+            if (i < 0)
+                reverse = false;
 
-            if (time % 40 < 20)
-                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, 0, 0, parent, actionList));
-
+            if (time % 35 < 20)
+            {
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, AngleToTarget(MainGame.player1.Position), 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, AngleToTarget(MainGame.player1.Position) + 20, 0, parent, actionList));
+                MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["prettyArrowBullet"], new Vector2(Position.X, Position.Y), 10, AngleToTarget(MainGame.player1.Position) - 20, 0, parent, actionList));
+            }
             
             base.Update();
         }
