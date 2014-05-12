@@ -142,6 +142,7 @@ namespace STG
                         lives--;
                         invincible = true;
                         MainGame.ObjectManager.DeleteAll('B');
+                        power--;
                         if (lives <= 0)
                         {
                             MainGame.ObjectManager.Remove(this);
@@ -166,7 +167,8 @@ namespace STG
                 if (hitPower != null)
                 {
                     MainGame.ObjectManager.Remove(hitPower);
-                    power += ((CollectibleItem)hitPower).powerLevel;
+                    if(power < 3)
+                        power += ((CollectibleItem)hitPower).powerLevel;
                 }
             }
 
