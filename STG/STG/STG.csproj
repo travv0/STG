@@ -116,10 +116,14 @@
     <Compile Include="BulletPattern.cs" />
     <Compile Include="CollectibleItem.cs" />
     <Compile Include="Collision.cs" />
+    <Compile Include="PawnBulletPattern3.cs" />
+    <Compile Include="PawnBulletPattern2.cs" />
     <Compile Include="FullPowerItem.cs" />
     <Compile Include="ItemSpawner.cs" />
     <Compile Include="LargePowerItem.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="Pawn.cs" />
+    <Compile Include="PawnBulletPattern.cs" />
     <Compile Include="ScrollingBackground.cs" />
     <Compile Include="SmallPowerItem.cs" />
     <Compile Include="Sprite.cs" />

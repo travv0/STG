@@ -199,6 +199,10 @@ namespace STG
 
             //Item Spawner
             ObjectManager.Add(new ItemSpawner());
+
+            ObjectManager.Add(new Pawn(SpriteDict["sunGirl"], new Vector2(50, 50), SpriteDict["suns"], 999));
+            ObjectManager.Add(new Pawn(SpriteDict["moonGirl"], new Vector2(300, 50), SpriteDict["moons"], 666));
+
             // TODO: use this.Content to load your game content here
         }
 

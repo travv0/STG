@@ -78,6 +78,7 @@ namespace STG
 
             rotation = angle * (float)Math.PI / 180 + drawAngle;
             objType = 'B';
+            Initialize();
         }
 
         /// <summary>
@@ -203,6 +204,10 @@ namespace STG
 
             rotation = angle * (float)Math.PI / 180 + drawAngle;
 
+            if(!this.insidePlayingArea(500)) 
+            {
+                MainGame.ObjectManager.Remove(this);
+            }
             base.Update();
         }
 
