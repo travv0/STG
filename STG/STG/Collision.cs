@@ -55,7 +55,6 @@ namespace STG
         /// </summary>
         /// <param name="o"></param>
         public void addToCollisionGrid(GameObject o){
-
             if (o.insidePlayingArea(0))
             {
                 if (o.getCollisionColumn()[0] != -1 && o.getCollisionRow()[0] != -1 && o.getCollisionColumn()[0] < ROWS && o.getCollisionRow()[0] < COLUMNS - 1)

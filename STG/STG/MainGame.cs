@@ -39,6 +39,9 @@ namespace STG
         Texture2D quitButton;
         Rectangle quitRect;
 
+        private ScrollingBackground scrollBack;
+        Texture2D scrollTexture;
+
         Song titleSong;
         bool titleSongStart = false;
         Song gameBGSong;
@@ -121,6 +124,10 @@ namespace STG
 
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
+            scrollBack = new ScrollingBackground();
+            scrollTexture = Content.Load<Texture2D>("cloudsGameBackGround");
+            scrollBack.Load(GraphicsDevice, scrollTexture);
+
             titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
             gameBGSong = Content.Load<Song>("Music and Sound\\FireAndFlame");
 
@@ -190,6 +197,7 @@ namespace STG
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             switch (gameState)
             {
                 // title screen section 
@@ -224,6 +232,7 @@ namespace STG
                 case GameStates.Playing:
                     //call all objects' update function
                     ObjectManager.Update();
+                    scrollBack.Update(elapsed * 75);
 
                     if (!gameSongStart)
                     {
@@ -284,6 +293,8 @@ namespace STG
             if (gameState == GameStates.Playing)
             {
                 spriteBatch.Begin();
+
+                scrollBack.Draw(spriteBatch);
 
                 spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
                 spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
