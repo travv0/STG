@@ -227,12 +227,12 @@ namespace STG
 
             //Luna Stuff
             SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
-            Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(300, 50), SpriteDict["moons"], 666);
+            Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(playingArea.Width + 100, -100), SpriteDict["moons"], 666);
             ObjectManager.Add(Luna);
 
             //Sol Stuff
             SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
-            Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(50, 50), SpriteDict["suns"], 999);
+            Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(-100, -100), SpriteDict["suns"], 999);
             ObjectManager.Add(Sol);
 
             
@@ -328,7 +328,7 @@ namespace STG
                         if (solTime == 1200)
                         {
                             solTime = 0;
-                            Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(50, -50), SpriteDict["suns"], 999);
+                            Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(-100, -100), SpriteDict["suns"], 999);
                             ObjectManager.Add(Sol);
                         }
                     }
@@ -339,7 +339,7 @@ namespace STG
                         if (lunaTime == 1200)
                         {
                             lunaTime = 0;
-                            Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(-300, 50), SpriteDict["moons"], 666);
+                            Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(playingArea.Width + 100, -100), SpriteDict["moons"], 666);
                             ObjectManager.Add(Luna);
                         }
                     }
