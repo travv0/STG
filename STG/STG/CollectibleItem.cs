@@ -57,7 +57,7 @@ namespace STG
         public override void Update()
         {
             if(rotation < 2 * Math.PI)
-                rotation++;
+                rotation += 0.05f * vel;
             else
                 rotation = 0;
             if (vel == 0)

@@ -66,7 +66,7 @@ namespace STG
                 o.Update();
                 if (o.getSprite != null)//Updates for collision grid
                 {
-                    //collisionGrid.removeFromCollisionGrid(o);
+                    collisionGrid.removeFromCollisionGrid(o);
                     collisionGrid.addToCollisionGrid(o);
                 }
             }

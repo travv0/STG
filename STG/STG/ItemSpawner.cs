@@ -24,8 +24,8 @@ namespace STG
         static private Random smallRand = new Random();
         static private Random largeRand = new Random();
         static private Random position = new Random();
-        protected int smallInterval = smallRand.Next(10, 30);
-        protected int largeInterval = largeRand.Next(30, 80);
+        protected int smallInterval = smallRand.Next(50, 300);
+        protected int largeInterval = largeRand.Next(300, 800);
         private bool smallSpawn = false;
         private bool largeSpawn = false;
 
@@ -58,13 +58,13 @@ namespace STG
             if (smallSpawn == true)
             {
                 smallSpawn = false;
-                smallInterval = smallRand.Next(10, 30);//1200, 3600
+                smallInterval = smallRand.Next(50, 300);//1200, 3600
                 smallIntervalTime = 0;
             }
             if (largeSpawn == true)
             {
                 largeSpawn = false;
-                largeInterval = largeRand.Next(30, 80);//3600,8000
+                largeInterval = largeRand.Next(300, 800);//3600,8000
                 largeIntervalTime = 0;
             }
 

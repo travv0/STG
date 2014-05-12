@@ -209,13 +209,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cloudsGameBackGround.png">
-      <Name>cloudsGameBackGround</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="bullet sprites\suns.png">
       <Name>suns</Name>
       <Importer>TextureImporter</Importer>
@@ -258,6 +251,13 @@
   <ItemGroup>
     <Compile Include="bullet sprites\moons.png">
       <Name>moons</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clouds.jpg">
+      <Name>clouds</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
