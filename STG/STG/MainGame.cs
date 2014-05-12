@@ -324,7 +324,7 @@ namespace STG
                     if (objectManager.Find(Sol) == null)
                     {
                         solTime++;
-                        if (solTime == 1200)
+                        if (solTime == 1800)
                         {
                             solTime = 0;
                             Sol = new Pawn(SpriteDict["sunGirl"], new Vector2(-100, -100), SpriteDict["suns"], 999);
@@ -335,7 +335,7 @@ namespace STG
                     if (objectManager.Find(Luna) == null)
                     {
                         lunaTime++;
-                        if (lunaTime == 1200)
+                        if (lunaTime == 1800)
                         {
                             lunaTime = 0;
                             Luna = new Pawn(SpriteDict["moonGirl"], new Vector2(playingArea.Width + 100, -100), SpriteDict["moons"], 666);
