@@ -44,6 +44,8 @@ namespace STG
         bool againstWall = false;
         int health;
         int lives;
+        bool invincible = false;
+        public int invincibilityTimer = 0;
 
         /// <summary>
         /// A playable character.
@@ -129,18 +131,29 @@ namespace STG
             if (playerNum == PlayerNum.One)
             {
                 GameObject hitBullet = Collides('B');
-                Bullet newBullet = (Bullet)hitBullet;
-                if (hitBullet != null)
+                if (hitBullet != null && invincible == false)
                 {
                     if (this != ((Bullet)hitBullet).Parent)
                     {
                         this.sprite = MainGame.SpriteDict["hitbox"];
                         MainGame.ObjectManager.Remove(hitBullet);
                         lives--;
+                        invincible = true;
+                        MainGame.ObjectManager.DeleteAll('B');
                         if (lives <= 0)
                         {
                             MainGame.ObjectManager.Remove(this);
                         }
+                    }
+                    
+                }
+                else if(invincible == true)
+                {
+                    invincibilityTimer++;
+                    if (invincibilityTimer == 120)
+                    {
+                        invincibilityTimer = 0;
+                        invincible = false;
                     }
                 }
 
