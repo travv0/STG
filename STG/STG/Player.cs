@@ -143,6 +143,7 @@ namespace STG
                         if (lives <= 0)
                         {
                             MainGame.ObjectManager.Remove(this);
+                            MediaPlayer.Stop();
                             MainGame.gameState = MainGame.GameStates.GameOver;
                         }
                     }
@@ -181,6 +182,7 @@ namespace STG
                         if (lives <= 0)
                         {
                             MainGame.ObjectManager.Remove(this);
+                            MediaPlayer.Stop();
                             MainGame.gameState = MainGame.GameStates.GameWin;
                         }
                     }
