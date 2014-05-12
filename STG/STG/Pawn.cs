@@ -20,7 +20,7 @@ namespace STG
         bool moving = false;
         Random rand, randShoot;
         int recharge = 0;
-        int health;
+        public int health;
         public Pawn(Sprite sprite, Vector2 pos, Sprite bulletSprite, int seed)
         {
             rand = new Random(Environment.TickCount + seed);
@@ -30,7 +30,7 @@ namespace STG
             this.bulletSprite = bulletSprite;
             boundingBox = new Rectangle(0, 0, sprite.Width, sprite.Height);
             Initialize();
-            health = 100;
+            health = 50;
         }
 
         protected override void Initialize()
@@ -52,6 +52,7 @@ namespace STG
                 if (((Bullet)hitBullet).Parent != MainGame.player2 && ((Bullet)hitBullet).Parent != MainGame.Sol && ((Bullet)hitBullet).Parent != MainGame.Luna)
                 {
                     MainGame.objectManager.Remove(hitBullet);
+                    ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
                     health--;
                     if (health == 0)
                     {
