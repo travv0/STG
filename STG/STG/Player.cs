@@ -140,8 +140,9 @@ namespace STG
                     {
                         MainGame.ObjectManager.Remove(hitBullet);
                         lives--;
-                        invincible = true;
+                        invincible = true;                        
                         MainGame.ObjectManager.DeleteAll('B');
+                        MainGame.ObjectManager.moveAllBoxes('B');
                         power--;
                         if (lives <= 0)
                         {
@@ -165,10 +166,12 @@ namespace STG
 
                 GameObject hitPower = Collides('C');
                 if (hitPower != null)
-                {
-                    MainGame.ObjectManager.Remove(hitPower);
+                {                    
                     if(power < 3)
                         power += ((CollectibleItem)hitPower).powerLevel;
+
+                    MainGame.ObjectManager.Remove(hitPower);
+                    ((CollectibleItem)hitPower).boundingBox = new Rectangle(0, 0, 0, 0);
                 }
             }
 
@@ -179,8 +182,9 @@ namespace STG
                 {
                     if (this != ((Bullet)hitBullet).Parent && ((Bullet)hitBullet).Parent != MainGame.Sol && ((Bullet)hitBullet).Parent != MainGame.Luna)
                     {
-                        //this.sprite = MainGame.SpriteDict["hitbox"];
+                        //this.sprite = MainGame.SpriteDict["hitbox"];                        
                         MainGame.ObjectManager.Remove(hitBullet);
+                        ((Bullet)hitBullet).boundingBox = new Rectangle(0, 0, 0, 0);
                         health--;
                         if (health == 0)
                             lives--;

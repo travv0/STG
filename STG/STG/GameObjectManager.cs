@@ -164,6 +164,15 @@ namespace STG
             }
         }
 
+        public void moveAllBoxes(char objType)
+        {
+            foreach (GameObject o in objectList)
+            {
+                if(o.objectType == objType)
+                    o.boundingBox = new Rectangle(0, 0, 0, 0);
+            }
+        }
+
         /// <summary>
         /// Returns the number of objects in the object manager.
         /// </summary>
