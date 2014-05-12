@@ -207,6 +207,15 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cloudsGameBackGround.png">
+      <Name>cloudsGameBackGround</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="bullet sprites\suns.png">
       <Name>suns</Name>
       <Importer>TextureImporter</Importer>

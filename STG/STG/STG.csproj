@@ -121,6 +121,7 @@
     <Compile Include="ItemSpawner.cs" />
     <Compile Include="LargePowerItem.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="ScrollingBackground.cs" />
     <Compile Include="SmallPowerItem.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Bullet.cs" />
