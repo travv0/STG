@@ -147,11 +147,11 @@ namespace STG
         /// </summary>
         /// <param name="type">Type of object to find.</param>
         /// <returns>An object of a given type that is in the object manager.</returns>
-        public GameObject Find(Type type)
+        public GameObject Find(GameObject type)
         {
             return objectList.Find(delegate(GameObject obj)
             {
-                return (type == obj.GetType());
+                return (type == obj);
             });
         }
 
