@@ -129,14 +129,18 @@ namespace STG
             if (playerNum == PlayerNum.One)
             {
                 GameObject hitBullet = Collides('B');
+                Bullet newBullet = (Bullet)hitBullet;
                 if (hitBullet != null)
                 {
-                    this.sprite = MainGame.SpriteDict["hitbox"];
-                    MainGame.ObjectManager.Remove(hitBullet);
-                    lives--;
-                    if (lives <= 0)
+                    if (this != ((Bullet)hitBullet).Parent)
                     {
-                        MainGame.ObjectManager.Remove(this);
+                        this.sprite = MainGame.SpriteDict["hitbox"];
+                        MainGame.ObjectManager.Remove(hitBullet);
+                        lives--;
+                        if (lives <= 0)
+                        {
+                            MainGame.ObjectManager.Remove(this);
+                        }
                     }
                 }
 
@@ -144,7 +148,7 @@ namespace STG
                 if (hitPower != null)
                 {
                     MainGame.ObjectManager.Remove(hitPower);
-                    power += 1;
+                    power += ((CollectibleItem)hitPower).powerLevel;
                 }
             }
 
@@ -153,14 +157,17 @@ namespace STG
                 GameObject hitBullet = Collides('B');
                 if (hitBullet != null)
                 {
-                    //this.sprite = MainGame.SpriteDict["hitbox"];
-                    MainGame.ObjectManager.Remove(hitBullet);
-                    health--;
-                    if(health == 0)
-                        lives--;
-                    if (lives <= 0)
+                    if (this != ((Bullet)hitBullet).Parent)
                     {
-                        MainGame.ObjectManager.Remove(this);
+                        //this.sprite = MainGame.SpriteDict["hitbox"];
+                        MainGame.ObjectManager.Remove(hitBullet);
+                        health--;
+                        if (health == 0)
+                            lives--;
+                        if (lives <= 0)
+                        {
+                            MainGame.ObjectManager.Remove(this);
+                        }
                     }
                 }
             }
