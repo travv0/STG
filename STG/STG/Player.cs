@@ -463,7 +463,7 @@ namespace STG
                     }
 
                     //going in and out of focus mode
-                    if (keyboard.IsKeyDown(Keys.Enter))
+                    if (keyboard.IsKeyDown(Keys.LeftShift))
                     {
                         speed = SPEED * (2 / 5.0f);
                         maxRotation = 0;
@@ -475,7 +475,7 @@ namespace STG
                             }
                         inFocus = true;
                     }
-                    else if (keyboard.IsKeyUp(Keys.Enter))
+                    else if (keyboard.IsKeyUp(Keys.LeftShift))
                     {
                         speed = SPEED;
                         maxRotation = .2f;
@@ -494,15 +494,15 @@ namespace STG
                         rotation -= 0.05f;
 
                     //movement
-                    if ((keyboard.IsKeyDown(Keys.Left) && keyboard.IsKeyDown(Keys.Up)
-                        || keyboard.IsKeyDown(Keys.Left) && keyboard.IsKeyDown(Keys.Down)
-                        || keyboard.IsKeyDown(Keys.Up) && keyboard.IsKeyDown(Keys.Right)
-                        || keyboard.IsKeyDown(Keys.Right) && keyboard.IsKeyDown(Keys.Down))
+                    if ((keyboard.IsKeyDown(Keys.A) && keyboard.IsKeyDown(Keys.W)
+                        || keyboard.IsKeyDown(Keys.A) && keyboard.IsKeyDown(Keys.S)
+                        || keyboard.IsKeyDown(Keys.W) && keyboard.IsKeyDown(Keys.D)
+                        || keyboard.IsKeyDown(Keys.D) && keyboard.IsKeyDown(Keys.S))
                         && (speed == SPEED || speed == SPEED * (2 / 5.0f)))
                         speed = (float)(speed / Math.Sqrt(2));
-                    
 
-                    if (keyboard.IsKeyDown(Keys.Left) && pos.X - (sprite.Width / 2) + 20 > MainGame.PlayingArea.X)
+
+                    if (keyboard.IsKeyDown(Keys.A) && pos.X - (sprite.Width / 2) + 20 > MainGame.PlayingArea.X)
                     {
                         pos.X -= speed;
 
@@ -510,11 +510,11 @@ namespace STG
                             rotation -= 0.05f;
                     }
 
-                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height)
+                    if (keyboard.IsKeyDown(Keys.S) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height)
                         pos.Y += speed;
 
 
-                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + (sprite.Width / 2) - 20 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
+                    if (keyboard.IsKeyDown(Keys.D) && pos.X + (sprite.Width / 2) - 20 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                     {
                         
                         pos.X += speed;
@@ -523,7 +523,7 @@ namespace STG
                             rotation += 0.05f;
                     }
 
-                    if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
+                    if (keyboard.IsKeyDown(Keys.W) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
                         pos.Y -= speed;
 
                     if (pos.X - (sprite.Width / 2) + 20 <= MainGame.PlayingArea.X || pos.X + (sprite.Width / 2) - 20 >= MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
@@ -531,7 +531,7 @@ namespace STG
                     else
                         againstWall = false;
 
-                    if ((!keyboard.IsKeyDown(Keys.Left) && !keyboard.IsKeyDown(Keys.Right)) || againstWall == true || ((keyboard.IsKeyDown(Keys.Left) == true) && (keyboard.IsKeyDown(Keys.Right) == true)))
+                    if ((!keyboard.IsKeyDown(Keys.A) && !keyboard.IsKeyDown(Keys.D)) || againstWall == true || ((keyboard.IsKeyDown(Keys.A) == true) && (keyboard.IsKeyDown(Keys.D) == true)))
                     {
                         if (rotation < 0)
                             rotation += 0.05f;
@@ -541,17 +541,17 @@ namespace STG
 
 
                     //shootin
-                    if (keyboard.IsKeyDown(Keys.NumPad1) && mainCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.Space) && mainCooldown == 0)
                     {
                         MainGame.ObjectManager.Add(new Bullet(MainGame.SpriteDict["umbrellaBullet"], new Vector2(Position.X, Position.Y - 20), 20, 270, 0, this, null));
                         mainCooldown = 5;
                     }
-                    if (keyboard.IsKeyDown(Keys.D0) && optionCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.B) && optionCooldown == 0)
                     {
                         MainGame.ObjectManager.Add(new Bomb(MainGame.SpriteDict["bombRad"], new Vector2(Position.X, Position.Y), 5));
                         optionCooldown = 200;
                     }
-                    if (keyboard.IsKeyDown(Keys.NumPad1) && optionCooldown == 0)
+                    if (keyboard.IsKeyDown(Keys.Space) && optionCooldown == 0)
                     {
                         if (inFocus == false)
                             foreach (Option option in options)
@@ -570,13 +570,13 @@ namespace STG
 
                 case PlayerNum.Two:
                     //movement
-                    if (keyboard.IsKeyDown(Keys.A) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
+                    if (keyboard.IsKeyDown(Keys.Left) && pos.X - sprite.Width / 2 > MainGame.PlayingArea.X)
                         pos.X -= speed;
-                    if (keyboard.IsKeyDown(Keys.S) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 2)
+                    if (keyboard.IsKeyDown(Keys.Down) && pos.Y + sprite.Height / 2 < MainGame.PlayingArea.Y + MainGame.PlayingArea.Height / 2)
                         pos.Y += speed;
-                    if (keyboard.IsKeyDown(Keys.D) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
+                    if (keyboard.IsKeyDown(Keys.Right) && pos.X + sprite.Width / 2 < MainGame.PlayingArea.X + MainGame.PlayingArea.Width)
                         pos.X += speed;
-                    if (keyboard.IsKeyDown(Keys.W) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
+                    if (keyboard.IsKeyDown(Keys.Up) && pos.Y - sprite.Height / 2 > MainGame.PlayingArea.Y)
                         pos.Y -= speed;
 
                     //shootin
@@ -590,9 +590,6 @@ namespace STG
 
                     break;
             }
-
-            if (keyboard.IsKeyDown(Keys.B))
-                angle = angle;
 
             base.Update();
         }
