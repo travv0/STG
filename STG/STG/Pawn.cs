@@ -19,6 +19,7 @@ namespace STG
         float vel;
         bool moving = false;
         Random rand, randShoot;
+        int recharge = 0;
         public Pawn(Sprite sprite, Vector2 pos, Sprite bulletSprite, int seed)
         {
             rand = new Random(Environment.TickCount + seed);
@@ -43,6 +44,8 @@ namespace STG
 
             int chance; //integer used to see if pawn should move or not
 
+            recharge++;
+
             if (moving == false)
             {
                 chance = rand.Next(100);
@@ -65,11 +68,25 @@ namespace STG
                 }
             }
 
-            chance = randShoot.Next(100);
+            chance = randShoot.Next(500);
 
-            if (chance > 98)
+            if (chance > 498 && recharge >= 300)
             {
-                MainGame.ObjectManager.Add(new PawnBulletPattern(this, bulletSprite));
+                chance = rand.Next(3);
+                switch (chance)
+                {
+                    case 0:
+                        MainGame.ObjectManager.Add(new PawnBulletPattern(this, bulletSprite));
+                        break;
+                    case 1:
+                        MainGame.ObjectManager.Add(new PawnBulletPattern2(this, bulletSprite));
+                        break;
+                    case 2:
+                        MainGame.ObjectManager.Add(new PawnBulletPattern3(this, bulletSprite));
+                        break;
+                }
+
+                recharge = 0;
             }
 
  	        base.Update();
