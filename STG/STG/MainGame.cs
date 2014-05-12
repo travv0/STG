@@ -166,6 +166,8 @@ namespace STG
             SpriteDict["CloudGirlAnimation"] = new Sprite(Content.Load<Texture2D>("attack sprites\\CloudGirlAnimation"), 4, 5);
 
             player1 = new Player(SpriteDict["CloudGirlAnimation"], Player.PlayerNum.One, new Vector2(playingArea.X + playingArea.Width / 2, playingArea.Y + playingArea.Height - ((float)SpriteDict["CloudGirlAnimation"].Height * 1.5f)), 5, 5);
+            player1.setHealth(1);
+            player1.setLives(3);
             ObjectManager.Add(player1);
 
             //player 2 stuff
@@ -173,6 +175,8 @@ namespace STG
             SpriteDict["sunGirl"] = new Sprite(Content.Load<Texture2D>("sunGirl"));
             SpriteDict["moonGirl"] = new Sprite(Content.Load<Texture2D>("moonGirl"));
             player2 = new Player(SpriteDict["peanutBallerina"], Player.PlayerNum.Two, new Vector2(playingArea.X + playingArea.Width / 2, 100));
+            player2.setHealth(100);
+            player2.setLives(1);
             ObjectManager.Add(player2);
 
             //bullet textures
@@ -351,10 +355,14 @@ namespace STG
 
                 scrollBack.Draw(spriteBatch);
 
-                spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.White);
-                spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.White);
-                spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.White);
-                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.White);
+                spriteBatch.DrawString(FPSfont, "FPS: " + drawFPS.ToString("0.0"), new Vector2(16, 16), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Dropped frames: " + drawDropped.ToString("P"), new Vector2(16, 32), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Object count: " + ObjectManager.Count, new Vector2(16, 48), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Power Level: " + player1.Power, new Vector2(16, 64), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Boss Health: " + player2.Health, new Vector2(16, 80), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Player Lives: " + player1.Lives, new Vector2(16, 96), Color.Black);
+                spriteBatch.DrawString(FPSfont, "Timer: " + player1.invincibilityTimer, new Vector2(16, 112), Color.Black);
+
 
                 spriteBatch.End();
 

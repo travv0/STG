@@ -42,6 +42,10 @@ namespace STG
         const float SPEED = 7; //player's speed
         float speed = SPEED; //change to player's x and y value (smaller if moving diagonal)
         bool againstWall = false;
+        int health;
+        int lives;
+        bool invincible = false;
+        public int invincibilityTimer = 0;
 
         /// <summary>
         /// A playable character.
@@ -127,19 +131,60 @@ namespace STG
             if (playerNum == PlayerNum.One)
             {
                 GameObject hitBullet = Collides('B');
-                if (hitBullet != null)
+                if (hitBullet != null && invincible == false)
                 {
-                    this.sprite = MainGame.SpriteDict["hitbox"];
-                    MainGame.ObjectManager.Remove(hitBullet);
+                    if (this != ((Bullet)hitBullet).Parent)
+                    {
+                        this.sprite = MainGame.SpriteDict["hitbox"];
+                        MainGame.ObjectManager.Remove(hitBullet);
+                        lives--;
+                        invincible = true;
+                        MainGame.ObjectManager.DeleteAll('B');
+                        if (lives <= 0)
+                        {
+                            MainGame.ObjectManager.Remove(this);
+                        }
+                    }
+                    
+                }
+                else if(invincible == true)
+                {
+                    invincibilityTimer++;
+                    if (invincibilityTimer == 120)
+                    {
+                        invincibilityTimer = 0;
+                        invincible = false;
+                    }
                 }
 
                 GameObject hitPower = Collides('C');
                 if (hitPower != null)
                 {
                     MainGame.ObjectManager.Remove(hitPower);
-                    power += 1;
+                    power += ((CollectibleItem)hitPower).powerLevel;
                 }
             }
+
+            if (playerNum == PlayerNum.Two)
+            {
+                GameObject hitBullet = Collides('B');
+                if (hitBullet != null)
+                {
+                    if (this != ((Bullet)hitBullet).Parent)
+                    {
+                        //this.sprite = MainGame.SpriteDict["hitbox"];
+                        MainGame.ObjectManager.Remove(hitBullet);
+                        health--;
+                        if (health == 0)
+                            lives--;
+                        if (lives <= 0)
+                        {
+                            MainGame.ObjectManager.Remove(this);
+                        }
+                    }
+                }
+            }
+
             switch (playerNum)
             {
                 case PlayerNum.One:
@@ -577,5 +622,27 @@ namespace STG
         /// Returns the player's power.
         /// </summary>
         public float Power { get { return power; } }
+
+        /// <summary>
+        /// Returns the player's health.
+        /// </summary>
+        public int Health { get { return health; } }
+
+        /// <summary>
+        /// Returns the player's lives.
+        /// </summary>
+        public int Lives { get { return lives; } }
+
+        /// <summary>
+        /// Sets the player's health.
+        /// </summary>
+        /// <param name="health"></param>
+        public void setHealth(int health) { this.health = health; }
+        
+        /// <summary>
+        /// Sets the player's lives.
+        /// </summary>
+        /// <param name="lives"></param>
+        public void setLives(int lives) { this.lives = lives; }
     }
 }
