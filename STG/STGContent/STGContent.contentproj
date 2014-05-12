@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{1F5F39B9-AE17-4275-89F7-60B881138283}</ProjectGuid>
@@ -209,13 +209,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cloudsGameBackGround.png">
-      <Name>cloudsGameBackGround</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="bullet sprites\suns.png">
       <Name>suns</Name>
       <Importer>TextureImporter</Importer>
@@ -258,6 +251,13 @@
   <ItemGroup>
     <Compile Include="bullet sprites\moons.png">
       <Name>moons</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clouds.jpg">
+      <Name>clouds</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

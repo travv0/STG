@@ -125,7 +125,7 @@ namespace STG
             quitRect = new Rectangle((graphics.GraphicsDevice.Viewport.Width / 2 - (quitButton.Width / 2)), graphics.GraphicsDevice.Viewport.Height * 2 / 3, quitButton.Width, quitButton.Height);
 
             scrollBack = new ScrollingBackground();
-            scrollTexture = Content.Load<Texture2D>("cloudsGameBackGround");
+            scrollTexture = Content.Load<Texture2D>("clouds");
             scrollBack.Load(GraphicsDevice, scrollTexture);
 
             titleSong = Content.Load<Song>("Music and Sound\\dearly-beloved");
