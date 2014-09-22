@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>STG</name>
+    </assembly>
+    <members>
+        <member name="T:STG.GameObject">
+            <summary>
+            A object in the game.  Everything that can interact with other objects should inherit this class.
+            </summary>
+        </member>
+        <member name="F:STG.GameObject.pos">
+            <summary>
+            The position of the object.
+            </summary>
+        </member>
+        <member name="F:STG.GameObject.colPos">
+            <summary>
+            position shifted for collision grid to work with a play area moved away from the origin
+            </summary>
+        </member>
+        <member name="F:STG.GameObject.boundingBox">
+            <summary>
+            The bounding box of the sprite.  This is the rectangle that the sprite will be drawn in.
+            </summary>
+        </member>
+        <member name="F:STG.GameObject.sprite">
+            <summary>
+            The sprite for this game object.
+            </summary>
+        </member>
+        <member name="F:STG.GameObject.rotation">
+            <summary>
+            The angle that the sprite will be drawn at.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:STG.GameObject.tlVertex" -->
+        <!-- Badly formed XML comment ignored for member "F:STG.GameObject.trVertex" -->
+        <!-- Badly formed XML comment ignored for member "F:STG.GameObject.blVertex" -->
+        <!-- Badly formed XML comment ignored for member "F:STG.GameObject.brVertex" -->
+        <member name="M:STG.GameObject.#ctor">
+            <summary>
+            Initializes a new GameObject.  Don't use this, make a class that inherits GameObject and use that.
+            </summary>
+        </member>
+        <member name="M:STG.GameObject.Initialize">
+            <summary>
+            A function that is called whenever any GameObject is created.  Make an override function in a class that inherits GameObject.
+            </summary>
+        </member>
+        <member name="M:STG.GameObject.Update">
+            <summary>
+            Updates the object's member variables.
+            </summary>
+        </member>
+        <member name="M:STG.GameObject.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws the object.
+            </summary>
+            <param name="spriteBatch">The spriteBatch that should be used for drawing.</param>
+        </member>
+        <member name="M:STG.GameObject.getVertices">
+            <summary>
+            puts all vertices of an object into a list and returns it
+            will be used for collision purposes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:STG.GameObject.getCollisionColumn">
+            <summary>
+            Returns the collision column for collision grid.
+            </summary>
+        </member>
+        <member name="M:STG.GameObject.getCollisionRow">
+            <summary>
+            Returns the collision row for collision grid.
+            </summary>
+        </member>
+        <member name="M:STG.GameObject.AngleToTarget(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Calculates the angle from one position to another.
+            </summary>
+            <param name="pos1">The starting position.</param>
+            <param name="pos2">The ending position.</param>
+            <returns></returns>
+        </member>
+        <member name="M:STG.GameObject.AngleToTarget(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Calculates the angle from current position to another position.
+            </summary>
+            <param name="targetPos">The target position.</param>
+        </member>
+        <member name="M:STG.GameObject.DistanceToTarget(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Calculates the distance between two points.
+            </summary>
+            <param name="pos1">The first point.</param>
+            <param name="pos2">The second point.</param>
+            <returns></returns>
+        </member>
+        <member name="M:STG.GameObject.DistanceToTarget(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Calculates the distance between the current position and a given position.
+            </summary>
+            <param name="targetPos">The position to find the distance to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:STG.GameObject.calculateCollisionGridCell">
+            <summary>
+            Calculates where in the collision grid the cell is currently
+            collision positions are shifted 20 pixels from actual position to accomadate for the play area being moved away from the origin
+            </summary>
+        </member>
+        <member name="M:STG.GameObject.insidePlayingArea(System.Int32)">
+            <summary>
+            checks if the object is inside the playing area at all
+            remove buffer is how far outside (int pixels) the playing area you want to check if the object is in
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:STG.GameObject.Position">
+            <summary>
+            Returns the position of the object.
+            </summary>
+        </member>
+        <member name="P:STG.GameObject.collisionPosition">
+            <summary>
+            Returns the collision position of the object.
+            </summary>
+        </member>
+        <member name="P:STG.GameObject.objectType">
+            <summary>
+            Returns object type
+            used to detect if an object should be deleted or not drawn when it is outside of the playing area
+            For example options should not be deleted only disabled and not drawn temporarily but bullets should be removed and cleaned up
+            'O' for options, 'C' for collectibles, 'B' for bullets, 'P' for players 
+            </summary>
+        </member>
+        <member name="P:STG.GameObject.getSprite">
+            <summary>
+            Returns sprite of object
+            </summary>
+        </member>
+        <member name="P:STG.GameObject.BoundingBox">
+            <summary>
+            Returns the object's bounding box.
+            </summary>
+        </member>
+        <member name="T:STG.GameObject.Direction">
+            <summary>
+            The direction the object needs to turn
+            </summary>
+        </member>
+        <member name="T:STG.Player">
+            <summary>
+            A playable character.
+            </summary>
+        </member>
+        <member name="M:STG.Player.#ctor(STG.Sprite,STG.Player.PlayerNum,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
+            <summary>
+            A playable character.
+            </summary>
+            <param name="sprite">Character's sprite.</param>
+            <param name="playerNum">Player one or player two.</param>
+            <param name="pos">Player's position.</param>
+            <param name="hitboxWidth">Width of the player's hitbox.</param>
+            <param name="hitboxHeight">Height of the player's hitbox.</param>
+        </member>
+        <member name="M:STG.Player.#ctor(STG.Sprite,STG.Player.PlayerNum,Microsoft.Xna.Framework.Rectangle,System.Int32,System.Int32)">
+            <summary>
+            A playable character.
+            </summary>
+            <param name="sprite">Character's sprite.</param>
+            <param name="playerNum">Player one or player two.</param>
+            <param name="boundingBox">The bounding box of the player.</param>
+            <param name="hitboxWidth">The width of the player's hitbox.</param>
+            <param name="hitboxHeight">The height of the player's hitbox.</param>
+        </member>
+        <member name="M:STG.Player.#ctor(STG.Sprite,STG.Player.PlayerNum,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            A playable character.
+            </summary>
+            <param name="sprite">Character's sprite.</param>
+            <param name="playerNum">Player one or player two.</param>
+            <param name="pos">Player's position.</param>
+        </member>
+        <member name="M:STG.Player.#ctor(STG.Sprite,STG.Player.PlayerNum,Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            A playable character.
+            </summary>
+            <param name="sprite">Character's sprite.</param>
+            <param name="playerNum">Player one or player two.</param>
+            <param name="boundingBox">The bounding box of the player.</param>
+        </member>
+        <member name="M:STG.Player.Initialize">
+            <summary>
+            Runs on creation of a new player object, adds any options in the option list.
+            </summary>
+        </member>
+        <member name="M:STG.Player.Update">
+            <summary>
+            Updates the player object.
+            </summary>
+        </member>
+        <member name="M:STG.Player.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws the hitbox on the player.
+            </summary>
+            <param name="spriteBatch">The spritebatch to be used for drawing.</param>
+        </member>
+        <member name="M:STG.Player.setHealth(System.Int32)">
+            <summary>
+            Sets the player's health.
+            </summary>
+            <param name="health"></param>
+        </member>
+        <member name="M:STG.Player.setLives(System.Int32)">
+            <summary>
+            Sets the player's lives.
+            </summary>
+            <param name="lives"></param>
+        </member>
+        <member name="P:STG.Player.Speed">
+            <summary>
+            Returns the player's speed.
+            </summary>
+        </member>
+        <member name="P:STG.Player.Power">
+            <summary>
+            Returns the player's power.
+            </summary>
+        </member>
+        <member name="P:STG.Player.Health">
+            <summary>
+            Returns the player's health.
+            </summary>
+        </member>
+        <member name="P:STG.Player.Lives">
+            <summary>
+            Returns the player's lives.
+            </summary>
+        </member>
+        <member name="T:STG.Player.PlayerNum">
+            <summary>
+            The player number.
+            </summary>
+        </member>
+        <member name="F:STG.Player.PlayerNum.One">
+            <summary>
+            First player.
+            </summary>
+        </member>
+        <member name="F:STG.Player.PlayerNum.Two">
+            <summary>
+            Second player.
+            </summary>
+        </member>
+        <member name="T:STG.CollectibleItem">
+            <summary>
+            A collectible item.
+            </summary>
+        </member>
+        <member name="M:STG.CollectibleItem.#ctor(STG.Sprite,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">
+            <summary>
+            Creates a new collectible item object.
+            </summary>
+            <param name="sprite">This is the item's sprite.</param>
+            <param name="pos">This is the item's position.</param>
+            <param name="vel">This is the item's velocity.</param>
+            <param name="powerLevel">This is the item's power value.</param>
+        </member>
+        <member name="M:STG.CollectibleItem.Update">
+            <summary>
+            Updates the Collectible Item.
+            </summary>
+        </member>
+        <member name="P:STG.CollectibleItem.PowerLevel">
+            <summary>
+            Accessor for power level of item.
+            </summary>
+        </member>
+        <member name="T:STG.Sprite">
+            <summary>
+            A animated or non-animated sprite.
+            </summary>
+        </member>
+        <member name="M:STG.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Initializes a new non-animated sprite using a Texture2D.
+            </summary>
+            <param name="sprite">The Texture2D to be used by the sprite.</param>
+        </member>
+        <member name="M:STG.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new animated sprite.
+            </summary>
+            <param name="sprite">The spritesheet to be used for the sprite.</param>
+            <param name="numberOfFrames">Number of frames in the animation.</param>
+            <param name="timePerFrame">How long each frame should be on the screen.</param>
+        </member>
+        <member name="M:STG.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new animated sprite, starting at a specific frame.
+            </summary>
+            <param name="sprite">The spritesheet to be used for the sprite.</param>
+            <param name="numberOfFrames">Number of frames in the animation.</param>
+            <param name="timePerFrame">How long each frame should be on the screen.</param>
+            <param name="startingFrame">Which frame it should start on, with 0 being the first frame.</param>
+        </member>
+        <member name="M:STG.Sprite.Update">
+            <summary>
+            Updates the sprite's animation.
+            </summary>
+        </member>
+        <member name="M:STG.Sprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws the sprite at the given position.
+            </summary>
+            <param name="spriteBatch">The SpriteBatch to be used for drawing.</param>
+            <param name="position">The position to draw the sprite at.</param>
+            <param name="color">The color to tint the sprite.</param>
+        </member>
+        <member name="M:STG.Sprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws the sprite in the given rectangle.
+            </summary>
+            <param name="spriteBatch">The SpriteBatch to be used for drawing.</param>
+            <param name="destinationRectangle">The rectangle to draw the sprite in.</param>
+            <param name="color">The color to tint the sprite.</param>
+        </member>
+        <member name="M:STG.Sprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+            Draw the sprite in the given rectangle and at the given rotation.
+            </summary>
+            <param name="spriteBatch">The SpriteBatch to be used for drawing.</param>
+            <param name="destinationRectangle">The rectangle to draw the sprite in.</param>
+            <param name="color">The color to tint the sprite.</param>
+            <param name="rotation">The angle to draw the sprite at in radians.</param>
+            <param name="origin">The sprite's origin.</param>
+            <param name="effects">The SpriteEffects to be applied to the sprite.</param>
+            <param name="layerDepth">The layer it should be drawn on, between 0 and 1.</param>
+        </member>
+        <member name="P:STG.Sprite.Width">
+            <summary>
+            Returns the width of the sprite.
+            </summary>
+        </member>
+        <member name="P:STG.Sprite.Height">
+            <summary>
+            Returns the height of the sprite.
+            </summary>
+        </member>
+        <member name="T:STG.BulletPattern">
+            <summary>
+            The parent class for bullet patterns, meant to be inherited by different pattern classes.
+            </summary>
+        </member>
+        <member name="F:STG.BulletPattern.parent">
+            <summary>
+            The object that created the bullet pattern.
+            </summary>
+        </member>
+        <member name="F:STG.BulletPattern.time">
+            <summary>
+            The time that the bullet pattern has been in existance.
+            </summary>
+        </member>
+        <member name="F:STG.BulletPattern.maxTime">
+            <summary>
+            The maximum time the bullet pattern should exist.
+            </summary>
+        </member>
+        <member name="F:STG.BulletPattern.cycle">
+            <summary>
+            The number of times the bullet pattern has cycled through.
+            </summary>
+        </member>
+        <member name="M:STG.BulletPattern.#ctor">
+            <summary>
+            Initializes a new bullet pattern.
+            </summary>
+        </member>
+        <member name="M:STG.BulletPattern.Update">
+            <summary>
+            Updates the bullet pattern.
+            </summary>
+        </member>
+        <member name="T:STG.Bullet">
+            <summary>
+            A bullet.
+            </summary>
+        </member>
+        <member name="M:STG.Bullet.#ctor(STG.Sprite,Microsoft.Xna.Framework.Vector2,System.Single,System.Single,System.Single,STG.GameObject,System.Collections.Generic.List{System.Tuple{STG.Bullet.Action,System.Single,System.Int32,System.Int32,System.Boolean}},System.Boolean,System.Boolean)">
+            <summary>
+            Creates a new bullet object.
+            </summary>
+            <param name="sprite">The bullet's sprite.</param>
+            <param name="pos">The bullet's position.</param>
+            <param name="vel">The bullet's velocity.</param>
+            <param name="angle">The bullet's angle.</param>
+            <param name="curve">The curve of the bullet.</param>
+            <param name="parent">The object that created the bullet.</param>
+            <param name="actionList">The list of actions for the bullet to do during its lifetime.</param>
+            <param name="homing">Does the bullet home in on an object?</param>
+            <param name="spinning">Should the bullet's sprite spin around?</param>
+        </member>
+        <member name="M:STG.Bullet.Update">
+            <summary>
+            Updates the bullet.
+            </summary>
+        </member>
+        <member name="P:STG.Bullet.Parent">
+            <summary>
+            Returns the parent of the bullet, usually the object that created it.
+            </summary>
+        </member>
+        <member name="T:STG.Bullet.Action">
+            <summary>
+            An enum used for modifying the bullet's properties during its lifetime.
+            </summary>
+        </member>
+        <member name="F:STG.Bullet.Action.speed">
+            <summary>
+            Used to modify the speed of the bullet.
+            </summary>
+        </member>
+        <member name="F:STG.Bullet.Action.angle">
+            <summary>
+            Used to modify the angle of the bullet.
+            </summary>
+        </member>
+        <member name="F:STG.Bullet.Action.curve">
+            <summary>
+            Used to modify the curve of the bullet.
+            </summary>
+        </member>
+        <member name="T:STG.MainGame">
+            <summary>
+            This is the main type for your game
+            </summary>
+        </member>
+        <member name="F:STG.MainGame.player1">
+            <summary>
+            Player one.
+            </summary>
+        </member>
+        <member name="F:STG.MainGame.player2">
+            <summary>
+            Player two.
+            </summary>
+        </member>
+        <member name="M:STG.MainGame.#ctor">
+            <summary>
+            Initializes the game.
+            </summary>
+        </member>
+        <member name="M:STG.MainGame.Initialize">
+            <summary>
+            Allows the game to perform any initialization it needs to before starting to run.
+            This is where it can query for any required services and load any non-graphic
+            related content.  Calling base.Initialize will enumerate through any components
+            and initialize them as well.
+            </summary>
+        </member>
+        <member name="M:STG.MainGame.LoadContent">
+            <summary>
+            LoadContent will be called once per game and is the place to load
+            all of your content.
+            </summary>
+        </member>
+        <member name="M:STG.MainGame.UnloadContent">
+            <summary>
+            UnloadContent will be called once per game and is the place to unload
+            all content.
+            </summary>
+        </member>
+        <member name="M:STG.MainGame.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the game to run logic such as updating the world,
+            checking for collisions, gathering input, and playing audio.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:STG.MainGame.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            This is called when the game should draw itself.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="P:STG.MainGame.ObjectManager">
+            <summary>
+            A list of every object in the game.
+            </summary>
+        </member>
+        <member name="P:STG.MainGame.SpriteDict">
+            <summary>
+            A dictionary of every sprite in the game.  The index should have the same name as the file.
+            </summary>
+        </member>
+        <member name="P:STG.MainGame.WindowWidth">
+            <summary>
+            The width of the game window.
+            </summary>
+        </member>
+        <member name="P:STG.MainGame.WindowHeight">
+            <summary>
+            The height of the game window.
+            </summary>
+        </member>
+        <member name="P:STG.MainGame.PlayingArea">
+            <summary>
+            The ractangle containing the playing area.
+            </summary>
+        </member>
+        <member name="M:STG.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:STG.GameObjectManager">
+            <summary>
+            Manages all GameObjects to simplify updating and drawing them.
+            </summary>
+        </member>
+        <member name="M:STG.GameObjectManager.#ctor">
+            <summary>
+            Initializes a new GameObjectManager with an empty list of GameObjects.
+            </summary>
+        </member>
+        <member name="M:STG.GameObjectManager.Add(STG.GameObject)">
+            <summary>
+            Adds a new object to the object manager.
+            </summary>
+            <param name="o">The object to add to the manager.</param>
+        </member>
+        <member name="M:STG.GameObjectManager.Remove(STG.GameObject)">
+            <summary>
+            Removes an object from the object manager.
+            </summary>
+            <param name="o">The object to remove from the manager.</param>
+        </member>
+        <member name="M:STG.GameObjectManager.Update">
+            <summary>
+            Updates all objects in the object manager.
+            </summary>
+        </member>
+        <member name="M:STG.GameObjectManager.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws all objects in the object manager.
+            </summary>
+            <param name="spriteBatch">The SpriteBatch to use for drawing.</param>
+        </member>
+        <member name="M:STG.GameObjectManager.Find(STG.GameObject)">
+            <summary>
+            Find and return an object of a given type in the object manager.
+            </summary>
+            <param name="type">Type of object to find.</param>
+            <returns>An object of a given type that is in the object manager.</returns>
+        </member>
+        <member name="P:STG.GameObjectManager.Count">
+            <summary>
+            Returns the number of objects in the object manager.
+            </summary>
+        </member>
+        <member name="T:STG.ItemSpawner">
+            <summary>
+            Class that spawns items at random intervals on top of the screen
+            </summary>
+        </member>
+        <member name="M:STG.Collision.getCellWidth">
+            <summary>
+            Getter for collision grid cell width
+            </summary>
+        </member>
+        <member name="M:STG.Collision.getCellHeight">
+            <summary>
+            Getter for collision grid cell height
+            </summary>
+        </member>
+        <member name="M:STG.Collision.#ctor">
+            <summary>
+            Constructor for collision object
+            
+            </summary>
+        </member>
+        <member name="M:STG.Collision.addToCollisionGrid(STG.GameObject)">
+            <summary>
+            If any of the object is in the playing area it adds the object to all of the collision cells it could be in by using its vertices
+            </summary>
+            <param name="o"></param>
+        </member>
+        <member name="M:STG.Collision.getObjectsNearPlayer(STG.GameObject)">
+            gets the list of all objects and checks if they are in the same collision grid square as each player then 
+            returns a list of all the objects near it. These will then be looped through and checked for collision
+            pass it the object you are checking if things are near to
+        </member>
+        <member name="M:STG.Collision.addToGrid(System.Int32,System.Int32,STG.GameObject)">
+            <summary>
+            Adds a game object to the collision grid(double array of lists of game objects)
+            </summary>
+            <param name="column"></param>
+            <param name="row"></param>
+            <param name="o"></param>
+        </member>
+        <member name="M:STG.Collision.collides(System.Collections.Generic.List{Microsoft.Xna.Framework.Vector2},Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Uses separating axis theorem to determine if there is a collision
+            </summary>
+            <param name="o1">verticies of an object</param>
+            <param name="o2">main playing area</param>
+            <returns></returns>
+        </member>
+        <member name="M:STG.Collision.collides(System.Collections.Generic.List{Microsoft.Xna.Framework.Vector2},System.Collections.Generic.List{Microsoft.Xna.Framework.Vector2})">
+            <summary>
+            Uses separating axis theorem to determine if there is a collision
+            </summary>
+            <param name="o1"></param>
+            <param name="o2"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
